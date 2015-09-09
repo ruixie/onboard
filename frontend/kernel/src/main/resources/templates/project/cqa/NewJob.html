@@ -1,0 +1,35 @@
+<!-- created by 胡天翔 at 2015/07/08 -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="cqaNewJob" id="cqa-new-job">
+
+  <div class="title">
+    <span class="title-content"><a ui-sref="company.project.cqa.jobs">任务列表</a> / 新分析任务</span>
+  </div>
+  <div class="cqa-new-job-panel">
+    <form>
+      <div class="form-group">
+        <label for="branch">项目分支</label>
+        <input type="text" class="form-control" id="branch" placeholder="如master, develop, feature/XXX"/>
+      </div>
+      <div class="form-group">
+        <label for="folder">源码目录</label>
+        <input type="text" class="form-control" id="folder" placeholder="如'.'代表根目录, 'src'代表根目录下的src文件夹"/>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" checked="checked"/>分析完成后通知我
+        </label>
+      </div>
+      <button ng-click="submit()" class="btn btn-default">提交</button>
+    </form>
+  </div>
+
+</div>
+
+</body>
+
+</html>

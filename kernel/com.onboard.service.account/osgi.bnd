@@ -1,0 +1,4 @@
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.onboard.service.account;version=${project.version}, \
+Import-Package: com.onboard.domain.mapper.model,\
+ *

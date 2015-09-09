@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+  <div th:fragment="statisticsCode" id="code" class="stats-tab-content fade active in">
+    
+    <div class="graph-switcher">
+      <div class="btn-group">
+        <button type="button" class="btn btn-xs btn-default" 
+                ng-class="{ active:isSet(1) }" ng-click="setTab(1, $event)">PunchCard</button>
+        <button type="button" class="btn btn-xs btn-default" 
+                ng-class="{ active:isSet(3) }" ng-click="setTab(3, $event)">代码提交次数</button>
+        <button type="button" class="btn btn-xs btn-default" 
+                ng-class="{ active:isSet(2) }" ng-click="setTab(2, $event)">代码提交影响行数</button>
+      </div>
+    </div>    
+
+    <div class="graph-filter">
+      <!-- start date -->
+      <div class="input-group ob-date">
+          <input type="text" class="form-control date" datepicker-popup="yyyy-MM-dd" ng-click="openDTPicker($event, 1)" ng-model="start" is-open="started" close-text="关闭" clear-text="不指定" current-text="今天" readonly="" title="选择开始日期"/>
+      </div>
+      –&nbsp;
+      <!-- end date -->
+      <div class="input-group ob-date">
+          <input type="text" class="form-control date" datepicker-popup="yyyy-MM-dd" ng-click="openDTPicker($event, 2)" ng-model="end" is-open="ended" close-text="关闭" clear-text="不指定" current-text="今天" readonly="" title="选择结束日期"/>
+      </div>  
+
+      <!-- 按截止日期回溯 -->
+      <div class="btn-group time-span">
+        <button class="btn btn-default dropdown-toggle stepback-btn" data-toggle="dropdown" title="按截止日期回溯"><span class="fa fa-reply"></span></button>
+        <ul class="dropdown-menu" role="menu">
+          <li role="menuitem" ><a href="#" ng-click="selectTimeSpan(1)">一周</a></li>
+          <li role="menuitem" ><a href="#" ng-click="selectTimeSpan(2)">两周</a></li>
+          <li role="menuitem" ><a href="#" ng-click="selectTimeSpan(3)">一个月</a></li>
+          <li role="menuitem" ><a href="#" ng-click="selectTimeSpan(4)">一季度</a></li>
+          <li role="menuitem" ><a href="#" ng-click="selectTimeSpan(5)">半年</a></li>
+        </ul>
+      </div>   
+
+      <!-- refresh btn -->
+      <button class="btn btn-default refresh-btn" type="button" id="refresh" ng-disabled="busy" ng-click="refresh()" title="按新日期区间刷新图表">
+        <i class="fa fa-refresh"></i>
+      </button>
+
+      <p class="info">
+        {{graphInfo()}}
+        <!-- 解释一下该图表 -->
+      </p>
+    </div>
+
+    <div >
+      <div class="chart-container">
+        <!-- graph heading -->
+        <div class="graph-heading">
+
+          <!-- choose users menu btn -->
+          <div class="dropdown userMenu pull-right" ng-include="'user-menu-with-all-users.html'"></div>
+
+          <div class="graph-title">
+            <img ng-src="{{ user.avatarUrl }}" class="img-circle"></img>
+            <h4>
+              {{ user.name }}
+            </h4>
+          </div>
+
+        </div>
+
+        <div ng-show="isSet(1)">
+          <div id="commitsPunchCard" class="commits-punchCard svg-chart" ng-show="sync" ng-controller="commitsPunchCardCtrl">
+          </div>
+        </div>
+ 
+        <div ng-show="isSet(2)" ng-controller="LocChartCtrl">
+          <div id="LocChart" class="commits-trend svg-chart" ng-show="sync"></div>
+          <div id="pie-LocChart" class="svg-chart" ng-show="sync &amp;&amp; hasData" style="height: 600px;"></div>
+          <br/>
+          <hr/>
+          <br/>
+          <div id="pie-LocMinusChart" class="svg-chart" ng-show="sync &amp;&amp; hasData" style="height: 600px;"></div>
+        </div>
+ 
+        <div ng-show="isSet(3)" ng-controller="commitsChartCtrl">
+          <div id="commitsChart" class="commits-trend svg-chart" ng-show="sync" ></div>
+          <div id="pie-commitsChart" class="svg-chart" ng-show="sync &amp;&amp; hasData" style="height: 600px;"></div>
+        </div>
+        
+      </div>
+    </div>
+    
+    <div class="graph-loading-mask" ng-show="busy"></div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/osgi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+  <!-- 事务服务的引用 -->
+  <reference id="transactionManager" interface="org.springframework.transaction.PlatformTransactionManager" />
+
+  <!-- 引入 activityRecorder -->
+  <reference id="activityRecorder" interface="com.onboard.service.activity.ActivityRecorder" />
+
+  <reference id="identifiableManager" interface="com.onboard.service.common.identifiable.IdentifiableManager" />
+  
+  <!-- Service层依赖 -->
+  <reference id="sessionService" interface="com.onboard.service.web.SessionService" />
+  <reference id="userService" interface="com.onboard.service.account.UserService" />
+  <reference id="subscriberService" interface="com.onboard.service.common.subscrible.SubscriberService" />
+  <reference id="commentService" interface="com.onboard.service.collaboration.CommentService" />
+  <reference id="topicService" interface="com.onboard.service.collaboration.TopicService" />
+  <reference id="redisStringTemplate" interface="org.springframework.data.redis.core.StringRedisTemplate" />
+  <reference id="documentMapper" interface="com.onboard.domain.mapper.DocumentMapper" />
+  <reference id="documentHistoryMapper" interface="com.onboard.domain.mapper.DocumentHistoryMapper" />
+
+  <!-- 开放的服务 -->
+  <service id="documentService" interface="com.onboard.service.wiki.DocumentService" ref="documentServiceBean" />
+  <service id="documentHistoryService" interface="com.onboard.service.wiki.DocumentHistoryService" ref="documentHistoryServiceBean" />
+
+  <!-- ActivityGenerator服务 -->
+  <service id="documentActivityGenerator" interface="com.onboard.service.activity.ActivityGenerator" ref="documentActivityGeneratorBean" />
+
+  <!-- IndexableService服务 -->
+  <service id="documentIndexableService" interface="com.onboard.service.index.custom.IndexableService" ref="documentIndexableServiceBean" />
+
+</beans:beans>

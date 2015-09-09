@@ -1,0 +1,65 @@
+package com.onboard.service.collaboration.activity;
+
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
+
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import com.onboard.domain.model.Discussion;
+import com.onboard.domain.model.Project;
+import com.onboard.domain.model.type.BaseProjectItem;
+import com.onboard.service.collaboration.DiscussionService;
+import com.onboard.service.collaboration.ProjectService;
+import com.onboard.test.moduleutils.ModuleHelper;
+
+@RunWith(MockitoJUnitRunner.class)
+public abstract class AbstractDiscussionActivityGenerator {
+    
+    @Mock
+    protected DiscussionService mockedDiscussionService;
+    
+    protected static ProjectService projectService;
+    
+    protected BaseProjectItem baseProjectItem;
+    protected Discussion discussion, discussionDeleted, discussionOtherProject;
+     
+    protected Project project;
+
+    @Before
+    public void setupTest() {
+        discussion = getASampleDiscussion();
+        discussionDeleted = getASampleDiscussion();
+        discussionDeleted.setDeleted(true);
+        discussionOtherProject = getASampleDiscussion();
+        discussionOtherProject.setProjectId(ModuleHelper.projectId+1);
+        project = ModuleHelper.getASampleProject();
+        projectService = Mockito.mock(ProjectService.class);
+        when(projectService.getById(anyInt())).thenReturn(project);
+        ActivityRecorderHelper.setProjectService(projectService);
+        //discussion = (Discussion) baseProjectItem;
+        initDiscussionService();
+    }
+    
+    /** initDiscussionService **/
+    private void initDiscussionService() {
+        when(mockedDiscussionService.getById(anyInt())).thenReturn(discussion);
+    }
+    
+    /** **/
+    private Discussion getASampleDiscussion() {
+        Discussion d = new Discussion();
+        d.setId(ModuleHelper.id);
+        d.setProjectId(ModuleHelper.projectId);
+        d.setCompanyId(ModuleHelper.companyId);
+        d.setCreatorId(ModuleHelper.creatorId);
+        d.setCreatorName(ModuleHelper.creatorName);
+        d.setContent(ModuleHelper.content);
+        d.setDeleted(false);
+        return d;
+    }
+    
+}

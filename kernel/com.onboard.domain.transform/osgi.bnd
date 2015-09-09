@@ -1,0 +1,2 @@
+Export-Package:  com.onboard.domain.transform;version=${project.version}
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

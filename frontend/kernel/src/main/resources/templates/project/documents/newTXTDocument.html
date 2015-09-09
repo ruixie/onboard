@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="newTXTDocument" id="newTXTDocument">
+
+
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+      <div class="panel-title">新建TXT文档 &nbsp; <i class="fa fa-file-text fa-lg"></i></div>
+    </div>
+
+    <div class="panel-body">
+
+      <form id="newTXTWikiForm" name="newTXTWikiForm" role="form" class="form">
+
+        <div class="form-group">
+          <label class="control-label">文档标题：</label>
+
+          <div class="input-group">
+            <input type="text" name="title" class="form-control" ng-model="newTXTWikiTitle" placeholder="文档标题"
+                   required="" ng-minlength="1" ng-maxlength="100" autofocus="true"/>
+            <span class="input-group-btn">
+              <button class="btn btn-success doc-type-button" tabindex="-1">.txt</button>
+            </span>
+          </div>
+
+          <div ng-show="newTXTWikiForm.$dirty &amp;&amp; newTXTWikiForm.title.$error.required "
+               class="alert alert-danger" role="alert">文档名不能为空
+          </div>
+          <div ng-show="newTXTWikiForm.title.$error.maxlength || newTXTWikiForm.title.$error.minlength"
+               class="alert alert-danger" role="alert">文档名长度必须在1-100之间
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">文档内容：</label>
+          <textarea id="newTXTWikiContent" ng-model="newTXTWikiContent" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <button type="button" class="btn btn-primary" ng-click="saveNewTXTWikiForm()"
+                  ng-disabled="newTXTWikiForm.$invalid">创建文档
+          </button>
+          <a href="javascript:history.back(-1)" class="btn btn-default">返回</a>
+
+          <div ng-show="stat =='error'" class="alert alert-danger" role="alert">{{msg}}</div>
+        </div>
+
+      </form>
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+</body>
+
+</html>

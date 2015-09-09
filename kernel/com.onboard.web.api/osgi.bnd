@@ -1,0 +1,43 @@
+Private-Package: com.onboard.web.api;version=${project.version},\
+ com.onboard.web.api.*;version=${project.version},\
+ com.onboard.web.exception.handler;version=${project.version}
+Import-Bundle: org.springframework.beans;version="[3.0.5.RELEASE,3.1.0.RELEASE]",\
+ org.springframework.context;version="[3.0.5.RELEASE,3.1.0.RELEASE]",\
+ org.springframework.security.config;version="[3.0.5.RELEASE,3.1.0.RELEASE]",\
+ org.springframework.security.core;version="[3.0.5.RELEASE,3.1.0.RELEASE]",\
+ org.springframework.security.web;version="[3.0.5.RELEASE,3.1.0.RELEASE]",\
+ org.springframework.web;version="[3.0.5.RELEASE,3.1.0.RELEASE]",\
+ org.springframework.web.servlet;version="[3.0.5.RELEASE,3.1.0.RELEASE]",\
+ org.eclipse.virgo.web.dm;version="[3.0.2.RELEASE,4)",\
+ com.springsource.com.mysql.jdbc;version="5.1.6",\
+ com.springsource.javax.servlet.jsp.jstl;version="[1.2.0.v20110728, 1.2.0.v20110728]",\
+ com.springsource.org.hibernate.validator;version="4.2.0.Final",\
+ org.springframework.aop;version=3.1,\
+ com.springsource.org.aopalliance,\
+ org.elevenframework.web.api
+Import-Package: net.kencochrane.raven,\
+ net.kencochrane.raven.servlet,\
+ org.codehaus.jackson.map,\
+ com.onboard.service.security.auth,\
+ com.onboard.service.common.cache,\
+ com.onboard.service.common.identifiable,\
+ com.onboard.service.common.attach,\
+ org.codehaus.jackson;version="[1.6, 2]",\
+ org.springframework.validation.beanvalidation,\
+ org.springframework.data.redis.cache,\
+ org.springframework.data.redis.core,\
+ org.springframework.aop,\
+ org.thymeleaf.templateresolver,\
+ org.thymeleaf.spring3,\
+ org.thymeleaf.spring3.processor.attr,\
+ org.thymeleaf.spring3.requestdata,\
+ org.thymeleaf.spring3.view,\
+ net.sf.cglib.proxy,\
+ net.sf.cglib.core,\
+ net.sf.cglib.reflect,\
+ javax.servlet;version="[2.5.0,4)",\
+ javax.servlet.http;version="[2.5.0,4)",\
+ org.joda.time;version="[1.6,2)",\
+ org.joda.time.format;version="[1.6,2)",\
+ javax.validation.constraints, *
+Web-ContextPath: /api

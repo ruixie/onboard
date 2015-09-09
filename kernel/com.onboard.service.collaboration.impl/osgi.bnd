@@ -1,0 +1,16 @@
+Private-Package: com.onboard.service.collaboration.impl;version=${project.version},\
+ com.onboard.service.collaboration.attach;version=${project.version},\
+ com.onboard.service.collaboration.utils;version=${project.version}, \
+ com.onboard.service.collaboration.activity;version=${project.version},\
+ com.onboard.service.collaboration.scheduler;version=${project.version},\
+ com.onboard.service.collaboration.index;version=${project.version},\
+ com.onboard.service.collaboration.notification.email;version=${project.version},\
+ com.onboard.service.collaboration.notification.rule;version=${project.version},\
+ com.onboard.service.collaboration.trash;version=${project.version},\
+ com.onboard.service.collaboration.topic;version=${project.version},\
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.springframework.scheduling.config,\
+ org.springframework.scheduling.concurrent,\
+ *
+Import-Bundle: org.springframework.aop;version=3.1,\
+ com.springsource.org.aopalliance

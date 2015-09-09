@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.onboard</groupId>
+    <artifactId>com.onboard.parent</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+  <packaging>bundle</packaging>
+  <artifactId>com.onboard.service.github</artifactId>
+  <name>com.onboard.service.github</name>
+  <description>com.onboard.service.github</description>
+   <dependencies>
+   
+    <dependency>
+      <groupId>org.eclipse.jetty.orbit</groupId>
+      <artifactId>javax.servlet</artifactId>
+    </dependency>
+    <dependency>
+       <groupId>com.sun.jersey</groupId>
+       <artifactId>jersey-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.domain.model</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</project>

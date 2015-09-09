@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+  <div th:fragment="iterationCodeStats" id="iterationCodeStats" class="stats-tab-content fade active in" ng-controller="iterationCodeStatsCtrl">
+
+    <div class="graph-switcher">
+      <div class="btn-group">
+        <button type="button" class="btn btn-xs btn-default" ng-class="{ active:isSet(1) }" ng-click="setTab(1, $event)">PunchCard</button>
+        <button type="button" class="btn btn-xs btn-default" ng-class="{ active:isSet(3) }" ng-click="setTab(3, $event)">代码提交次数</button>
+        <button type="button" class="btn btn-xs btn-default" ng-class="{ active:isSet(2) }" ng-click="setTab(2, $event)">代码提交影响行数</button>
+      </div>
+    </div>
+
+    <div class="graph-filter">
+      <p class="info">
+        <!-- 解释一下该图表 -->
+        {{ graphInfo() }}
+        <!-- refresh btn -->
+        <button class="btn btn-default refresh-btn" type="button" id="refresh" ng-disabled="busy" ng-click="refresh()">
+          <i class="fa fa-refresh"></i>
+        </button>
+      </p>
+      <p class="info text-center">
+        <strong>{{user.name}}</strong>
+      </p>
+    </div>
+
+    <div>
+      <div class="chart-container">
+
+        <div ng-show="isSet(1)">
+          <div id="commitsPunchCard" class="commits-punchCard svg-chart">
+          </div>
+        </div>
+
+        <div ng-show="isSet(2)">
+          <div id="LocChart" class="commits-trend svg-chart"></div>
+        </div>
+
+        <div ng-show="isSet(3)">
+          <div id="commitsChart" class="commits-trend svg-chart"></div>
+        </div>
+
+        <div ng-show="hasData">
+          <div class="pie-parallel">
+            <div id="pie-commitsChart" style="height: 300px;"></div>
+          </div>
+          <div class="pie-parallel">
+            <div id="pie-LocChart" style="height: 300px;"></div>
+          </div>
+          <div class="pie-parallel">
+            <div id="pie-LocMinusChart" style="height: 300px;"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- <div class="graph-loading-mask" ng-show="busy"></div> -->
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+Private-Package: com.onboard.service.wiki.activity;version=${project.version},\
+ com.onboard.service.wiki.impl;version=${project.version},\
+ com.onboard.service.wiki.index;version=${project.version},\
+ com.onboard.service.wiki.utils;version=${project.version},\
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.springframework.scheduling.config,\
+ org.springframework.scheduling.concurrent,\
+ *
+Import-Bundle:org.springframework.aop;version=3.0,\
+ com.springsource.org.aopalliance

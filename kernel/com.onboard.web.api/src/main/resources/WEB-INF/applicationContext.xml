@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:cache="http://www.springframework.org/schema/cache"
+  xmlns:c="http://www.springframework.org/schema/c"
+  xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                                 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                                http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+  <context:component-scan base-package="com.onboard.web.api">
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+  </context:component-scan>
+  <beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+  <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:maxUploadSize="33554432" />
+  
+  <beans:bean id="attachmentCreatorRequired" class="com.onboard.service.security.interceptors.AttachmentCreatorRequired"/>
+  <beans:bean id="commentCreatorRequired" class="com.onboard.service.security.interceptors.CommentCreatorRequired"/>
+  <beans:bean id="companyAdminInSpecificProjectRequired" class="com.onboard.service.security.interceptors.CompanyAdminInSpecificProjectRequired"/>
+  <beans:bean id="companyAdminRequired" class="com.onboard.service.security.interceptors.CompanyAdminRequired"/>
+  <beans:bean id="companyChecking" class="com.onboard.service.security.interceptors.CompanyChecking"/>
+  <beans:bean id="companyMemberRequired" class="com.onboard.service.security.interceptors.CompanyMemberRequired"/>
+  <beans:bean id="companyOwnerRequired" class="com.onboard.service.security.interceptors.CompanyOwnerRequired"/>
+  <beans:bean id="discussionCreatorRequired" class="com.onboard.service.security.interceptors.DiscussionCreatorRequired"/>
+  <beans:bean id="invitationPermissionRequired" class="com.onboard.service.security.interceptors.InvitationPermissionRequired"/>
+  <beans:bean id="loginRequired" class="com.onboard.service.security.interceptors.LoginRequired"/>
+  <beans:bean id="projectAdminRequired" class="com.onboard.service.security.interceptors.ProjectAdminRequired"/>
+  <beans:bean id="projectChecking" class="com.onboard.service.security.interceptors.ProjectChecking"/>
+  <beans:bean id="projectCreationPrivilegeRequired" class="com.onboard.service.security.interceptors.ProjectCreationPrivilegeRequired"/>
+  <beans:bean id="projectMemberRequired" class="com.onboard.service.security.interceptors.ProjectMemberRequired"/>
+  <beans:bean id="projectNotArchivedRequired" class="com.onboard.service.security.interceptors.ProjectNotArchivedRequired"/>
+  <beans:bean id="rememberMeInterceptor" class="com.onboard.service.security.interceptors.RememberMeInterceptor"/>
+  <beans:bean id="uploadCreatorRequired" class="com.onboard.service.security.interceptors.UploadCreatorRequired"/>
+  <beans:bean id="eventCreatorRequired" class="com.onboard.service.security.interceptors.EventCreatorRequired"/>
+  <beans:bean id="userChecking" class="com.onboard.service.security.interceptors.UserChecking"/>
+  <beans:bean id="ManagerChecking" class="com.onboard.service.security.interceptors.ManagerRequired"/>
+  <beans:bean id="cacheManager" class="com.onboard.service.common.cache.OnboardCacheManager" c:template-ref="redisTemplate"/>
+  
+  <cache:annotation-driven />
+</beans:beans>

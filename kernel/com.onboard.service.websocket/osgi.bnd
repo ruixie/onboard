@@ -1,0 +1,3 @@
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.onboard.service.websocket;version=${project.version}
+Private-Package: com.onboard.service.websocket.impl;version=${project.version}

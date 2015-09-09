@@ -1,0 +1,14 @@
+Export-Package: com.onboard.service.file.exception;version=${project.version},\
+ com.onboard.service.file;version=${project.version},\
+ com.onboard.service.email.exception;version=${project.version},\
+ com.onboard.service.email;version=${project.version},\
+ com.onboard.utils;version=${project.version}, \
+ com.onboard.service.common.cache;version=${project.version}, \
+ com.onboard.service.base;version=${project.version},\
+ com.onboard.service.common.identifiable;version=${project.version},\
+ com.onboard.service.common.attach;version=${project.version},\
+ com.onboard.service.common.subscrible;version=${project.version}
+ 
+Import-Package: redis.clients.jedis;version="2.1",\
+ *
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

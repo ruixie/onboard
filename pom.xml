@@ -17,14 +17,14 @@
   </properties>
 
   <modules>
-    <module>kernel/com.onboard.api</module>
     <module>kernel/com.onboard.domain.mapper.model</module>
     <module>kernel/com.onboard.domain.model</module>
+    <module>kernel/com.onboard.api</module>
     <module>kernel/com.onboard.domain.transform</module>
-    <module>test/com.onboard.test.utils</module>
     <module>kernel/com.onboard.service.index</module>
     <module>kernel/com.onboard.service.index.impl</module>
     <module>kernel/com.onboard.domain.mapper</module>
+    <module>test/com.onboard.test.utils</module>
     <module>kernel/com.onboard.service.common</module>
     <module>kernel/com.onboard.service.common.impl</module>
     <module>kernel/com.onboard.service.web</module>
@@ -65,8 +65,6 @@
           <instructions>
             <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
             <Bundle-Version>${project.version}</Bundle-Version>
-            <Export-Package>${bundle.Export-Package};version="${project.version}"</Export-Package>
-            <Private-Package>!${bundle.Export-Package};${bundle.Export-Package}.internal.*</Private-Package>
             <_include>osgi.bnd</_include>
           </instructions>
         </configuration>

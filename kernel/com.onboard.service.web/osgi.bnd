@@ -1,1 +1,2 @@
+Export-Package: com.onboard.service.web;version=${project.version},\
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

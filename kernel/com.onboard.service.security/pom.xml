@@ -19,7 +19,7 @@
       <groupId>org.eclipse.jetty.orbit</groupId>
       <artifactId>javax.servlet</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>org.springframework.security.web</artifactId>
@@ -28,12 +28,12 @@
       <groupId>org.springframework</groupId>
       <artifactId>org.springframework.web.servlet</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.elevenframework</groupId>
       <artifactId>org.elevenframework.web.api</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>com.onboard</groupId>
       <artifactId>com.onboard.domain.model</artifactId>

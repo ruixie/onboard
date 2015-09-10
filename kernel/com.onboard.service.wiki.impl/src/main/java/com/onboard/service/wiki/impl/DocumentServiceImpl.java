@@ -78,9 +78,6 @@ public class DocumentServiceImpl extends AbstractBaseService<Document, DocumentE
     @Autowired
     private DocumentHistoryMapper documentHistoryMapper;
 
-    @Autowired
-    private Repository repository;
-
     @Value("${plugins.document.defaultTitle}")
     private String defaultTitle;
 
@@ -170,6 +167,7 @@ public class DocumentServiceImpl extends AbstractBaseService<Document, DocumentE
 
     @Override
     public List<Document> getNUptodateDocuments(int projectId, int n) {
+    	// TODO 这个实现不太好，应该可以直接按Date排序获取n个文档
         Document document = new Document(false);
         document.setProjectId(projectId);
         List<Document> list = getBySample(document);

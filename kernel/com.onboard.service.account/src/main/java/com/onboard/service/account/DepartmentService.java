@@ -29,32 +29,36 @@ import com.onboard.service.base.BaseService;
 public interface DepartmentService extends BaseService<Department, DepartmentExample> {
 
     /**
-     * 更新用户所在的组
-     * 
-     * @param userCompany
+     * 将一个用户移动到特定分组下
+     * @param userCompany 新的用户-分组对象
      */
     void updateDepartmentOfUser(UserCompany userCompany);
 
     /**
-     * 对分组进行排序
-     * 
+     * 对于传入的分组列表，对其按照主键从小到大排序
      * @param ids
      */
     void sortDepartment(List<Integer> groupIds);
 
     /**
-     * @param userId
-     * @return
+     * 获取一个用户在特定团队中的分组
+     * @param companyId 团队主键
+     * @param userId 用户主键
+     * @return 按要求从数据库中获取出的分组对象
      */
     Department getDepartmentByCompanyIdByUserId(int companyId, int userId);
 
     /**
-     * 找到用户在某公司的departmentId，并填充
+     * 获取一个用户在特定团队中的分组，并将分组对象填充进用户对象中
+     * @param user 用户对象
+     * @param companyId 团队主键
      */
     void fillUserDepartmentInCompany(User user, int companyId);
 
     /**
-     * 填充某公司一组用户的departmentId
+     * 对于一个用户列表，获取其中每一个用户在特定团队中的分组，并将分组对象填充进用户对象中
+     * @param users 用户列表
+     * @param companyId 团队主键
      */
     void fillUsersDepartmentInCompany(List<User> users, int companyId);
 

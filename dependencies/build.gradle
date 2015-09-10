@@ -6,10 +6,10 @@ version = '1.0'
 repositories {
     maven {
         credentials {
-            username 'deployment'
-            password 'sercxtyf'
+            username 'yourname'
+            password 'yourpass'
         }
-        url "http://dev.elevenframework.org/nexus/content/groups/public"
+        url "http://yourprivatemavenrepo.org/"
     }
 }
 

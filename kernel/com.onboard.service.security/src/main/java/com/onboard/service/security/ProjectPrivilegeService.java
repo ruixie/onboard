@@ -28,101 +28,89 @@ import com.onboard.domain.model.User;
  */
 public interface ProjectPrivilegeService {
     /**
-     * Get item by id
-     * 
-     * @param id
-     * @return item
+     * 根据主键获取项目权限对象
+     * @param id 主键
+     * @return 按要求从数据库中获取出的项目权限对象
      */
     ProjectPrivilege getProjectPrivilegeById(int id);
 
     /**
-     * Get item list
-     * 
-     * @param start
-     * @param limit
-     * @return the item list
+     * 获取一定范围内的项目权限列表
+     * @param start 列表的起始位置
+     * @param limit 列表的最大长度
+     * @return 按要求从数据库中获取出的项目权限列表
      */
     List<ProjectPrivilege> getProjectPrivileges(int start, int limit);
 
     /**
-     * Get item list by example
-     * 
-     * @param item
-     * @param start
-     * @param limit
-     * @return the item list
+     * 根据样例对象获取一定范围内的项目权限列表
+     * @param item 样例对象
+     * @param start 列表的起始位置
+     * @param limit 列表的最大长度
+     * @return 按要求从数据库中获取出的项目权限列表
      */
     List<ProjectPrivilege> getProjectPrivilegesByExample(ProjectPrivilege item, int start, int limit);
 
     /**
-     * Get item count by example
-     * 
-     * @param item
-     * @return the count
+     * 根据样例对象获取符合条件的项目权限数量
+     * @param item 样例对象
+     * @return 按要求从数据库中获取出的项目权限的数量
      */
     int countByExample(ProjectPrivilege item);
 
     /**
-     * Create
-     * 
-     * @param item
-     * @return the created ProjectPrivilege
+     * 在数据库中创建一个项目权限对象
+     * @param item 需要被添加进数据库的项目权限对象
+     * @return 创建好的项目权限对象，包括其在数据库中的主键
      */
     ProjectPrivilege createProjectPrivilege(ProjectPrivilege item);
 
     /**
-     * Update
-     * 
-     * @param item
-     * @return the updated item
+     * 在数据库中更新一个项目权限对象
+     * @param item 需要被更新的项目权限对象
+     * @return 更新好的项目权限对象
      */
     ProjectPrivilege updateProjectPrivilege(ProjectPrivilege item);
 
     /**
-     * Delete
-     * 
-     * @param id
+     * 在数据库中删除一个项目权限对象
+     * @param id 需要被删除的项目权限对象的主键
      */
     void deleteProjectPrivilege(int id);
 
     /**
-     * 获取用户在项目的权限，如果权限尚不存在，则创建一个
-     * 
-     * @param companyId
-     * @param userId
-     * @return
+     * 获取特定用户在特定项目中的权限，如果权限尚不存在，则创建一个
+     * @param projectId 项目主键
+     * @param userId 用户主键
+     * @return 已经存在或者刚刚创建好的项目权限对象
      */
     ProjectPrivilege getOrCreateProjectPrivilegeByUserId(int projectId, int userId);
 
     /**
-     * 通过uesrId获取projectPrivilege
-     * 
-     * @param userId
-     * @return
+     * 根据用户主键获取其所有关联的项目权限
+     * @param userId 用户主键
+     * @return 按要求从数据库中获取出的项目权限列表
      */
     List<ProjectPrivilege> getProjectPrivilegesByUserId(int userId);
 
     /**
-     * 通过projectId获取项目管理员
-     * 
-     * @param project
-     * @return
+     * 根据项目主键获取其所有的管理员
+     * @param projectId 项目主键
+     * @return 按要求从数据库中获取出的用户列表
      */
     List<User> getProjectAdminsByProject(int projectId);
 
     /**
-     * 添加项目管理员
-     * 
-     * @param userId
-     * @param projectId
+     * 添加特定用户为特定项目的管理员
+     * @param userId 用户主键
+     * @param projectId 项目主键
      */
     void addProjectAdmin(int userId, int projectId);
 
     /**
-     * 删除项目管理员
-     * 
-     * @param userId
-     * @param projectId
+     * 从特定项目的管理员中删除特定用户
+     * @param userId 用户主键
+     * @param projectId 项目主键
      */
     void removeProjectAdmin(int userId, int projectId);
 }

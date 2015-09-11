@@ -27,77 +27,69 @@ import com.onboard.domain.model.CompanyPrivilege;
  */
 public interface CompanyPrivilegeService {
     /**
-     * Get item by id
-     * 
-     * @param id
-     * @return item
+     * 根据主键获取团队权限对象
+     * @param id 主键
+     * @return 按要求从数据库中获取出的团队权限对象
      */
     CompanyPrivilege getCompanyPrivilegeById(int id);
 
     /**
-     * Get item list
-     * 
-     * @param start
-     * @param limit
-     * @return the item list
+     * 获取一定范围内的团队权限列表
+     * @param start 列表的起始位置
+     * @param limit 列表的最大长度
+     * @return 按要求从数据库中获取出的团队权限列表
      */
     List<CompanyPrivilege> getCompanyPrivileges(int start, int limit);
 
     /**
-     * Update
-     * 
-     * @param item
-     * @return the updated item
+     * TODO 需要和updateCompanyPrivilege统一
+     * 在数据库中更新一个团队权限对象
+     * @param item 需要被更新的团队权限对象
+     * @return 更新好的团队权限对象
      */
     CompanyPrivilege setCompanyPrivilege(CompanyPrivilege item);
 
     /**
-     * Get item list by example
-     * 
-     * @param item
-     * @param start
-     * @param limit
-     * @return the item list
+     * 根据样例对象获取一定范围内的团队权限列表
+     * @param item 样例对象
+     * @param start 列表的起始位置
+     * @param limit 列表的最大长度
+     * @return 按要求从数据库中获取出的团队权限列表
      */
     List<CompanyPrivilege> getCompanyPrivilegesByExample(CompanyPrivilege item, int start, int limit);
 
     /**
-     * Get item count by example
-     * 
-     * @param item
-     * @return the count
+     * 根据样例对象获取符合条件的团队权限数量
+     * @param item 样例对象
+     * @return 按要求从数据库中获取出的团队权限的数量
      */
     int countByExample(CompanyPrivilege item);
 
     /**
-     * Create
-     * 
-     * @param item
-     * @return the created CompanyPrivilege
+     * 在数据库中创建一个团队权限对象
+     * @param item 需要被添加进数据库的团队权限对象
+     * @return 创建好的团队权限对象，包括其在数据库中的主键
      */
     CompanyPrivilege createCompanyPrivilege(CompanyPrivilege item);
 
     /**
-     * Update
-     * 
-     * @param item
-     * @return the updated item
+     * 在数据库中更新一个团队权限对象
+     * @param item 需要被更新的团队权限对象
+     * @return 更新好的团队权限对象
      */
     CompanyPrivilege updateCompanyPrivilege(CompanyPrivilege item);
 
     /**
-     * Delete
-     * 
-     * @param id
+     * 在数据库中删除一个团队权限对象
+     * @param id 需要被删除的团队权限对象的主键
      */
     void deleteCompanyPrivilege(int id);
 
     /**
-     * 获取用户在公司的权限，如果权限尚不存在，则创建一个
-     * 
-     * @param companyId
-     * @param userId
-     * @return
+     * 获取特定用户在特定团队中的权限，如果权限尚不存在，则创建一个
+     * @param companyId 团队主键
+     * @param userId 用户主键
+     * @return 已经存在或者刚刚创建好的团队权限对象
      */
     CompanyPrivilege getOrCreateCompanyPrivilegeByUserId(int companyId, int userId);
 }

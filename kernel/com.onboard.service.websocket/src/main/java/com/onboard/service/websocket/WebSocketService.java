@@ -31,38 +31,60 @@ import com.onboard.domain.model.User;
  */
 public interface WebSocketService {
 
+	/**
+	 * 注册一个用户页面的WebSocket客户端
+	 * @param user 用户对象
+	 * @param inbound
+	 */
     public void registerClient(String user, MessageInbound inbound);
 
+    /**
+     * 注销一个用户页面的WebSocket客户端
+     * @param user 用户端想
+     * @param inbound
+     */
     public void unregisterClient(String user, MessageInbound inbound);
 
     /**
-     * 将信息发送给某个特定用户的所有页面
-     * 
-     * @param user
-     * @param actionMap
+     * 将活动对象发送给某个特定用户的所有页面
+     * @param user 目标用户对象
+     * @param activity 需要发送的活动对象
      */
     public void broadcastOne(String user, Activity activity);
-
+    
+    /**
+     * 将文本信息发送给某个特定用户的所有页面
+     * @param user 目标用户对象
+     * @param message 需要发送的文本信息
+     */
     public void broadcastOne(String user, String message);
 
+    /**
+     * 将对象发送给某个特定用户的所有页面
+     * @param user 目标用户对象
+     * @param object 需要发送的对象
+     */
     public void broadcastOne(User user, Object object);
 
     /**
-     * 对所有已经注册了websocket连接的页面发送消息
-     * 
-     * @throws IOException
+     * 将活动对象发送给所有连接了WebSocket的用户的所有页面
+     * @param activity 需要发送的活动对象
      */
     public void broadcastAll(Activity activity);
 
     /**
-     * 对单个websocket连接对应的页面发送消息
-     * 
-     * @param inbound
-     * @param message
+     * 将文本信息发送给某个特定页面
+     * @param inbound 页面信息
+     * @param message 需要发送的文本信息
      * @throws IOException
      */
     public void sendToPage(MessageInbound inbound, String message) throws IOException;
 
+    /**
+     * 将通知对象发送给某个特定用户的所有页面
+     * @param user 目标用户对象
+     * @param notification 需要发送的通知对象
+     */
     void broadcastOne(String user, Notification notification);
 
 }

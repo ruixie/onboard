@@ -32,22 +32,50 @@ public interface SessionService {
     public static final String CURRENT_PROJECT = "currentProject";
     public static final String TEMP_USER = "tempUser";
 
+    /**
+     * 获取当前Session对应的用户
+     * @return
+     */
     public User getCurrentUser();
 
+    /**
+     * 获取当前Session对应的团队
+     * @return
+     */
     public Company getCurrentCompany();
 
+    /**
+     * 获取当前Session对应的项目
+     * @return
+     */
     public Project getCurrentProject();
 
+    /**
+     * 设置当前Session对应的用户
+     * @param user
+     */
     public void setCurrentUser(User user);
 
+    /**
+     * 设置当前Session对应的团队
+     * @param company
+     */
     public void setCurrentCompany(Company company);
 
+    /**
+     * 设置当前Session对应的项目
+     * @param project
+     */
     public void setCurrentProject(Project project);
 
+    /**
+     * 移除当前Session中的用户信息
+     */
     public void removeUserInformation();
 
     /**
-     * set temp user while there are no http session
+     * 当没有Session时，设置临时用户
+     * @param user
      */
     void setTempUser(User user);
 

@@ -26,23 +26,23 @@ public interface FileService {
 
     /**
      * 读取指定路径的文件，请注意文件路径中的分隔符务必使用平台无关的{@link File.separator}
-     * @param path
-     * @return
+     * @param path 目标路径
+     * @return 该操作是否成功
      */
     byte[] readFile(String path);
 
     /**
      * 将文件存储指定路径，请注意文件路径中的分隔符务必使用平台无关的{@link File.separator}
-     * @param path
-     * @param data
-     * @return
+     * @param path 目标路径
+     * @param data 需要存储的文件的二进制数据
+     * @return 该操作是否成功
      */
     boolean writeFile(String path, byte[] data);
 
     /**
      * 删除指定路径的文件，请注意文件路径中的分隔符务必使用平台无关的{@link File.separator}
-     * @param path
-     * @return
+     * @param path 目标路径
+     * @return 该操作是否成功
      */
     boolean deleteFile(String path);
     
@@ -51,7 +51,7 @@ public interface FileService {
      * @param path 原路径
      * @param newPath 新路径
      * @param auto 是否自动创建目录
-     * @return
+     * @return 该操作是否成功
      */
     boolean renameFile(String path, String newPath, boolean auto);
 }

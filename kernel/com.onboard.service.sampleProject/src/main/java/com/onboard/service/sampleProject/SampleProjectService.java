@@ -26,9 +26,9 @@ import com.onboard.domain.model.User;
 public interface SampleProjectService {
 
     /**
-     * 建立示例项目
-     * 
-     * @param companyId
+     * 在一个团队中创建一个用于示例的演示项目
+     * @param companyId 需要创建演示项目的团队的主键
+     * @param creator 所有操作的执行人，通常即为该团队的创建者
      */
     void createSampleProjectByCompanyId(Integer companyId, User creator);
 }

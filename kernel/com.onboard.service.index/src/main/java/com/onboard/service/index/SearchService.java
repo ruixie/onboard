@@ -20,7 +20,13 @@ import com.onboard.service.index.model.SearchResult;
 
 public interface SearchService {
     
+	/**
+	 * 在Solr中搜索指定关键字，并返回一段范围内的结果
+	 * @param key 需要搜索的结果
+	 * @param searchQuery 搜索队列
+	 * @param start 范围的开始位置
+	 * @param limit 范围的最大长度
+	 * @return 按照要求从Solr中获取的搜索结果
+	 */
     SearchResult search(String key, SearchQuery searchQuery, int start, int limit);
-
-
 }

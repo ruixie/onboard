@@ -69,7 +69,7 @@ public class IndexAspectImpl implements IndexAspect {
 
     @Override
     public void insertSelective(Indexable item) {
-            indexServices.getIndexService().addIndex(item);
+        indexServices.getIndexService().addIndex(item);
     }
 
     @Override

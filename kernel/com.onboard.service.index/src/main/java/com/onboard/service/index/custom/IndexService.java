@@ -31,44 +31,35 @@ import com.onboard.service.index.model.SearchResult;
 public interface IndexService {
     
     /**
-     * 添加文档索引
-     *
-     * @param indexable
-     *            被添加到全文索引的对象
+     * 在全局索引中创建一个可索引对象
+     * @param indexable 需要被添加进全文索引的索引对象
      */
     public void addIndex(Indexable indexable);
 
     /**
-     * 更新文档索引
-     *
-     * @param modifiedIndexable
-     *            新的对象，用于更新全文索引中的旧文档
+     * 在全局索引中更新一个可索引对象
+     * @param modifiedIndexable 需要被更新的索引对象
      */
     public void updateIndex(Indexable modifiedIndexable);
 
     /**
-     * 根据文档Id删除全文索引中的单个文档
-     *
-     * @param id
-     *            文档Id
+     * 在全局索引中根据文档主键删除对应的可索引对象
+     * @param id 文档主键
      */
     public void deleteIndexById(String id);
 
     /**
-     * 根据文档Id列表删除全文索引中相应的文档
-     *
-     * @param idList
-     *            文档Id列表
+     * 在全局索引中根据文档主键列表删除对应的可索引对象
+     * @param idList 文档主键的列表
      */
     public void deleteIndexByIdList(List<String> idList);
 
     /**
-     * 根据关键词，项目列表和分页信息对特定的对象进行查询
-     * 
-     * @param key
-     * @param projectIdList
-     * @param page
-     * @param modelType
+     * 在全局索引中，根据关键词，项目列表和分页信息对特定的对象进行查询
+     * @param key 索引关键词
+     * @param projectIdList 项目列表
+     * @param page 分页信息
+     * @param modelType 查询对象的类型
      * @return {@link SearchResult}对象
      */
     public SearchResult search(String key, SearchQuery searchQuery, Page page);
@@ -76,7 +67,6 @@ public interface IndexService {
 
     /**
      * 关键词推荐
-     * 
      * @param key
      * @return 相关的关键词列表
      */

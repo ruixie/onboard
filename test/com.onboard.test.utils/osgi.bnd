@@ -1,4 +1,5 @@
 Export-Package: com.onboard.test.exampleutils;version=${project.version},\
+ com.onboard.test.module;version=${project.version},\
  com.onboard.test.moduleutils;version=${project.version},\
  com.onboard.test.service;version=${project.version},\
 Import-Package: com.onboard.domain.mapper.model,\

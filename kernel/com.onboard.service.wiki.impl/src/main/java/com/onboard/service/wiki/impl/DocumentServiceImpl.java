@@ -42,7 +42,6 @@ import com.onboard.service.collaboration.CommentService;
 import com.onboard.service.collaboration.TopicService;
 import com.onboard.service.common.subscrible.SubscriberService;
 import com.onboard.service.wiki.DocumentService;
-import com.onboard.service.wiki.utils.Repository;
 
 /**
  * {@link DocumentService}接口实现

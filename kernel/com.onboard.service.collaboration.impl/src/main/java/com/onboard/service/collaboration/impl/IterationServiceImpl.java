@@ -18,8 +18,6 @@ package com.onboard.service.collaboration.impl;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,11 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.Lists;
 import com.onboard.domain.mapper.IterationAttachMapper;
 import com.onboard.domain.mapper.IterationMapper;
-import com.onboard.domain.mapper.ProjectMapper;
 import com.onboard.domain.mapper.base.BaseMapper;
 import com.onboard.domain.mapper.model.IterationAttachExample;
 import com.onboard.domain.mapper.model.IterationExample;
-import com.onboard.domain.mapper.model.ProjectExample;
 import com.onboard.domain.model.Iteration;
 import com.onboard.domain.model.Iteration.IterationStatus;
 import com.onboard.domain.model.IterationAttach;
@@ -70,21 +66,7 @@ public class IterationServiceImpl extends AbstractBaseService<Iteration, Iterati
     private IdentifiableManager identifiableManager;
 
     @Autowired
-    private ProjectMapper projectMapper;
-
-    @Autowired
     private ProjectService projectService;
-
-    @PostConstruct
-    public void initIterations() {
-        List<Project> projects = projectMapper.selectByExample(new ProjectExample());
-        for (Project project : projects) {
-            if (getCurrentIterationByProjectId(project.getId()) != null) {
-                continue;
-            }
-            addNewIterationForProject(project);
-        }
-    }
 
     @Override
     public Iteration getById(int id) {
@@ -199,13 +181,14 @@ public class IterationServiceImpl extends AbstractBaseService<Iteration, Iterati
 
     @Override
     public Iteration addNewIterationForProject(Project project) {
+        DateTime now = DateTime.now();
         Iteration iteration = new Iteration();
         iteration.setCompanyId(project.getCompanyId());
         iteration.setCreated(new Date());
         iteration.setCreatorId(-1);
-        iteration.setEndTime(DateTime.now().withTimeAtStartOfDay().plusDays(7).plusSeconds(-1).toDate());
+        iteration.setEndTime(now.withTimeAtStartOfDay().plusDays(7).plusSeconds(-1).toDate());
         iteration.setProjectId(project.getId());
-        iteration.setStartTime(DateTime.now().withTimeAtStartOfDay().toDate());
+        iteration.setStartTime(now.withTimeAtStartOfDay().toDate());
         iteration.setStatus(IterationStatus.CREATED.getValue());
         iterationMapper.insert(iteration);
         return iteration;

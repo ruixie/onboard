@@ -115,7 +115,7 @@ public abstract class AbstractProjectItemServiceTest<I extends BaseProjectItem, 
     }
 
     @Before
-    public void setup() {
+    public void baseSetup() {
         initFields();
         initMockMapper();
     }
@@ -242,6 +242,12 @@ public abstract class AbstractProjectItemServiceTest<I extends BaseProjectItem, 
         int result = getTestService().countByExample(example);
         verify(getMockMapper()).countByExample(example);
         assertEquals(ModuleHelper.count, result);
+    }
+    
+    protected boolean isNow(Date date){
+        DateTime now = DateTime.now();
+        return (now.isAfter(date.getTime()) || now.isEqual(date.getTime()))
+                && now.plusSeconds(-1).isBefore(date.getTime());
     }
     
     protected void assertNow(Date date){

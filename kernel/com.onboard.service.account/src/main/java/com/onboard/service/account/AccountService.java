@@ -24,68 +24,52 @@ import com.onboard.domain.model.User;
 public interface AccountService {
 
     /**
-     * 邀请用户加入公司
-     * 
-     * @param companyId
-     *            公司id
-     * @param email
-     *            email地址
+     * 邀请用户加入团队
+     * @param companyId 团队主键
+     * @param email 该用户的邮件地址
      */
     void sendInvitation(int companyId, String email);
 
     /**
-     * 邀请用户加入项目，传入项目列表的目的是为了在邮件中显示
-     * 
-     * @param companyId
-     *            公司id
-     * @param email
-     *            email地址
-     * @param projectIds
-     *            项目id列表
+     * 邀请用户加入项目
+     * @param companyId 团队主键
+     * @param email 该用户的邮件地址
+     * @param projects 项目主键列表，该列表中的项目会在邮件当中进行显示
      */
     void sendInvitation(int companyId, String email, List<Project> projects);
 
     /**
-     * 确认邀请是否有效
-     * 
-     * @param companyId
-     *            公司id
-     * @param token
-     *            令牌
-     * @return 如果有效返回对应的email地址，否则返回null
+     * 判断一个令牌是否有效
+     * @param companyId 团队主键
+     * @param token 需要检验的令牌
+     * @return 当令牌有效时，返回该令牌所属用户的邮件地址，否则返回null。
      */
     String authenticateInvitation(int companyId, String token);
 
     /**
-     * 完成邀请，删除令牌
-     * 
-     * @param companyId
-     *            公司id
-     * @Param user 用户对象
-     * @param token
-     *            令牌
+     * 在邀请完成后，删除对应的令牌
+     * @param companyId 团队主键
+     * @param token 需要被删除的令牌
+     * @param user 用户对象
      */
     void completeInvitation(int companyId, User user, String token);
 
     /**
-     * 获取公司下所有邀请
-     * 
-     * @param companyId
-     * @return
+     * 获取一个团队中所有邀请的列表
+     * @param companyId 团队主键
+     * @return 按要求从数据库中获取出的邀请列表
      */
     List<Invitation> getAllInvitations(int companyId);
 
     /**
-     * 获取Invitation
-     * 
+     * 根据主键获取邀请对象
      * @param id
-     * @return
+     * @return 按要求从数据库中获取出的邀请对象
      */
     Invitation getInvitationById(int id);
 
     /**
-     * 删除Invitation
-     * 
+     * 根据主键删除邀请对象
      * @param id
      */
     void deleteInvitationById(int id);

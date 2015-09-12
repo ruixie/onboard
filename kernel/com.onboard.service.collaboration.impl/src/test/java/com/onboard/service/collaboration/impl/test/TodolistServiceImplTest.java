@@ -66,7 +66,6 @@ import com.onboard.service.common.subscrible.SubscriberService;
 import com.onboard.service.web.SessionService;
 import com.onboard.test.exampleutils.CriterionVerifier;
 import com.onboard.test.exampleutils.ExampleMatcher;
-import com.onboard.test.exampleutils.ObjectMatcher;
 import com.onboard.test.moduleutils.ModuleHelper;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -442,52 +441,6 @@ public class TodolistServiceImplTest {
     }
 
     @Test
-    public void testUpdateTodolist_IsDeletedToTrashTest() {
-        sampleTodolist.setDeleted(true);
-        Todolist ret = todolistService.update(sampleTodolist);
-
-        verify(mockTodolistMapper).selectByPrimaryKey(id);
-        verify(mockTodolistMapper).updateByPrimaryKeySelective(argThat(new ObjectMatcher<Todolist>() {
-
-            @Override
-            public boolean verifymatches(Todolist item) {
-                return isToday(item.getUpdated());
-
-            }
-        }));
-        verify(mockTopicService).discardTopcicByTypeAndId(todolistType, id);
-        verify(mockTodoService).getTodosByTodoListWithoutComments(id);
-
-        assertNotNull(ret);
-        assertTrue(isToday(ret.getUpdated()));
-
-        assertEquals(sampleTodolist, ret);
-    }
-
-    @Test
-    public void testUpdateTodolist_IsRecoveredFromTrashTest() {
-
-        sampleTodolist.setDeleted(false);
-        Todolist ret = spyTodolistService.update(sampleTodolist);
-
-        verify(spyTodolistService).getById(id);
-        verify(mockTodolistMapper, times(2)).updateByPrimaryKeySelective(argThat(new ObjectMatcher<Todolist>() {
-
-            @Override
-            public boolean verifymatches(Todolist item) {
-                todolistService.update(item);
-                return isToday(item.getUpdated());
-            }
-        }));
-        verify(mockTopicService).recoverTopcicByTypeAndId(todolistType, id);
-        verify(mockTodoService).getDeletedTodosByTodoList(id);
-
-        assertNotNull(ret);
-        assertTrue(isToday(ret.getUpdated()));
-        assertEquals(sampleTodolist, ret);
-    }
-
-    @Test
     public void testDeleteTodolist() {
         todolistService.delete(id);
         verify(mockTodoService, times(2)).delete(id);
@@ -498,27 +451,6 @@ public class TodolistServiceImplTest {
         doReturn(sampleTodolist).when(spyTodolistService).update(any(Todolist.class));
 
         spyTodolistService.recover(id);
-        verify(spyTodolistService).update(argThat(new ObjectMatcher<Todolist>() {
-
-            @Override
-            public boolean verifymatches(Todolist item) {
-                return (item.getId() == 1) && !item.getDeleted();
-            }
-        }));
-    }
-
-    @Test
-    public void testMoveTodolist() {
-        doReturn(sampleTodolist).when(spyTodolistService).update(any(Todolist.class));
-
-        spyTodolistService.moveTodolist(sampleTodolist, id);
-        verify(spyTodolistService).update(argThat(new ObjectMatcher<Todolist>() {
-
-            @Override
-            public boolean verifymatches(Todolist item) {
-                return (item.getId() == 1) && (item.getProjectId() == 1);
-            }
-        }));
     }
 
 }

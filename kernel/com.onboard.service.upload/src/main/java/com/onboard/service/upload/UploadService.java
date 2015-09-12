@@ -30,20 +30,18 @@ import com.onboard.service.base.BaseService;
 public interface UploadService extends BaseService<Upload, UploadExample> {
 
     /**
-     * 获取一个项目内的Upload
-     * 
+     * 获取一个项目中指定范围内的文件列表
      * @param projectId
-     * @param start
-     * @param limit
-     * @return
+     * @param start 列表的起始位置
+     * @param limit 列表的最大长度
+     * @return 按要求从数据库中获取出的Upload列表
      */
     List<Upload> getUploadsByProject(int projectId, int start, int limit);
 
     /**
-     * 移动Upload到新的项目下
-     * 
-     * @param upload
-     * @param projectId
+     * 将一个文件移动到指定的项目下
+     * @param upload 需要被移动的文件
+     * @param projectId 目标项目的主键
      */
     void moveUpload(Upload upload, int projectId);
 

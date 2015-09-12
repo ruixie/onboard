@@ -7,8 +7,6 @@ MANIFEST.MF
 TEST.MF
 bin
 database/environments
-database/environments/development.properties
-dev-profile.properties
 velocity.log
 npm-debug.log
 generatorConfig.xml
@@ -20,7 +18,6 @@ release.xml
 output
 .checkstyle
 mybatis-generator
-service.kvdb.properties
 .jshintrc
 kernel/com.onboard.web/.externalToolBuilders/
 .DS_Store
@@ -29,8 +26,7 @@ kernel/com.onboard.web/.externalToolBuilders/
 solr/app/conf/db-data-config.xml
 solr/app/data
 
-OnboardWeb/**/application.properties
-application.properties
+*.properties
 
 node_modules
 onboard.css

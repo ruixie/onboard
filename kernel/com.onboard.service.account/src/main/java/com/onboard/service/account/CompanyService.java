@@ -29,27 +29,24 @@ import com.onboard.service.base.BaseService;
  */
 public interface CompanyService extends BaseService<Company, CompanyExample> {
     /**
-     * 获取某个用户所在的company列表
-     * 
-     * @param userId
-     * @return
+     * 获取某个用户所在的所有团队的列表
+     * @param userId 该用户的主键
+     * @return 按要求从数据库中获取出的团队列表
      */
     List<Company> getCompaniesByUserId(int userId);
 
     /**
-     * 在company中移除用户
-     * 
-     * @param companyId
-     * @param userId
+     * 在团队中移除某个用户
+     * @param companyId 团队主键
+     * @param userId 用户主键
      */
     void removeUser(Integer companyId, Integer userId);
 
     /**
-     * 是否包含用户
-     * 
-     * @param companyId
-     * @param userId
-     * @return
+     * 判断一个团队中是否包含某个用户
+     * @param companyId 团队主键
+     * @param userId 用户主键
+     * @return 返回该判断是否为真
      */
     boolean containsUser(Integer companyId, Integer userId);
 

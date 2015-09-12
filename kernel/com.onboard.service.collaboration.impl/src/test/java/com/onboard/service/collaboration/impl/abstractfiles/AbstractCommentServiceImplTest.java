@@ -30,6 +30,7 @@ import com.onboard.domain.mapper.CommentMapper;
 import com.onboard.domain.mapper.model.CommentExample;
 import com.onboard.domain.model.Attachment;
 import com.onboard.domain.model.Comment;
+import com.onboard.domain.model.Discussion;
 import com.onboard.domain.model.Topic;
 import com.onboard.domain.model.User;
 import com.onboard.test.moduleutils.ModuleHelper;
@@ -48,6 +49,7 @@ public abstract class AbstractCommentServiceImplTest {
     protected User user;
     protected Topic topic;
     protected Attachment attachment;
+    protected Discussion discussion;
 
     @Before
     public void setupCollectionTest() {
@@ -62,6 +64,7 @@ public abstract class AbstractCommentServiceImplTest {
         topic = getATopic();
         attachment = getAAttachment();
         attachmentList = getAttachmentList();
+        discussion = getADiscussion();
 
         when(mockCommentMapper.countByExample(Mockito.any(CommentExample.class))).thenReturn(ModuleHelper.count);
 
@@ -81,6 +84,16 @@ public abstract class AbstractCommentServiceImplTest {
         when(mockCommentMapper.updateByPrimaryKey(Mockito.any(Comment.class))).thenReturn(mapperReturnValue);
         when(mockCommentMapper.updateByPrimaryKeySelective(Mockito.any(Comment.class))).thenReturn(mapperReturnValue);
 
+    }
+
+    public Discussion getADiscussion() {
+        Discussion discussion = new Discussion();
+        discussion.setId(ModuleHelper.id);
+        discussion.setProjectId(ModuleHelper.projectId);
+        discussion.setCompanyId(ModuleHelper.companyId);
+        discussion.setSubject(ModuleHelper.subject);
+
+        return discussion;
     }
 
     public List<Comment> getAListofComments() {

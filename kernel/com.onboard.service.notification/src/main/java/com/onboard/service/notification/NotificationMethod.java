@@ -27,9 +27,24 @@ import com.onboard.domain.model.type.Subscribable;
  */
 public interface NotificationMethod extends IdentifiableOperator {
 
+	/**
+	 * 获取该通知方法的通知规则，用以判断什么时候应当发送通知
+	 * @return 一个通知规则对象
+	 */
     NotificationRule getNotificationRule();
 
+    /**
+     * 根据活动对象和可订阅对象发送通知
+     * @param activity 活动对象
+     * @param item 可订阅对象
+     */
     void notifySubsribers(Activity activity, Subscribable item);
 
+    /**
+     * 根据活动对象和可订阅对象发送通知
+     * @param activity 活动对象
+     * @param original 更新前的可订阅对象
+     * @param updated 更新后的可订阅对象
+     */
     void notifySubsribers(Activity activity, Subscribable original, Subscribable updated);
 }

@@ -23,12 +23,100 @@ import com.onboard.domain.model.type.BaseOperateItem;
 public interface BaseService<I extends BaseOperateItem, E extends BaseExample> {
     
     /**
-     * Get item by id
-     * 
-     * @param id
-     * @return item
+     * 根据主键获取对象
+     * @param id 目标对象的主键
+     * @return 按要求从数据库中获取出的对象，当不存在时返回null
      */
     I getById(int id);
+    
+    /**
+     * 获取所有对象的列表
+     * @return 按要求从数据库中获取出的对象组成的列表
+     */
+    List<I> getAll();
+
+    /**
+     * 获取一段范围内的对象的列表
+     * @param start 范围的起始位置
+     * @param limit 范围的长度
+     * @return 按要求从数据库中获取出的对象组成的列表
+     */
+    List<I> getAll(int start, int limit);
+
+    /**
+     * 根据样例对象获取符合条件的对象的列表
+     * @param item 样例对象
+     * @return 按要求从数据库中获取出的对象组成的列表
+     */
+    List<I> getBySample(I item);
+    
+    /**
+     * 根据样例对象获取一定范围内符合条件的对象列表
+     * @param item 样例对象
+     * @param start 范围的起始位置
+     * @param limit 范围的最大长度
+     * @return 按要求从数据库中获取出的对象组成的列表
+     */
+    List<I> getBySample(I item, int start, int limit);
+
+    /**
+     * 根据样例对象获取符合条件的对象的数量
+     * @param item 样例对象
+     * @return 按要求从数据库中获取出的对象的数量
+     */
+    int countBySample(I item);
+
+    /**
+     * 在数据库中创建一个对象
+     * @param item 需要被添加进数据库的对象
+     * @return 创建好的对象，包括其在数据库中的主键
+     */
+    I create(I item);
+
+    /**
+     * 在数据库中更新一个对象，在更新过程中忽略值为null的域
+     * @param item 需要被更新进数据库的对象
+     * @return 更新好的对象
+     */
+    I updateSelective(I item);
+    
+    /**
+     * 在数据库中更新一个对象
+     * @param item 需要被更新进数据库的对象
+     * @return 更新好的对象
+     */
+    I update(I item);
+
+    /**
+     * 在数据库中删除一个对象
+     * @param id 需要被删除的对象的主键
+     */
+    void delete(int id);
+    
+    /**
+     * 在数据库中删除一个对象
+     * @param id 需要被恢复的对象的主键
+     */
+    void recover(int id);
+    
+    /**
+     * TODO: 重新整理名称
+     * 在数据库中彻底删除一个对象
+     * @param id 需要被彻底删除的对象的主键
+     */
+    void deleteFromTrash(int id);
+    
+    /**
+     * 返回该对象的类型标识符
+     * @return
+     */
+    String getModelType();
+    
+    /**
+     * 返回一个与该对象相同类型的新对象
+     * @return
+     */
+    I newItem();
     
     /**
      * TODO: delete this method
@@ -36,37 +124,9 @@ public interface BaseService<I extends BaseOperateItem, E extends BaseExample> {
      * @return
      */
     I getByIdWithDetail(int id);
-
+    
     /**
-     * Get item list
-     * 
-     * @param start
-     * @param limit
-     * @return the item list
-     */
-    List<I> getAll();
-    List<I> getAll(int start, int limit);
-
-    /**
-     * Get item list by sample
-     * 
-     * @param item
-     * @param start
-     * @param limit
-     * @return the item list
-     */
-    List<I> getBySample(I item);
-    List<I> getBySample(I item, int start, int limit);
-
-    /**
-     * Get item count by sample
-     * 
-     * @param item
-     * @return the count
-     */
-    int countBySample(I item);
-
-    /**
+     * TODO: delete this method
      * Get item list by example
      * 
      * @param item
@@ -77,68 +137,13 @@ public interface BaseService<I extends BaseOperateItem, E extends BaseExample> {
     List<I> getByExample(E example);
 
     /**
+     * TODO: delete this method
      * Get item count by example
      * 
      * @param item
      * @return the count
      */
     int countByExample(E example);
-
-    /**
-     * Create
-     * 
-     * @param item
-     * @return the created Step
-     */
-    I create(I item);
-
-    /**
-     * update item except null value
-     * 
-     * @param item
-     * @return the updated item
-     */
-    I updateSelective(I item);
-    
-    /**
-     * update all
-     * 
-     * @param item
-     * @return
-     */
-    I update(I item);
-
-    /**
-     * 
-     * move to trash
-     * 
-     * @param id
-     */
-    void delete(int id);
-    
-    /**
-     * move from trash
-     * @param id
-     */
-    void recover(int id);
-    
-    /**
-     * TODO: 重新整理名称
-     * @param id
-     */
-    void deleteFromTrash(int id);
-    
-    /**
-     * get model type
-     * @return
-     */
-    String getModelType();
-    
-    /**
-     * 新建item
-     * @return
-     */
-    I newItem();
     
     /**
      * 新建example

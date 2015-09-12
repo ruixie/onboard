@@ -29,110 +29,91 @@ import com.onboard.domain.model.type.Subscribable;
  */
 public interface SubscriberService {
     /**
-     * 根据id获取Subscriber对象
-     * 
-     * @param id
-     *            Subscriber id
-     * @return
+     * 根据主键获取订阅对象
+     * @param id 目标订阅对象的主键
+     * @return 按要求从数据库中获取出的订阅对象
      */
     Subscriber getSubscriberById(int id);
 
     /**
-     * 获取一个topic的订阅用户
-     * 
-     * @param id
-     *            Subscriber id
+     * 获取一个可订阅对象的所有订阅用户
+     * @param subscribeType 可订阅对象的的类型
+     * @param subscribeId 可订阅对象的的主键
      * @return
      */
     List<User> getSubscribeUsersByTopic(String subscribeType, int subscribeId);
 
     /**
-     * Get item count by example
-     * 
-     * @param item
-     * @return the count
+     * 根据样例对象获取符合条件的订阅对象的数量
+     * @param item 样例对象
+     * @return 按要求从数据库中获取出的订阅对象的数量
      */
     int countByExample(Subscriber item);
 
     /**
-     * 填充Subscribable对象
-     * 
-     * @param subscribable
+     * 填充一个可订阅对象的订阅者列表域
+     * @param subscribable 需要被填充的可订阅对象域
      */
     void fillSubcribers(Subscribable subscribable);
 
     /**
-     * 增加subscriber对象
-     * 
-     * @param type
-     * @param id
-     * @param usersId
+     * 为一个可订阅对象在数据库中添加订阅者
+     * @param subscribable 包含了订阅者信息的可订阅对象
      */
     void addSubscribers(Subscribable subscribable);
 
     /**
-     * 根据topic获取Subscriber对象
-     * 
-     * @param subscribeType
-     * @param subscribeId
-     * @return
+     * 获取一个可订阅对象的所有订阅的列表
+     * @param subscribeType 可订阅对象的的类型
+     * @param subscribeId 话可订阅对象的的主键
+     * @return 按要求从数据库中获取出的订阅的列表
      */
     List<Subscriber> getSubscribersByTopic(String subscribeType, int subscribeId);
 
     /**
-     * 创建一个Subscriber对象
-     * 
-     * @param bubscriber
-     * @return 返回创建的Subscriber对象，包括数据库中的id
+     * 在数据库中创建一个订阅对象
+     * @param bubscriber  需要被添加进数据库的订阅对象
+     * @return 返回创建的订阅对象，包括数据库中的id
      */
     Subscriber createSubscriber(Subscriber bubscriber);
 
     /**
-     * 更新Subscriber
-     * 
-     * @param bubscriber
-     * @return
+     * 在数据库中更新一个订阅对象
+     * @param bubscriber 需要被更新的订阅对象
+     * @return 更新好的订阅对象
      */
     Subscriber updateSubscriber(Subscriber bubscriber);
 
     /**
-     * 删除Subscriber
-     * 
-     * @param id
+     * 在数据库中删除一个订阅对象
+     * @param id 需要被删除的订阅对象的主键
      */
     void deleteSubscriber(int id);
 
     /**
-     * 根据实例删除subscr
-     * 
-     * @param subscriber
+     * 在数据库中删除一个订阅对象
+     * @param subscriber 需要被删除的订阅对象
      */
     void deleteSubscriberByExample(Subscriber subscriber);
 
     /**
-     * 根据表单数据生成subscriber列表，同时需要包含当前用户
-     * 
-     * @param subscribers
-     * @param defaultUser
-     *            当前用户
-     * @return
+     * 填充一个可订阅对象的订阅者列表，同时需要包含当前用户
+     * @param subscribable 需要被填充的可订阅对象域
+     * @param defaultUser 当前用户
      */
     void generateSubscribers(Subscribable subscribable, User defaultUser);
 
     /**
-     * 根据类型和id获取Subscribable对象
-     * 
-     * @param type
-     * @param id
-     * @return
+     * 根据类型和主键获取一个可订阅对象
+     * @param type 可订阅对象的类型
+     * @param id 可订阅对象的主键
+     * @return 按要求从数据库中获取出可订阅对象
      */
     Subscribable getSubscribleByTypeAndId(String type, Integer id);
 
     /**
-     * 根据subscribable更新其提醒用户
-     * 
-     * @param subscribable
-     * @return
+     * 为一个可订阅对象在数据库中更新订阅者
+     * @param subscribable 包含了更新后订阅者信息的可订阅对象
      */
     void updateSubscribers(Subscribable subscribable);
 

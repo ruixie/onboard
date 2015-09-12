@@ -27,8 +27,21 @@ import com.onboard.domain.model.type.Subscribable;
  */
 public interface NotificationRule extends IdentifiableOperator {
 
+	/**
+	 * 根据活动对象和可订阅对象判断是否要发送通知
+	 * @param activity 活动对象
+	 * @param subscribable 可订阅对象
+	 * @return 是否要发送通知
+	 */
     boolean ifNotify(Activity activity, Subscribable subscribable);
 
+    /**
+	 * 根据活动对象和可订阅对象判断是否要发送通知
+	 * @param activity 活动对象
+	 * @param original 更新前的可订阅对象
+	 * @param updated 更新后的可订阅对象
+	 * @return 是否要发送通知
+	 */
     boolean ifNotify(Activity activity, Subscribable original, Subscribable updated);
 
 }

@@ -86,8 +86,21 @@ public interface IterationService extends BaseService<Iteration, IterationExampl
      * @param modelId
      */
     void removeIterable(IterationAttach iterationAttach);
+    
+    /**
+     * Remove an iterable from its iteration
+     * 
+     * @param iterable - the iterable to remove
+     * @param iterationId - the id of its iteration
+     */
     void removeIterable(Iterable iterable, Integer iterationId);
     
+    /**
+     * Get all completed iterations by projectId
+     * 
+     * @param projectId
+     * @return
+     */
     List<Iteration> getCompleteIterationsByProjectId(int projectId);
 
 }

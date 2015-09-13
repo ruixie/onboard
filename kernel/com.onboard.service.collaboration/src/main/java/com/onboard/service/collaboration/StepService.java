@@ -62,8 +62,27 @@ public interface StepService extends BaseService<Step, StepExample> {
      */
     List<Step> getOpenStepsBetweenDatesByUser(int companyId, Integer userId, Date since, Date until);
 
+    /**
+     * Get all completed steps by its companyId, assignedId and dueDate,
+     * then organized them by its dueDate and projectId  
+     * 
+     * @param companyId - the id of its company
+     * @param userId - the id of its assignee
+     * @param projectList - the list of valid projectId
+     * @param until - the latest date of its dueTime
+     * @param limit - the maximum number of steps
+     * @return an organized list of steps fits the requirements
+     */
     TreeMap<Date, Map<Integer, List<Step>>> getCompletedStepsGroupByDateByUser(int companyId, int userId,
             List<Integer> projectList, Date until, int limit);
 
+    /**
+     * Get all opened steps by its assigneeId,
+     * then organized them by its projectId
+     * 
+     * @param userId - the id of its assignee
+     * @param projectList - the list of valid projectId
+     * @return an organized list of steps fits the requirements
+     */
     Map<Integer, List<Step>> getOpenStepsByUser(Integer userId, List<Integer> projectList);
 }

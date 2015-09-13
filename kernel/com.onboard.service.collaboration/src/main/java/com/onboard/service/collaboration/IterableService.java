@@ -19,8 +19,20 @@ import com.onboard.domain.model.type.Iterable;
 
 public interface IterableService<I extends Iterable> {
 
+	/**
+	 * Get an Iterable with boardables by its id
+	 * 
+	 * @param id
+	 * @return
+	 */
     I getIterableWithBoardables(Integer id);
 
+    /**
+     * Get an Iterable by its id
+     * 
+     * @param id
+     * @return
+     */
     I getIterable(Integer id);
 
 }

@@ -19,10 +19,30 @@ import com.onboard.domain.model.type.ProjectItem;
 
 public interface IdInProjectService {
     
+	/**
+	 * Get next available IdInProject of a project
+	 * 
+	 * @param projectId - the project
+	 * @return an available IdInProject
+	 */
     Integer getNextIdByProjectId(Integer projectId);
     
+    /**
+     * Get next available IdInProject with step of a project
+     * 
+     * @param projectId - the project
+     * @param step - step
+     * @return an available IdInProject
+     */
     Integer getNextIdByProjectIdWithStep(Integer projectId, Integer step); 
     
+    /**
+     * Get a projectItem by its projectId and IdInProject
+     * 
+     * @param projectId
+     * @param idInProject
+     * @return a projectItem fits the requirements
+     */
     ProjectItem get(Integer projectId, Integer idInProject);
 
 }

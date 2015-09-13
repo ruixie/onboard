@@ -233,7 +233,19 @@ public interface ProjectService extends BaseService<Project, ProjectExample> {
      */
     boolean removeTodoStatusFromProject(Integer projectId, String todoStatus);
 
+    /**
+     * Create a project according to a DTO
+     * 
+     * @param projectDTO
+     * @return created project
+     */
     Project createProject(ProjectDTO projectDTO);
 
+    /**
+     * Update a project according to a DTO
+     * 
+     * @param projectDTO
+     * @return updated project
+     */
     Project updateProject(ProjectDTO projectDTO);
 }

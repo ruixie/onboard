@@ -83,8 +83,19 @@ public interface StoryService extends BaseService<Story, StoryExample> {
      */
     List<Story> getStoriesByCreatorId(int creatorId);
 
+    /**
+     * 统计一个父节点中完成子需求的数量
+     * 
+     * @param parentStoryId 父节点id
+     * @return 统计数量
+     */
     Integer getCompletedStoryCount(int parentStoryId);
 
+    /**
+     * 统计一个父节点中未完成子需求的数量
+     * @param parentStoryId 父节点id
+     * @return 统计数量
+     */
     Integer getUncompletedStoryCount(int parentStoryId);
 
     /**
@@ -118,9 +129,21 @@ public interface StoryService extends BaseService<Story, StoryExample> {
      */
     void updateAndCompleteStory(int storyId);
 
+    /**
+     * TODO: unused method
+     */
     List<Story> getUnCompletedStoriesByProjectIdOrderByPosition(int projectId, int start, int limit);
 
+    /**
+     * TODO: unused method
+     */
     List<Story> getCompletedStoriesByProjectIdOrderByPosition(int projectId, int start, int limit);
 
+    /**
+     * 获取一个父节点的子节点数
+     * 
+     * @param parentId 父节点Id
+     * @return 该节点下子节点的数目
+     */
     int getChildCountByParentId(int parentId);
 }

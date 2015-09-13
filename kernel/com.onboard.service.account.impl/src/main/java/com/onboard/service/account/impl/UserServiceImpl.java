@@ -321,16 +321,6 @@ public class UserServiceImpl extends AbstractBaseService<User, UserExample> impl
     }
 
     @Override
-    public User authenticateRememberMeToken(int uid, String token) {
-        return repository.authenticateToken(TokenType.REMEMBER_ME, uid, token) ? this.getById(uid) : null;
-    }
-
-    @Override
-    public void deleteRememberMeToken(int uid) {
-        repository.delToken(TokenType.REMEMBER_ME, uid);
-    }
-
-    @Override
     public void sendConfirmationEmail(User user) {
         if (user.getActivated()) {
             return;

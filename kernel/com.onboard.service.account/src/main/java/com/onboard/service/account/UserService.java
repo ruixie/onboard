@@ -200,25 +200,6 @@ public interface UserService extends BaseService<User, UserExample> {
 	void updateUser(User user, byte[] avatar, String filename);
 
 	/**
-	 * Authenticate a token of type "RememberMe"
-	 * 
-	 * @param uid
-	 *            The id of the user
-	 * @param token
-	 *            The token of the user
-	 * @return an object the the user if the token is valid, otherwise null
-	 */
-	User authenticateRememberMeToken(int uid, String token);
-
-	/**
-	 * 删除“记住我”功能中记录的令牌
-	 * 
-	 * @param uid
-	 *            用户主键
-	 */
-	void deleteRememberMeToken(int uid);
-
-	/**
 	 * 验证“忘记密码”功能中记录的令牌
 	 * 
 	 * @param uid

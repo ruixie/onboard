@@ -15,8 +15,13 @@
  *******************************************************************************/
 package com.onboard.service.account.impl.test;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -202,47 +207,7 @@ public class UserServiceImplTest extends AbstractUserServiceTest {
         Mockito.verifyNoMoreInteractions(mockUserMapper);
         assertNull("", user);
     }
-    
-    /**
-     * @author 胡天翔
-     * Branch that token is valid
-     */
-    @Test
-    public void testAuthenticateRememberMeToken_Branch1() {
-        when(mockRepository.authenticateToken(Mockito.any(TokenType.class), Mockito.anyInt(), Mockito.anyString())).thenReturn(true);
-        User user = testedUserServiceImpl.authenticateRememberMeToken(ModuleHelper.userId, ModuleHelper.token);
-        verify(mockRepository, times(1)).authenticateToken(TokenType.REMEMBER_ME, ModuleHelper.userId, ModuleHelper.token);
-        verify(mockUserMapper, times(1)).selectByPrimaryKey(ModuleHelper.userId);
-        Mockito.verifyNoMoreInteractions(mockRepository);
-        Mockito.verifyNoMoreInteractions(mockUserMapper);
-        runAsserts(user);
-    }
-    
-    /**
-     * @author 胡天翔
-     * Branch that token is invalid
-     */
-    @Test
-    public void testAuthenticateRememberMeToken_Branch2() {
-        when(mockRepository.authenticateToken(Mockito.any(TokenType.class), Mockito.anyInt(), Mockito.anyString())).thenReturn(false);
-        User user = testedUserServiceImpl.authenticateRememberMeToken(ModuleHelper.userId, ModuleHelper.token);
-        verify(mockRepository, times(1)).authenticateToken(TokenType.REMEMBER_ME, ModuleHelper.userId, ModuleHelper.token);
-        Mockito.verifyNoMoreInteractions(mockRepository);
-        Mockito.verifyNoMoreInteractions(mockUserMapper);
-        assertNull("", user);
-    }
-    
-    /**
-     * @author 胡天翔
-     */
-    @Test
-    public void testDeleteRememberMeToken() {
-        Mockito.doNothing().when(mockRepository).delToken(Mockito.any(TokenType.class), Mockito.anyInt());
-        testedUserServiceImpl.deleteRememberMeToken(ModuleHelper.userId);
-        verify(mockRepository, times(1)).delToken(TokenType.REMEMBER_ME, ModuleHelper.userId);
-        Mockito.verifyNoMoreInteractions(mockRepository);
-    }
-    
+        
     /**
      * @author 胡天翔
      * Branch that user is activated

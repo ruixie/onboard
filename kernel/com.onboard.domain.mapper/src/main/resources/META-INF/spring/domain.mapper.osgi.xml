@@ -39,7 +39,6 @@
   <service id="attachTodoDao" interface="com.onboard.domain.mapper.AttachTodoMapper" ref="attachTodoMapperBean" />
   <service id="projectTodoStatusDao" interface="com.onboard.domain.mapper.ProjectTodoStatusMapper" ref="projectTodoStatusMapperBean" />
   <service id="companyApplicationDao" interface="com.onboard.domain.mapper.CompanyApplicationMapper" ref="companyApplicationMapperBean" />
-  <service id="todoDurationMapperDao" interface="com.onboard.domain.mapper.TodoDurationMapper" ref="todoDurationMapperBean" />
   <service id="bugDao" interface="com.onboard.domain.mapper.BugMapper" ref="bugMapperBean" />
   <service id="storyMapperDao" interface="com.onboard.domain.mapper.StoryMapper" ref="storyMapperBean" />
   <service id="iterationAttachMapperDao" interface="com.onboard.domain.mapper.IterationAttachMapper" ref="iterationAttachMapperBean" />

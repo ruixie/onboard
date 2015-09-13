@@ -24,42 +24,62 @@ import com.onboard.domain.model.UserCompany;
 import com.onboard.service.base.BaseService;
 
 /**
+ * This service is about {@link Department}.
+ * 
  * @author xuchen
+ * 
+ * TODO: The usage "department" and "group" should be united.
+ * 
  */
-public interface DepartmentService extends BaseService<Department, DepartmentExample> {
+public interface DepartmentService extends
+		BaseService<Department, DepartmentExample> {
 
-    /**
-     * 将一个用户移动到特定分组下
-     * @param userCompany 新的用户-分组对象
-     */
-    void updateDepartmentOfUser(UserCompany userCompany);
+	/**
+	 * Move the given user to the given department
+	 * 
+	 * @param userCompany
+	 *            An object contains the informations of both user and company
+	 */
+	void updateDepartmentOfUser(UserCompany userCompany);
 
-    /**
-     * 对于传入的分组列表，对其按照主键从小到大排序
-     * @param ids
-     */
-    void sortDepartment(List<Integer> groupIds);
+	/**
+	 * Update the order of departments according to the given list
+	 * 
+	 * @param groupIds
+	 *            An list of group-id which indicated the new order
+	 */
+	void sortDepartment(List<Integer> groupIds);
 
-    /**
-     * 获取一个用户在特定团队中的分组
-     * @param companyId 团队主键
-     * @param userId 用户主键
-     * @return 按要求从数据库中获取出的分组对象
-     */
-    Department getDepartmentByCompanyIdByUserId(int companyId, int userId);
+	/**
+	 * Get department by the given user and the given company (Which means this
+	 * is the department that the given user belong to in the given company)
+	 * 
+	 * @param companyId
+	 *            The id of the company
+	 * @param userId
+	 *            The id of the user
+	 * @return An object of department which meets the restriction
+	 */
+	Department getDepartmentByCompanyIdByUserId(int companyId, int userId);
 
-    /**
-     * 获取一个用户在特定团队中的分组，并将分组对象填充进用户对象中
-     * @param user 用户对象
-     * @param companyId 团队主键
-     */
-    void fillUserDepartmentInCompany(User user, int companyId);
+	/**
+	 * 获取一个用户在特定团队中的分组，并将分组对象填充进用户对象中
+	 * 
+	 * @param user
+	 *            用户对象
+	 * @param companyId
+	 *            团队主键
+	 */
+	void fillUserDepartmentInCompany(User user, int companyId);
 
-    /**
-     * 对于一个用户列表，获取其中每一个用户在特定团队中的分组，并将分组对象填充进用户对象中
-     * @param users 用户列表
-     * @param companyId 团队主键
-     */
-    void fillUsersDepartmentInCompany(List<User> users, int companyId);
+	/**
+	 * 对于一个用户列表，获取其中每一个用户在特定团队中的分组，并将分组对象填充进用户对象中
+	 * 
+	 * @param users
+	 *            用户列表
+	 * @param companyId
+	 *            团队主键
+	 */
+	void fillUsersDepartmentInCompany(List<User> users, int companyId);
 
 }

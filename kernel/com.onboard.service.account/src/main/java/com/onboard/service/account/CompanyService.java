@@ -22,7 +22,7 @@ import com.onboard.domain.model.Company;
 import com.onboard.service.base.BaseService;
 
 /**
- * {@link Company}相关服务
+ * This service is about {@link Company}.
  * 
  * @author huangsz
  * 

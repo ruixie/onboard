@@ -21,6 +21,10 @@ import com.onboard.domain.model.Invitation;
 import com.onboard.domain.model.Project;
 import com.onboard.domain.model.User;
 
+/**
+ * This service is about {@link User} ,{@link Invitation}.
+ * 
+ */
 public interface AccountService {
 
 	/**

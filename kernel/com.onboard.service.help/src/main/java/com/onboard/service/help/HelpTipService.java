@@ -47,7 +47,7 @@ public interface HelpTipService {
     /**
      * Get item list by example
      * 
-     * @param item
+     * @param item an example of item
      * @param start
      * @param limit
      * @return the item list
@@ -57,7 +57,7 @@ public interface HelpTipService {
     /**
      * Get item count by example
      * 
-     * @param item
+     * @param item an example of item
      * @return the count
      */
     int countByExample(HelpTip item);
@@ -85,13 +85,40 @@ public interface HelpTipService {
      */
     void deleteHelpTip(int id);
 
+    /**
+     * Split helpTips into groups according to title
+     * 
+     * @param helpTips
+     * @return grouped helpTips
+     */
     Map<String, List<HelpTip>> groupHelpTipsByTitle(List<HelpTip> helpTips);
 
+    /**
+     * Update the title of a group
+     * 
+     * @param title
+     * @param newTitle
+     * @return updated helpTips
+     */
     List<HelpTip> updateHelpTipByGroupTitle(String title, String newTitle);
 
+    /**
+     * Delete helpTips by title 
+     * 
+     * @param title
+     */
     void deleteHelpTipByGroupTitle(String title);
 
+    /**
+     * Discard helpTip by id
+     * 
+     * @param id
+     */
     void discardHelpTip(int id);
 
+    /**
+     * Discard helpTips by group-title
+     * @param title
+     */
     void discardHelpTipsByGroupTitle(String title);
 }

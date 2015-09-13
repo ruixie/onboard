@@ -55,7 +55,17 @@ public interface CompanyApplicationService {
      */
     CompanyApplication createCompanyApplication(CompanyApplication item);
 
+    /**
+     * Delete
+     * 
+     * @param id
+     */
     void deleteCompanyApplication(int id);
 
+    /**
+     * Disable a token
+     * 
+     * @param id
+     */
     void disableCompanyApplicationToken(int id);
 }

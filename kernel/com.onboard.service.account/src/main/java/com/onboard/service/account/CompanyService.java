@@ -22,32 +22,40 @@ import com.onboard.domain.model.Company;
 import com.onboard.service.base.BaseService;
 
 /**
- * {@link Company}相关服务
+ * This service is about {@link Company}.
  * 
  * @author huangsz
  * 
  */
 public interface CompanyService extends BaseService<Company, CompanyExample> {
-    /**
-     * 获取某个用户所在的所有团队的列表
-     * @param userId 该用户的主键
-     * @return 按要求从数据库中获取出的团队列表
-     */
-    List<Company> getCompaniesByUserId(int userId);
+	/**
+	 * Get all companies which contains the given user
+	 * 
+	 * @param userId
+	 *            The id of the user
+	 * @return a list of companies that meets the restriction
+	 */
+	List<Company> getCompaniesByUserId(int userId);
 
-    /**
-     * 在团队中移除某个用户
-     * @param companyId 团队主键
-     * @param userId 用户主键
-     */
-    void removeUser(Integer companyId, Integer userId);
+	/**
+	 * Remove the given user from the given company
+	 * 
+	 * @param companyId
+	 *            The id of the company
+	 * @param userId
+	 *            The id of the user
+	 */
+	void removeUser(Integer companyId, Integer userId);
 
-    /**
-     * 判断一个团队中是否包含某个用户
-     * @param companyId 团队主键
-     * @param userId 用户主键
-     * @return 返回该判断是否为真
-     */
-    boolean containsUser(Integer companyId, Integer userId);
+	/**
+	 * Judge if the given company contains the given user
+	 * 
+	 * @param companyId
+	 *            The id of the company
+	 * @param userId
+	 *            The id of the user
+	 * @return the result of the judgment
+	 */
+	boolean containsUser(Integer companyId, Integer userId);
 
 }

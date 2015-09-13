@@ -19,6 +19,13 @@ import com.onboard.domain.model.type.ProjectItem;
 
 public interface ProjectItemService {
 
+	/**
+	 * Get projectItem by its ProjectId and IdInProject
+	 * 
+	 * @param projectId
+	 * @param idInProject
+	 * @return
+	 */
     ProjectItem getItemByIdInProject(Integer projectId, Integer idInProject);
 
 }

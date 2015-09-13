@@ -52,7 +52,7 @@ Path里需要添加Mybatis Migration的路径，如“%MIGRATION_HOME%\bin”
 - migrate up
 - migrate status
 
-#### 配置后端
+#### 编译后端
 
 - 在Eclipse中导入Maven Project（选定Onboard的根目录），并对parent包右键Run As - Maven Build - clean install，以进行构建。
 

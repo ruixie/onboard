@@ -50,6 +50,8 @@ public interface AccountService {
 	 * Authenticate a token to see if it's the token that was sent to some
 	 * user's email before
 	 * 
+	 * @param companyId
+	 *            The id of the company which this invitation related to
 	 * @param token
 	 *            The token need to be authenticated
 	 * @return The user's email address if the token is valid, null if not.

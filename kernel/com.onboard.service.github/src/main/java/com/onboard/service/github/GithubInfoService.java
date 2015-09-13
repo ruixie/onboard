@@ -84,13 +84,42 @@ public interface GithubInfoService {
      */
     void deleteGithubInfo(int id);
 
+    /**
+     * Get one's token by its onboardId
+     * 
+     * @param onboardUserId
+     * @return
+     */
     String getTokenByOnboardUserId(int onboardUserId);
 
+    /**
+     * Get one's github-info by its id
+     * 
+     * @param userId
+     * @return
+     */
     List<GithubInfo> getGithubInfoByUserId(int userId);
 
+    /**
+     * Update
+     * 
+     * @param githubInfo
+     */
     void updateByPrimaryKeySelective(GithubInfo githubInfo);
 
+    /**
+     * Get one's code by its id
+     * 
+     * @param onboardUserId
+     * @return
+     */
     String getCodeByOnboardUserId(int onboardUserId);
 
+    /**
+     * Get one's github-info by its onboardId
+     * 
+     * @param onboardUserId
+     * @return
+     */
     GithubInfo getGithubInfoByOnboardUserId(int onboardUserId);
 }

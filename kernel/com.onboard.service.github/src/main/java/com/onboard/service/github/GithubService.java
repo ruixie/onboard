@@ -22,12 +22,41 @@ import com.onboard.domain.model.GithubBranch;
 import com.onboard.domain.model.GithubUser;
 
 public interface GithubService {
+	
+	/**
+	 * Get public repositories by one's login url
+	 * 
+	 * @param login the login url of a user
+	 * @return a list of public repositories
+	 * @throws Exception
+	 */
     public List<GitHubRepository> getPublicRepository(String login) throws Exception;
 
+    /**
+     * Get all branches by a repository's name
+     * 
+     * @param githubRepositoryName the repository's name
+     * @return a list of branches
+     * @throws Exception
+     */
     public List<GithubBranch> getBranchesOfGithubRepository(String githubRepositoryName) throws Exception;
 
+    /**
+     * Get all repositories by one's token
+     * 
+     * @param token the token of a user
+     * @return a list of all repositories
+     * @throws Exception
+     */
     public List<GitHubRepository> getGitHubRepositoriesByOAuth(String token) throws Exception;
 
+    /**
+     * Get a user object by one's token
+     * 
+     * @param token the token of a user
+     * @return a object of the user
+     * @throws Exception
+     */
     public GithubUser getGithubUserByOAuth(String token) throws Exception;
 
 }

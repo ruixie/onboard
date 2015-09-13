@@ -36,7 +36,6 @@
   <osgi:reference id="identifiableAttachManager" interface="com.onboard.service.common.attach.IdentifiableAttachManager" />
   <osgi:reference id="trashService" interface="com.onboard.service.collaboration.TrashService" />
   <osgi:reference id="iterationService" interface="com.onboard.service.collaboration.IterationService" />
-  <osgi:reference id="todoDurationService" interface="com.onboard.service.collaboration.TodoDurationService" />
   <osgi:reference id="bugService" interface="com.onboard.service.collaboration.BugService" />
   <osgi:reference id="keywordService" interface="com.onboard.service.collaboration.KeywordService" />
   <osgi:reference id="idInProjectService" interface="com.onboard.service.collaboration.IdInProjectService" />

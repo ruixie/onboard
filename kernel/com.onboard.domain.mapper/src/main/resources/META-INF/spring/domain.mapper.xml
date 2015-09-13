@@ -168,11 +168,6 @@
     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
   </bean>
 
-  <bean id="todoDurationMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
-    <property name="mapperInterface" value="com.onboard.domain.mapper.TodoDurationMapper" />
-    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
-  </bean>
-
   <bean id="storyMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
     <property name="mapperInterface" value="com.onboard.domain.mapper.StoryMapper" />
     <property name="sqlSessionFactory" ref="sqlSessionFactory" />

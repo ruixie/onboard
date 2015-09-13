@@ -35,7 +35,6 @@
   <reference id="attachTodoMapper" interface="com.onboard.domain.mapper.AttachTodoMapper" />
   <reference id="projectTodoStatusMapper" interface="com.onboard.domain.mapper.ProjectTodoStatusMapper" />
   <reference id="companyApplicationMapper" interface="com.onboard.domain.mapper.CompanyApplicationMapper" />
-  <reference id="todoDurationMapper" interface="com.onboard.domain.mapper.TodoDurationMapper" />
   <reference id="bugMapper" interface="com.onboard.domain.mapper.BugMapper" />
   <reference id="storyMapper" interface="com.onboard.domain.mapper.StoryMapper" />
   <reference id="iterationAttachMapper" interface="com.onboard.domain.mapper.IterationAttachMapper" />
@@ -77,7 +76,6 @@
   <service id="projectService" interface="com.onboard.service.collaboration.ProjectService" ref="projectServiceBean" />
   <service id="IterationService" interface="com.onboard.service.collaboration.IterationService" ref="iterationServiceBean" />
   <service id="companyApplicationService" interface="com.onboard.service.collaboration.CompanyApplicationService" ref="companyApplicationServiceBean" />
-  <service id="todoDurationService" interface="com.onboard.service.collaboration.TodoDurationService" ref="todoDurationServiceBean" />
   <service id="bugService" interface="com.onboard.service.collaboration.BugService, com.onboard.service.collaboration.ProjectItemService" ref="bugServiceBean" />
   <service id="storyService" interface="com.onboard.service.collaboration.StoryService" ref="storyServiceBean" />
   <service id="stepService" interface="com.onboard.service.collaboration.StepService, com.onboard.service.collaboration.ProjectItemService" ref="stepServiceBean" />

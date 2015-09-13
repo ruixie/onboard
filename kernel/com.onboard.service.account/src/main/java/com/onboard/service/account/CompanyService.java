@@ -48,13 +48,13 @@ public interface CompanyService extends BaseService<Company, CompanyExample> {
 	void removeUser(Integer companyId, Integer userId);
 
 	/**
-	 * Judge if the given company contains the given user
+	 * Check if the given company contains the given user
 	 * 
 	 * @param companyId
 	 *            The id of the company
 	 * @param userId
 	 *            The id of the user
-	 * @return the result of the judgment
+	 * @return the result of the check
 	 */
 	boolean containsUser(Integer companyId, Integer userId);
 

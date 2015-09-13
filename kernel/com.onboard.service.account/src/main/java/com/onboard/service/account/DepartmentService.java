@@ -28,9 +28,8 @@ import com.onboard.service.base.BaseService;
  * 
  * @author xuchen
  * 
- * TODO: The usage "department" and "group" should be united.
- * 
  */
+// TODO: The usage "department" and "group" should be united.
 public interface DepartmentService extends
 		BaseService<Department, DepartmentExample> {
 
@@ -63,22 +62,25 @@ public interface DepartmentService extends
 	Department getDepartmentByCompanyIdByUserId(int companyId, int userId);
 
 	/**
-	 * 获取一个用户在特定团队中的分组，并将分组对象填充进用户对象中
+	 * Get department by the given user and the given company, then set the
+	 * groupId field of the user using this department
 	 * 
 	 * @param user
-	 *            用户对象
+	 *            An object of user
 	 * @param companyId
-	 *            团队主键
+	 *            The id of the company
 	 */
 	void fillUserDepartmentInCompany(User user, int companyId);
 
 	/**
-	 * 对于一个用户列表，获取其中每一个用户在特定团队中的分组，并将分组对象填充进用户对象中
+	 * For each user in a given list of users, get department by the user and
+	 * the given company, then set the groupId field of the user using this
+	 * department
 	 * 
 	 * @param users
-	 *            用户列表
+	 *            A list of user object
 	 * @param companyId
-	 *            团队主键
+	 *            The id of the company
 	 */
 	void fillUsersDepartmentInCompany(List<User> users, int companyId);
 

@@ -21,7 +21,19 @@
            ref="subscriberServiceBean"/>
   <service id="identifiableAttachManager" interface="com.onboard.service.common.attach.IdentifiableAttachManager"
            ref="identifiableAttachManagerBean"/>
-
+           
+  <service id="redisStringTemplate"
+           interface="org.springframework.data.redis.core.StringRedisTemplate"
+           ref="redisStringTemplateBean"/>
+           
+  <service id="redisTemplate"
+           interface="org.springframework.data.redis.core.RedisTemplate"
+           ref="redisTemplateBean"/>
+           
+  <service id="onboardCacheManager" 
+           interface="com.onboard.service.common.cache.OnboardCacheManager"
+           ref="cacheManagerBean" />
+           
   <!-- IdentifiableManager对identifiableServices的监听 -->
   <list id="identifiableServices" cardinality="0..N"
         interface="com.onboard.service.base.BaseService">

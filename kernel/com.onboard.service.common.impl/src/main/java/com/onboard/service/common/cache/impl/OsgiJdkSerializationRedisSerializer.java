@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.onboard.service.common.cache;
+package com.onboard.service.common.cache.impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

@@ -33,7 +33,6 @@
   <beans:bean id="eventCreatorRequired" class="com.onboard.service.security.interceptors.EventCreatorRequired"/>
   <beans:bean id="userChecking" class="com.onboard.service.security.interceptors.UserChecking"/>
   <beans:bean id="ManagerChecking" class="com.onboard.service.security.interceptors.ManagerRequired"/>
-  <beans:bean id="cacheManager" class="com.onboard.service.common.cache.OnboardCacheManager" c:template-ref="redisTemplate"/>
   
   <cache:annotation-driven />
 </beans:beans>

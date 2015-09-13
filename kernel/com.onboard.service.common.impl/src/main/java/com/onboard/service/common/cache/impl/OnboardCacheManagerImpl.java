@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.onboard.service.common.cache;
+package com.onboard.service.common.cache.impl;
 
 import org.springframework.cache.Cache;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.core.RedisTemplate;
+
+import com.onboard.service.common.cache.OnboardCacheManager;
 
 /**
  * custom cacheManager for fluzzy cache evict
@@ -23,7 +27,20 @@ import org.springframework.cache.Cache;
  * @author XingLiang
  * 
  */
-public interface OnboardCacheManager {
+public class OnboardCacheManagerImpl extends RedisCacheManager implements OnboardCacheManager {
 
-    public Cache getCache(String name);
+    @SuppressWarnings("rawtypes")
+    private RedisTemplate template;
+
+    public OnboardCacheManagerImpl(@SuppressWarnings("rawtypes") RedisTemplate template) {
+        super(template);
+        this.template = template;
+    }
+
+    @Override
+    public Cache getCache(String name) {
+        Cache redisCache = super.getCache(name);
+
+        return new RedisCacheDecorator(redisCache, template, name);
+    }
 }

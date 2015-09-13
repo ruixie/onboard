@@ -23,62 +23,88 @@ import com.onboard.domain.model.User;
 
 public interface AccountService {
 
-    /**
-     * 邀请用户加入团队
-     * @param companyId 团队主键
-     * @param email 该用户的邮件地址
-     */
-    void sendInvitation(int companyId, String email);
+	/**
+	 * Send an invitation of the given company to the given email
+	 * 
+	 * @param companyId
+	 *            The id of the company which this invitation related to
+	 * @param email
+	 *            The target email address
+	 */
+	void sendInvitation(int companyId, String email);
 
-    /**
-     * 邀请用户加入项目
-     * @param companyId 团队主键
-     * @param email 该用户的邮件地址
-     * @param projects 项目主键列表，该列表中的项目会在邮件当中进行显示
-     */
-    void sendInvitation(int companyId, String email, List<Project> projects);
+	/**
+	 * Send an invitation of the given company(and some of its projects) to the
+	 * given email
+	 * 
+	 * @param companyId
+	 *            The id of the company which this invitation related to
+	 * @param email
+	 *            The target email address
+	 * @param projects
+	 *            The list of the projects which this invitation related to
+	 */
+	void sendInvitation(int companyId, String email, List<Project> projects);
 
-    /**
-     * 判断一个令牌是否有效
-     * @param companyId 团队主键
-     * @param token 需要检验的令牌
-     * @return 当令牌有效时，返回该令牌所属用户的邮件地址，否则返回null。
-     */
-    String authenticateInvitation(int companyId, String token);
+	/**
+	 * Authenticate a token to see if it's the token that was sent to some
+	 * user's email before
+	 * 
+	 * @param token
+	 *            The token need to be authenticated
+	 * @return The user's email address if the token is valid, null if not.
+	 */
+	String authenticateInvitation(int companyId, String token);
 
-    /**
-     * 在邀请完成后，删除对应的令牌
-     * @param companyId 团队主键
-     * @param token 需要被删除的令牌
-     * @param user 用户对象
-     */
-    void completeInvitation(int companyId, User user, String token);
+	/**
+	 * Complete an invitation (Create user, add the user to company and projects
+	 * and delete the token)
+	 * 
+	 * @param companyId
+	 *            The id of the company which this invitation related to
+	 * @param token
+	 *            The token of the invitation that need to be complete
+	 * @param user
+	 *            The basic info user provides for registration
+	 * 
+	 */
+	void completeInvitation(int companyId, User user, String token);
 
-    /**
-     * 获取一个团队中所有邀请的列表
-     * @param companyId 团队主键
-     * @return 按要求从数据库中获取出的邀请列表
-     */
-    List<Invitation> getAllInvitations(int companyId);
+	/**
+	 * Get all invitations of the given company
+	 * 
+	 * @param companyId
+	 *            The id of the company
+	 * @return a list of invitations that meets the restriction
+	 */
+	List<Invitation> getAllInvitations(int companyId);
 
-    /**
-     * 根据主键获取邀请对象
-     * @param id
-     * @return 按要求从数据库中获取出的邀请对象
-     */
-    Invitation getInvitationById(int id);
+	/**
+	 * Get an invitation by its id
+	 * 
+	 * @param id
+	 *            The id of the invitation
+	 * @return an object of the invitation that meets the restriction
+	 */
+	Invitation getInvitationById(int id);
 
-    /**
-     * 根据主键删除邀请对象
-     * @param id
-     */
-    void deleteInvitationById(int id);
+	/**
+	 * Delete an invitation by its id
+	 * 
+	 * @param id
+	 *            The id of the invitation
+	 */
+	void deleteInvitationById(int id);
 
-    /**
-     * TODO: to delete
-     * @param user
-     * @param projectId
-     */
-    void addActivityInfo(User user, int projectId);
+	/**
+	 * Generate the activities of an user's join
+	 * 
+	 * @param user
+	 *            The user that just joined
+	 * @param projectId
+	 *            The id of the project that the activities related to
+	 */
+	// TODO: to delete
+	void addActivityInfo(User user, int projectId);
 
 }

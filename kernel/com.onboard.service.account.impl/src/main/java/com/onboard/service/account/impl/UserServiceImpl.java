@@ -348,11 +348,6 @@ public class UserServiceImpl extends AbstractBaseService<User, UserExample> impl
     }
 
     @Override
-    public boolean authenticateForgetToken(int uid, String token) {
-        return repository.authenticateToken(TokenType.FORGET_PASSWORD, uid, token);
-    }
-
-    @Override
     public List<User> getUserByCompanyId(int companyId) {
         // TODO 存在N+1问题：即先查一次UserCompany表然后再查N次User表，这样对效率有影响 
         UserCompany sample = new UserCompany();

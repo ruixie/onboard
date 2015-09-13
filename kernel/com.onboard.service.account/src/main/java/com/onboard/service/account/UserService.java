@@ -200,17 +200,6 @@ public interface UserService extends BaseService<User, UserExample> {
 	void updateUser(User user, byte[] avatar, String filename);
 
 	/**
-	 * 验证“忘记密码”功能中记录的令牌
-	 * 
-	 * @param uid
-	 *            用户主键
-	 * @param token
-	 *            令牌信息
-	 * @return 该令牌信息是否正确
-	 */
-	boolean authenticateForgetToken(int uid, String token);
-
-	/**
 	 * 判断特定用户是否属于特定团队
 	 * 
 	 * @param userId

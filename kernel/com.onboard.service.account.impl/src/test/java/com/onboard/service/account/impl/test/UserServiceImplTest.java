@@ -294,41 +294,7 @@ public class UserServiceImplTest extends AbstractUserServiceTest {
         Mockito.verifyNoMoreInteractions(mockRepository);
         Mockito.verifyNoMoreInteractions(mockUserMapper); 
     }
-    
-    /**
-     * @author 胡天翔
-     * Branch that token is valid
-     */
-    @Test
-    public void testAuthenticateForgetToken_Branch1() {
-        Mockito.doReturn(true).when(mockRepository).authenticateToken(TokenType.FORGET_PASSWORD, ModuleHelper.userId, ModuleHelper.token);
         
-        Boolean result = testedUserServiceImpl.authenticateForgetToken(ModuleHelper.userId, ModuleHelper.token);
-        
-        verify(mockRepository).authenticateToken(TokenType.FORGET_PASSWORD, ModuleHelper.userId, ModuleHelper.token);
-        
-        Mockito.verifyNoMoreInteractions(mockRepository);
-        
-        assertEquals(true, result);
-    }
-    
-    /**
-     * @author 胡天翔
-     * Branch that token isn't valid
-     */
-    @Test
-    public void testAuthenticateForgetToken_Branch2() {
-        Mockito.doReturn(false).when(mockRepository).authenticateToken(TokenType.FORGET_PASSWORD, ModuleHelper.userId, ModuleHelper.token);
-        
-        Boolean result = testedUserServiceImpl.authenticateForgetToken(ModuleHelper.userId, ModuleHelper.token);
-        
-        verify(mockRepository).authenticateToken(TokenType.FORGET_PASSWORD, ModuleHelper.userId, ModuleHelper.token);
-        
-        Mockito.verifyNoMoreInteractions(mockRepository);
-        
-        assertEquals(false, result);
-    }
-    
     /**
      * @author 胡天翔
      * Test that such user doesn't exist

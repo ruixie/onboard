@@ -257,20 +257,6 @@ public interface UserService extends BaseService<User, UserExample> {
 	public Boolean containUsername(String username);
 
 	/**
-	 * Check if the given password is valid
-	 * 
-	 * @author Chenlong
-	 * @param encPass
-	 *            The encode password
-	 * @param rawPass
-	 *            The origin password
-	 * @param salt
-	 * 
-	 * @return result of the check
-	 */
-	public boolean isPasswordValid(String encPass, String rawPass, String salt);
-
-	/**
 	 * Encoding the given password
 	 * 
 	 * @author Chenlong

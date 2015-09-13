@@ -451,11 +451,6 @@ public class UserServiceImpl extends AbstractBaseService<User, UserExample> impl
     }
 
     @Override
-    public boolean isPasswordValid(String encPass, String rawPass, String salt) {
-        return PasswordUtils.isPasswordValid(encPass, rawPass, salt);
-    }
-
-    @Override
     public String createPassword(String password, String salt) {
         return PasswordUtils.createPassword(password, salt);
     }

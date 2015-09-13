@@ -63,15 +63,6 @@ public interface UserService extends BaseService<User, UserExample> {
 	boolean confirmRegisteredUser(int uid, String token);
 
 	/**
-	 * Check if an email address is already been used
-	 * 
-	 * @param email
-	 *            The email address need to be checked
-	 * @return the result of check
-	 */
-	boolean isEmailRegistered(String email);
-
-	/**
 	 * Authenticate the given identity and the given password to see if the user
 	 * can login with these information, the identity here can be either email
 	 * or username, which means we need to check both possibilities
@@ -114,9 +105,33 @@ public interface UserService extends BaseService<User, UserExample> {
 	 * 
 	 * @param email
 	 *            The email that the user should have
-	 * @return an object of user that meets the restriction, null if not exists.
+	 * @return an object of user that meets the restriction, null if none
+	 *         exists.
 	 */
 	User getUserByEmail(String email);
+
+	/**
+	 * Get user by the given email address, and don't remove the password
+	 * information
+	 * 
+	 * @param email
+	 *            The email that the user should have
+	 * @return an object of user that meets the restriction, null if none
+	 *         exists.
+	 */
+	public User getUserWithPasswordByEmail(String email);
+
+	/**
+	 * Get user by the given identity(can be either email of username), and
+	 * don't remove the password information
+	 * 
+	 * @param emailOrUsername
+	 *            The identity that the user should have, can be either email or
+	 *            username
+	 * @return an object of user that meets the restriction, null if none
+	 *         exists.
+	 */
+	public User getUserByEmailOrUsernameWithPassword(String emailOrUsername);
 
 	/**
 	 * Get user by the given identity, the identity here can be either email or
@@ -200,86 +215,84 @@ public interface UserService extends BaseService<User, UserExample> {
 	void updateUser(User user, byte[] avatar, String filename);
 
 	/**
-	 * 判断特定用户是否属于特定团队
+	 * Check if the given user is belong to the given company
 	 * 
 	 * @param userId
-	 *            用户主键
+	 *            The id of the user
 	 * @param companyId
-	 *            团队主键
-	 * @return 该判断是否正确
+	 *            The id of the company
+	 * @return result of the check
 	 */
 	boolean isUserInCompany(int userId, int companyId);
 
 	/**
-	 * 判断特定用户是否属于特定项目
+	 * Check if the given user is belong to the given project
 	 * 
 	 * @param userId
-	 *            用户主键
-	 * @param CompanyId
-	 *            团队主键
+	 *            The id of the user
+	 * @param companyId
+	 *            the id of the company
 	 * @param projectId
-	 *            项目主键
-	 * @return 该判断是否正确
+	 *            the id of the project
+	 * @return result of the check
 	 */
 	boolean isUserInProject(int userId, int companyId, int projectId);
 
 	/**
-	 * 根据邮件地址获取带有密码信息的用户对象
+	 * Check if an email address is already used
 	 * 
 	 * @param email
-	 *            邮件地址
-	 * @return 按要求从数据库中获取出的用户对象
+	 *            The email address need to be checked
+	 * @return result of the check
 	 */
-	public User getUserWithPasswordByEmail(String email);
+	boolean isEmailRegistered(String email);
 
 	/**
-	 * 通过用户名或邮件地址获取带有密码信息的用户对象
-	 * 
-	 * @param emailOrUsername
-	 *            用户名或邮件地址
-	 * @return 按要求从数据库中获取出的用户对象
-	 */
-	public User getUserByEmailOrUsernameWithPassword(String emailOrUsername);
-
-	/**
-	 * 判断用户名是否已经被使用
+	 * Check if the given username is already used
 	 * 
 	 * @param username
-	 *            用户名
-	 * @return 该判断是否正确
+	 *            The username need to be checked
+	 * @return result of the check
 	 */
 	public Boolean containUsername(String username);
 
 	/**
-	 * 判断用户密码是否正确
+	 * Check if the given password is valid
 	 * 
 	 * @author Chenlong
 	 * @param encPass
+	 *            The encode password
 	 * @param rawPass
+	 *            The origin password
 	 * @param salt
-	 * @return 该判断是否正确
+	 * 
+	 * @return result of the check
 	 */
 	public boolean isPasswordValid(String encPass, String rawPass, String salt);
 
 	/**
-	 * 对用户密码进行加密
+	 * Encoding the given password
 	 * 
 	 * @author Chenlong
 	 * @param password
+	 *            Then password need to be encode
 	 * @param salt
-	 * @return
+	 *            No idea what's this..
+	 * @return a string of encoded password
 	 */
+	// TODO: the salt here is never used actually
 	public String createPassword(String password, String salt);
 
 	/**
-	 * 在一个用户列表中，筛选出属于特定项目的用户
+	 * Filter users that belongs to the given project from the given list of
+	 * users
 	 * 
 	 * @author Chenlong
 	 * @param users
-	 *            需要进行筛选的用户列表
+	 *            The origin list of users
 	 * @param projectId
-	 *            项目主键
-	 * @return 筛选出的用户列表
+	 *            The id of the project that used for filter
+	 * @return a filtered list of users that meets the restriction
 	 */
 	List<User> filterProjectMembers(List<User> users, int projectId);
 

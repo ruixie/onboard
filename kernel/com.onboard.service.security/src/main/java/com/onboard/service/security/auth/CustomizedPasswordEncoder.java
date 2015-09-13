@@ -24,17 +24,17 @@ import com.onboard.service.account.UserService;
 @Component
 public class CustomizedPasswordEncoder implements PasswordEncoder {
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @Override
-    public String encodePassword(String rawPass, Object salt) {
-        return userService.createPassword(rawPass, salt.toString());
-    }
+	@Override
+	public String encodePassword(String rawPass, Object salt) {
+		return userService.createPassword(rawPass, salt.toString());
+	}
 
-    @Override
-    public boolean isPasswordValid(String encPass, String rawPass, Object salt) {
-        return true;
-    }
+	@Override
+	public boolean isPasswordValid(String encPass, String rawPass, Object salt) {
+		return true;
+	}
 
 }

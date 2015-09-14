@@ -48,10 +48,8 @@
   <osgi:reference id="collectionService" interface="com.onboard.service.collaboration.CollectionService" />
   <osgi:reference id="notificationService" interface="com.onboard.service.notification.NotificationService" />
   
-  <osgi:reference id="redisTemplate" interface="org.springframework.data.redis.core.RedisTemplate" />
-  <osgi:reference id="redisStringTemplate" interface="org.springframework.data.redis.core.StringRedisTemplate" />
   <osgi:reference id="webConfiguration" interface="com.onboard.web.api.WebConfiguration" />
-  <osgi:reference id="redisStringTemplate" interface="org.springframework.data.redis.core.StringRedisTemplate" />
   <osgi:reference id="helpTipService" interface="com.onboard.service.help.HelpTipService" />
-  <osgi:reference id="cacheManager" interface="com.onboard.service.common.cache.OnboardCacheManager" />
+  <osgi:reference id="cacheManager" interface="org.springframework.cache.CacheManager" />
+  
 </beans>

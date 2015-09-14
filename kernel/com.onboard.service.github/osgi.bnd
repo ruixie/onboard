@@ -1,7 +1,0 @@
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.onboard.service.github;version=${project.version},\
- com.onboard.service.github.utils;version=${project.version}
-Import-Bundle: org.springframework.aop;version=3.1,\
- com.springsource.org.aopalliance,\
- com.springsource.com.mysql.jdbc
-

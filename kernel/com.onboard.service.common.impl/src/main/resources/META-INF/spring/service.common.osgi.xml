@@ -31,7 +31,7 @@
            ref="redisTemplateBean"/>
            
   <service id="onboardCacheManager" 
-           interface="com.onboard.service.common.cache.OnboardCacheManager"
+           interface="org.springframework.cache.CacheManager"
            ref="cacheManagerBean" />
            
   <!-- IdentifiableManager对identifiableServices的监听 -->

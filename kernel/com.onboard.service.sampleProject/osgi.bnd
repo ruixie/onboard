@@ -1,3 +1,0 @@
-Export-Package: com.onboard.service.sampleProject;version=${project.version},\
- com.onboard.service.sampleProject.model;version=${project.version}
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6

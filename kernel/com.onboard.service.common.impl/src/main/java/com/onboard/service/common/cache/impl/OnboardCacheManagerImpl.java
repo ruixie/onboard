@@ -16,10 +16,9 @@
 package com.onboard.service.common.cache.impl;
 
 import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.core.RedisTemplate;
-
-import com.onboard.service.common.cache.OnboardCacheManager;
 
 /**
  * custom cacheManager for fluzzy cache evict
@@ -27,10 +26,10 @@ import com.onboard.service.common.cache.OnboardCacheManager;
  * @author XingLiang
  * 
  */
-public class OnboardCacheManagerImpl extends RedisCacheManager implements OnboardCacheManager {
+public class OnboardCacheManagerImpl extends RedisCacheManager implements CacheManager {
 
     @SuppressWarnings("rawtypes")
-    private RedisTemplate template;
+    private final RedisTemplate template;
 
     public OnboardCacheManagerImpl(@SuppressWarnings("rawtypes") RedisTemplate template) {
         super(template);

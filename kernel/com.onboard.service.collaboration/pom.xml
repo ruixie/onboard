@@ -42,6 +42,10 @@
             <Export-Package>
                 com.onboard.service.collaboration
             </Export-Package>
+            <Import-Package>
+                com.onboard.domain.mapper.model.common,
+                *
+            </Import-Package>
           </instructions>
         </configuration>
       </plugin>  

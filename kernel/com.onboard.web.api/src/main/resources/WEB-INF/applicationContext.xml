@@ -28,7 +28,6 @@
   <beans:bean id="projectCreationPrivilegeRequired" class="com.onboard.service.security.interceptors.ProjectCreationPrivilegeRequired"/>
   <beans:bean id="projectMemberRequired" class="com.onboard.service.security.interceptors.ProjectMemberRequired"/>
   <beans:bean id="projectNotArchivedRequired" class="com.onboard.service.security.interceptors.ProjectNotArchivedRequired"/>
-  <beans:bean id="rememberMeInterceptor" class="com.onboard.service.security.interceptors.RememberMeInterceptor"/>
   <beans:bean id="uploadCreatorRequired" class="com.onboard.service.security.interceptors.UploadCreatorRequired"/>
   <beans:bean id="eventCreatorRequired" class="com.onboard.service.security.interceptors.EventCreatorRequired"/>
   <beans:bean id="userChecking" class="com.onboard.service.security.interceptors.UserChecking"/>

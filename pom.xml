@@ -25,7 +25,7 @@
     <module>kernel/com.onboard.service.index.impl</module>
     <module>kernel/com.onboard.domain.mapper</module>
     <module>test/com.onboard.test.utils</module>
-    <!-- module>kernel/com.onboard.service.common</module>
+    <module>kernel/com.onboard.service.common</module>
     <module>kernel/com.onboard.service.common.impl</module>
     <module>kernel/com.onboard.service.web</module>
     <module>kernel/com.onboard.service.web.impl</module>
@@ -50,7 +50,7 @@
     <module>kernel/com.onboard.service.github.impl</module>
     <module>kernel/com.onboard.service.help</module>
     <module>kernel/com.onboard.service.help.impl</module>
-    <module>kernel/com.onboard.web.api</module> -->
+    <module>kernel/com.onboard.web.api</module>
   </modules>
 
   <build>

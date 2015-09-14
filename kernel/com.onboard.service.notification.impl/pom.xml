@@ -41,11 +41,6 @@
             <Private-Package>
                 com.onboard.service.notification.impl
             </Private-Package>
-            <Import-Package>
-                org.springframework.scheduling.config,
-                org.springframework.scheduling.concurrent,
-                *
-            </Import-Package>
           </instructions>
         </configuration>
       </plugin>  

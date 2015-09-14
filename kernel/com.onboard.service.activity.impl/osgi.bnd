@@ -1,9 +1,0 @@
-Private-Package: com.onboard.service.activity.impl;version=${project.version},\
- com.onboard.service.activity.impl.util;version=${project.version}
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: org.springframework.scheduling.config,\
- org.springframework.scheduling.concurrent,\
- *
-Import-Bundle: org.springframework.aop;version=3.1,\
- com.springsource.org.aopalliance,\
- com.springsource.net.sf.cglib

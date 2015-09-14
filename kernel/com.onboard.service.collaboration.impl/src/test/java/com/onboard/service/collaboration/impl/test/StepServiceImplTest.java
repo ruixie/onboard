@@ -424,8 +424,7 @@ public class StepServiceImplTest {
         Step lastStep = getAListOfSampleSteps(3).get(2);
         final Date newUntil = new DateTime(lastStep.getCompletedTime()).withTimeAtStartOfDay().toDate();
         
-        TreeMap<Date, Map<Integer, List<Step>>> treeMap = 
-                testedStepServiceImpl.getCompletedStepsGroupByDateByUser(
+        testedStepServiceImpl.getCompletedStepsGroupByDateByUser(
                         ModuleHelper.companyId, ModuleHelper.userId, projectList, ModuleHelper.until, ModuleHelper.limit);
         
         Mockito.verify(mockStepMapper, times(2)).selectByExample(AdditionalMatchers.or(Mockito.argThat(new ExampleMatcher<StepExample>() {

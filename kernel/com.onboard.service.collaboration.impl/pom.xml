@@ -28,11 +28,7 @@
       <artifactId>hanlp</artifactId>
       <version>portable-1.2.2</version>
     </dependency>
-
-    <dependency>
-      <groupId>org.jsoup</groupId>
-      <artifactId>com.springsource.org.jsoup</artifactId>
-    </dependency>
+    
     <dependency>
       <groupId>com.onboard</groupId>
       <artifactId>com.onboard.service.collaboration</artifactId>
@@ -121,5 +117,40 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>2.5.0</version>
+        <configuration>
+          <manifestLocation>src/main/resources/META-INF</manifestLocation>
+          <instructions>
+            <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+            <Bundle-Version>${project.version}</Bundle-Version>
+            <Private-Package>
+                com.onboard.service.collaboration.activity,
+                com.onboard.service.collaboration.attach,
+                com.onboard.service.collaboration.impl,
+                com.onboard.service.collaboration.index,
+                com.onboard.service.collaboration.notification.email,
+                com.onboard.service.collaboration.notification.rule,
+                com.onboard.service.collaboration.scheduler,
+                com.onboard.service.collaboration.topic,
+                com.onboard.service.collaboration.trash,
+                com.onboard.service.collaboration.utils
+            </Private-Package>
+            <Import-Package>
+                org.springframework.scheduling.config,
+                org.springframework.scheduling.concurrent,
+                *
+            </Import-Package>
+          </instructions>
+        </configuration>
+      </plugin>  
+    </plugins>
+  </build>
 
 </project>

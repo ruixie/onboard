@@ -1,9 +1,0 @@
-Export-Package: com.onboard.domain.mapper;version=${project.version},\
- com.onboard.domain.mapper.base;version=${project.version}
-Import-Bundle: com.springsource.com.mysql.jdbc;version="5.1.6",\
- org.springframework.aop;version=3.1,\
- com.springsource.org.aopalliance,\
- com.onboard.service.index,\
- com.onboard.domain.model,\
- com.onboard.domain.mapper.model
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6

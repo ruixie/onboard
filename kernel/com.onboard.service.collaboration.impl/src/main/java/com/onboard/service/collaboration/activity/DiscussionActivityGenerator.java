@@ -15,13 +15,13 @@
  *******************************************************************************/
 package com.onboard.service.collaboration.activity;
 
-import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onboard.domain.model.Activity;
 import com.onboard.domain.model.Discussion;
 import com.onboard.domain.model.type.BaseProjectItem;
+import com.onboard.domain.model.utils.HtmlTextParser;
 import com.onboard.service.activity.ActivityActionType;
 import com.onboard.service.activity.ActivityGenerator;
 import com.onboard.service.activity.util.ActivityHelper;
@@ -50,7 +50,7 @@ public class DiscussionActivityGenerator implements ActivityGenerator {
         Activity activity = ActivityRecorderHelper.generateActivityByActionType(actionType, subject, discussion);
 
         activity.setTarget(discussion.getSubject());
-        activity.setContent(ActivityHelper.cutoffActivityContent(Jsoup.parse(discussion.getContent()).text()));
+        activity.setContent(ActivityHelper.cutoffActivityContent(HtmlTextParser.getPlainText(discussion.getContent())));
 
         activity.setProjectId(discussion.getProjectId());
         activity.setCompanyId(discussion.getCompanyId());

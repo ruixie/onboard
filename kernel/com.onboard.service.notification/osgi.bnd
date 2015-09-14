@@ -1,3 +1,0 @@
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.onboard.service.notification;version=${project.version}, \
- com.onboard.service.notification.email;version=${project.version}

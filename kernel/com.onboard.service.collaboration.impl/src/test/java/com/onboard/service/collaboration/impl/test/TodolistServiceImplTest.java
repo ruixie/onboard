@@ -15,21 +15,9 @@
  *******************************************************************************/
 package com.onboard.service.collaboration.impl.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -268,7 +256,7 @@ public class TodolistServiceImplTest {
 
     @Test
     public void testgetTodolistWithClosedTodos() {
-        Todolist ret = todolistService.getTodolistWithClosedTodos(id);
+        todolistService.getTodolistWithClosedTodos(id);
         verify(mockTodolistMapper).selectByPrimaryKey(id);
         verify(mockTodoService).getTodosByTodoList(anyInt());
     }

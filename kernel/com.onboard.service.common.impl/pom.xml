@@ -26,11 +26,6 @@
     </dependency>
     <dependency>
       <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.test.utils</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.onboard</groupId>
       <artifactId>com.onboard.domain.mapper</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -52,17 +47,47 @@
       <artifactId>org.springframework.transaction</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>org.springframework.context</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-redis</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.test.utils</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>2.5.0</version>
+        <configuration>
+          <manifestLocation>src/main/resources/META-INF</manifestLocation>
+          <instructions>
+            <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+            <Bundle-Version>${project.version}</Bundle-Version>
+            <Private-Package>
+                com.onboard.service.common.attach.impl,
+                com.onboard.service.common.cache.impl,
+                com.onboard.service.common.identifiable.impl,
+                com.onboard.service.common.subscrible.impl,
+                com.onboard.service.email.impl,
+                com.onboard.service.file.impl,
+                com.onboard.service.file.utils
+            </Private-Package>
+          </instructions>
+        </configuration>
+      </plugin>  
+    </plugins>
+  </build>
 
 </project>

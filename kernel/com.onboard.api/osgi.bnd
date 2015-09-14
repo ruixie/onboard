@@ -1,2 +1,0 @@
-Export-Package: com.onboard.dto;version=${project.version}
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6

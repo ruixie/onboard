@@ -17,7 +17,6 @@ package com.onboard.service.collaboration.impl;
 
 import java.util.List;
 
-import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +33,7 @@ import com.onboard.domain.model.Topic;
 import com.onboard.domain.model.type.BaseOperateItem;
 import com.onboard.domain.model.type.BaseProjectItem;
 import com.onboard.domain.model.type.Commentable;
+import com.onboard.domain.model.utils.HtmlTextParser;
 import com.onboard.service.collaboration.TopicService;
 import com.onboard.service.common.identifiable.IdentifiableManager;
 
@@ -114,7 +114,7 @@ public class TopicServiceImpl implements TopicService {
         // topic.setCreated(now);
         // topic.setUpdated(now);
         topic.setStick(false);
-        topic.setExcerpt(Jsoup.parse(topic.getExcerpt()).text());
+        topic.setExcerpt(HtmlTextParser.getPlainText(topic.getExcerpt()));
         checkTopicTitleLength(topic);
         topicMapper.insert(topic);
         return topic;
@@ -184,7 +184,7 @@ public class TopicServiceImpl implements TopicService {
         topics.addAll(topicMapper.selectByExample(example));
 
         for (Topic t : topics) {
-            t.setExcerpt(Jsoup.parse(t.getExcerpt()).text());
+            t.setExcerpt(HtmlTextParser.getPlainText(t.getExcerpt()));
             t.setLastUpdator(userMapper.selectByPrimaryKey(t.getLastUpdatorId()));
             BaseOperateItem identifiable = identifiableManager.getIdentifiableByTypeAndId(t.getRefType(), t.getRefId());
             if (identifiable != null) {
@@ -236,7 +236,7 @@ public class TopicServiceImpl implements TopicService {
             if (topic.getLastUpdator() == null) {
                 topic.setLastUpdator(userMapper.selectByPrimaryKey(topic.getLastUpdatorId()));
             }
-            topic.setExcerpt(Jsoup.parse(topic.getExcerpt()).text());
+            topic.setExcerpt(HtmlTextParser.getPlainText(topic.getExcerpt()));
 
             BaseOperateItem identifiable = identifiableManager.getIdentifiableByTypeAndId(topic.getRefType(),
                     topic.getRefId());

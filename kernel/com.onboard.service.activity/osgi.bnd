@@ -1,4 +1,0 @@
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.onboard.service.activity;version=${project.version},\
- com.onboard.service.activity.exception;version=${project.version},\
- com.onboard.service.activity.util;version=${project.version}

@@ -15,10 +15,8 @@
  *******************************************************************************/
 package com.onboard.service.collaboration.impl.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-import org.jsoup.Jsoup;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,12 +26,11 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.onboard.domain.model.Activity;
-import com.onboard.domain.model.Bug;
 import com.onboard.domain.model.Comment;
+import com.onboard.domain.model.utils.HtmlTextParser;
 import com.onboard.service.activity.ActivityActionType;
 import com.onboard.service.activity.util.ActivityHelper;
 import com.onboard.service.collaboration.CommentService;
-import com.onboard.service.collaboration.activity.BugActivityGenerator;
 import com.onboard.service.collaboration.activity.CommentActivityGenerator;
 import com.onboard.test.moduleutils.ModuleHelper;
 
@@ -56,7 +53,7 @@ public class CommentActivityGeneratorTest {
         assertEquals((int) comment.getProjectId(), (int) activity.getProjectId());
         assertEquals((int) comment.getCompanyId(), (int) activity.getCompanyId());
         assertEquals(ModuleHelper.commentTargetName, activity.getTarget());
-        assertEquals(ActivityHelper.cutoffActivityContent(Jsoup.parse(ModuleHelper.content).text()), activity.getContent());
+        assertEquals(ActivityHelper.cutoffActivityContent(HtmlTextParser.getPlainText(ModuleHelper.content)), activity.getContent());
 
         /* ActivityHelper.generateActivityByActionType */
         assertEquals((int) comment.getId(), (int) activity.getAttachId());

@@ -1,4 +1,0 @@
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.onboard.service.index;version=${project.version},\
- com.onboard.service.index.custom;version=${project.version},\
- com.onboard.service.index.model;version=${project.version}

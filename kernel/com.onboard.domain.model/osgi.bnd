@@ -1,4 +1,0 @@
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.onboard.domain.model;version=${project.version},\
- com.onboard.domain.model.utils;version=${project.version},\
- com.onboard.domain.model.type;version=${project.version}

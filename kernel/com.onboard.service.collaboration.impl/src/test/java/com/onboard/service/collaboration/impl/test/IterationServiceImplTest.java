@@ -39,7 +39,6 @@ import com.onboard.domain.mapper.model.IterationExample;
 import com.onboard.domain.mapper.model.common.BaseExample;
 import com.onboard.domain.model.Iteration;
 import com.onboard.domain.model.Iteration.IterationStatus;
-import com.onboard.domain.model.IterationAttach;
 import com.onboard.service.base.BaseService;
 import com.onboard.service.collaboration.ProjectService;
 import com.onboard.service.collaboration.impl.IterationServiceImpl;
@@ -161,16 +160,16 @@ public class IterationServiceImplTest extends AbstractProjectItemServiceTest<Ite
         assertId(items, result);
     }
     
-    private IterationAttach getIterationAttach(){
-        IterationAttach iterationAttach = new IterationAttach();
-        iterationAttach.setCompleted(false);
-//        iterationAttach.setIterable(iterable);
-        return iterationAttach;
-    }
-    
-    private void addNewIterationForProjectWithLastIteration(){
-        Iteration iteration = getSample(ModuleHelper.id);
-    }
+//    private IterationAttach getIterationAttach(){
+//        IterationAttach iterationAttach = new IterationAttach();
+//        iterationAttach.setCompleted(false);
+////        iterationAttach.setIterable(iterable);
+//        return iterationAttach;
+//    }
+//    
+//    private void addNewIterationForProjectWithLastIteration(){
+//        Iteration iteration = getSample(ModuleHelper.id);
+//    }
     
     @Test
     public void addNewIterationForProject(){

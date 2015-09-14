@@ -447,7 +447,7 @@ public class BugServiceImplTest extends AbstractBugServiceImplTest {
     public void testGetCompletedBugsGroupByDateByUser_NormalTest() {
         List<Integer> projectList = new ArrayList<Integer>();
         projectList.add(ModuleHelper.projectId);
-        TreeMap<Date, Map<Integer, List<Bug>>> ret = testedBugServiceImpl.getCompletedBugsGroupByDateByUser(
+        testedBugServiceImpl.getCompletedBugsGroupByDateByUser(
                 ModuleHelper.companyId, ModuleHelper.userId, projectList, ModuleHelper.until, ModuleHelper.limit);
 
         verify(mockBugMapper, times(2)).selectByExample(AdditionalMatchers.or(Mockito.argThat(new ExampleMatcher<BugExample>() {

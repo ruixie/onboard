@@ -67,7 +67,6 @@ public class IdentifiableAttachManagerImpl implements IdentifiableAttachManager 
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public List<? extends BaseProjectItem> getIdentifiablesByTypeAndAttachTypeAndId(String type, String attachType, Integer attachId) {
         IdentifiableAttachService identifialbeAttachService = null;

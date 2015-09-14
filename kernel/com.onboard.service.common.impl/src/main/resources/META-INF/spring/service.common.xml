@@ -20,8 +20,6 @@
   <context:property-placeholder properties-ref="osgiProps"/>
 
   <tx:annotation-driven transaction-manager="transactionManager" order="2"/>
-  <task:executor id="executor" pool-size="100"/>
-  <task:annotation-driven executor="executor"/>
 
   <bean id="emailTemplateResolver" class="org.thymeleaf.templateresolver.ClassLoaderTemplateResolver">
     <property name="templateMode" value="HTML5"/>

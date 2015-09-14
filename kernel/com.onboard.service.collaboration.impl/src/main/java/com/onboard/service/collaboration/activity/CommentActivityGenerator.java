@@ -15,7 +15,6 @@
  *******************************************************************************/
 package com.onboard.service.collaboration.activity;
 
-import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,7 @@ import org.springframework.stereotype.Service;
 import com.onboard.domain.model.Activity;
 import com.onboard.domain.model.Comment;
 import com.onboard.domain.model.type.BaseProjectItem;
+import com.onboard.domain.model.utils.HtmlTextParser;
 import com.onboard.service.activity.ActivityActionType;
 import com.onboard.service.activity.ActivityGenerator;
 import com.onboard.service.activity.util.ActivityHelper;
@@ -53,7 +53,7 @@ public class CommentActivityGenerator implements ActivityGenerator {
         Activity activity = ActivityHelper.generateActivityByActionType(actionType, subject, comment);
         String target = commentService.getCommentTargetName(comment.getAttachType(), comment.getAttachId());
         activity.setTarget(target);
-        activity.setContent(ActivityHelper.cutoffActivityContent(Jsoup.parse(comment.getContent()).text()));
+        activity.setContent(ActivityHelper.cutoffActivityContent(HtmlTextParser.getPlainText(comment.getContent())));
         activity.setProjectId(comment.getProjectId());
         activity.setCompanyId(comment.getCompanyId());
 

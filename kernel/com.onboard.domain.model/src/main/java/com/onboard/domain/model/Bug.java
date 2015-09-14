@@ -18,8 +18,6 @@ package com.onboard.domain.model;
 import java.util.Date;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 import com.google.common.collect.Lists;
 import com.onboard.domain.mapper.model.BugObject;
 import com.onboard.domain.model.type.Boardable;
@@ -187,7 +185,6 @@ public class Bug extends BugObject implements Commentable, Iterable, Boardable, 
     }
 
     @Override
-    @JsonIgnore
     public List<Boardable> getBoardables() {
         return Lists.newArrayList((Boardable) this);
     }

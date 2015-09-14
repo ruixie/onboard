@@ -197,6 +197,7 @@ public class IndexAspectImplTest {
         assertEquals(jointPointRetureValue, actualReturnValue);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDeleteByExample() {
         jointPointArgs = new Object[2];

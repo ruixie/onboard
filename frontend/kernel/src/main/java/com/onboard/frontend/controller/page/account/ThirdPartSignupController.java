@@ -2,7 +2,9 @@ package com.onboard.frontend.controller.page.account;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.onboard.frontend.controller.page.account.form.ThirdPartRegistrationForm;
+import com.onboard.frontend.interceptors.RememberMeInterceptor;
 import com.onboard.frontend.model.User;
 import com.onboard.frontend.service.account.AccountService;
 import com.onboard.frontend.service.web.SessionService;
@@ -41,6 +44,18 @@ public class ThirdPartSignupController {
 
     @Value("${data.host}")
     private String applicationHostUrl;
+
+    /**
+     * Cookie过期时间
+     */
+    @Value("${account.rememberMeExpired}")
+    private int expiredTime;
+
+    /**
+     * Cookie Domain
+     */
+    @Value("${site.domain}")
+    private String domain;
 
     private static final String GITHUBOAUTH = "https://github.com/login/oauth/authorize?client_id=%s&amp;"
             + "redirect_uri=%s/account/github/callback&amp;scope=%s&amp;state=%s";
@@ -66,8 +81,9 @@ public class ThirdPartSignupController {
     }
 
     @RequestMapping(value = "/github/callback", method = RequestMethod.GET)
-    public String getGitHubResponse(@ModelAttribute(NEW_COMMAND) ThirdPartRegistrationForm form, HttpServletRequest request,
-            @RequestParam("code") String code, @RequestParam("state") String state, Model model) {
+    public String getGitHubResponse(HttpServletResponse response, HttpServletRequest request,
+            @ModelAttribute(NEW_COMMAND) ThirdPartRegistrationForm form, @RequestParam("code") String code,
+            @RequestParam("state") String state, Model model) {
         if (!githubState.equals(state)) {
             return "home/Index";
         }
@@ -77,6 +93,10 @@ public class ThirdPartSignupController {
         if (exist) {
             User user = accountService.getUserByEmailOrUsername(signupMap.get("email"));
             session.setCurrentUser(user);
+            String token = accountService.getRememberMeToken(user.getId());
+            setCookie(response, RememberMeInterceptor.COOKIE_UID, String.valueOf(user.getId()), this.domain, this.expiredTime);
+            setCookie(response, RememberMeInterceptor.COOKIE_TOKEN, token, this.domain, this.expiredTime);
+
             return String.format("redirect:%s", (nextUrl == null ? "/" : nextUrl));
         }
         session.setCurrentThirdpartUserId(Integer.valueOf(signupMap.get("thirdpartInfoId")));
@@ -103,5 +123,13 @@ public class ThirdPartSignupController {
         session.setCurrentUser(user);
 
         return "redirect:/";
+    }
+
+    private void setCookie(HttpServletResponse response, String key, String value, String domain, int expiredTime) {
+        Cookie cookie = new Cookie(key, value);
+        cookie.setMaxAge(expiredTime);
+        cookie.setDomain(domain);
+        cookie.setPath("/");
+        response.addCookie(cookie);
     }
 }

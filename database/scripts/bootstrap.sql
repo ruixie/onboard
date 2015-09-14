@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.5.43, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: onboard
+-- Host:     Database: onboard
 -- ------------------------------------------------------
--- Server version	5.5.43-0ubuntu0.14.04.1
+-- Server version	5.5.44
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,21 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `CHANGELOG`
---
-
-DROP TABLE IF EXISTS `CHANGELOG`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `CHANGELOG` (
-  `ID` decimal(20,0) NOT NULL,
-  `APPLIED_AT` varchar(25) NOT NULL,
-  `DESCRIPTION` varchar(255) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `activity`
@@ -60,7 +45,7 @@ CREATE TABLE `activity` (
   CONSTRAINT `activity_ibfk_1` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`),
   CONSTRAINT `activity_ibfk_2` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_activity_company` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=590068 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=631778 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +61,7 @@ CREATE TABLE `attach_todo` (
   `attachId` int(11) NOT NULL,
   `todoId` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=345 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +94,7 @@ CREATE TABLE `attachment` (
   CONSTRAINT `attachment_ibfk_1` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`),
   CONSTRAINT `attachment_ibfk_2` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_attachment_company` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36538698 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36542223 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +128,22 @@ CREATE TABLE `bug` (
   CONSTRAINT `bug_fk_companyId` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`),
   CONSTRAINT `bug_fk_creatorId` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`),
   CONSTRAINT `bug_fk_projectId` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `changelog`
+--
+
+DROP TABLE IF EXISTS `changelog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `changelog` (
+  `ID` decimal(20,0) NOT NULL,
+  `APPLIED_AT` varchar(25) NOT NULL,
+  `DESCRIPTION` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,17 +232,17 @@ CREATE TABLE `collection` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
   `companyId` int(11) NOT NULL,
-  `projectName` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `projectName` varchar(50) NOT NULL DEFAULT '',
   `projectId` int(11) NOT NULL,
   `creatorId` int(11) NOT NULL,
-  `creatorName` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `creatorName` varchar(50) NOT NULL DEFAULT '',
   `attachId` int(11) NOT NULL,
   `deleted` tinyint(1) NOT NULL,
-  `title` varchar(200) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `attachType` varchar(20) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `title` varchar(200) NOT NULL DEFAULT '',
+  `attachType` varchar(20) NOT NULL DEFAULT '',
   `creatorAvatar` varchar(200) NOT NULL DEFAULT '/avatar/default.png',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -270,7 +270,7 @@ CREATE TABLE `comment` (
   KEY `FK_comment_company` (`companyId`),
   CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_comment_company` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39202979 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39207996 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -295,7 +295,7 @@ CREATE TABLE `commit_review` (
   `line_type` varchar(50) DEFAULT NULL,
   `creatorAvatar` varchar(200) NOT NULL DEFAULT '/avatar/default.png',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -312,7 +312,7 @@ CREATE TABLE `commit_todo` (
   `repoId` int(11) NOT NULL,
   `attachType` varchar(255) DEFAULT 'todo',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1807 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -328,8 +328,8 @@ CREATE TABLE `company` (
   `creatorId` int(11) DEFAULT NULL,
   `created` datetime NOT NULL,
   `updated` datetime DEFAULT NULL,
-  `deleted` tinyint(1) NOT NULL,
-  `privileged` bit(1) NOT NULL DEFAULT b'0' COMMENT '??????????0?????????onboard???1',
+  `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `privileged` bit(1) NOT NULL DEFAULT b'0' COMMENT '如果没有特权，默认为0。特权团队，比如说onboard，值为1',
   `money` int(11) NOT NULL DEFAULT '0',
   `lastPayTime` datetime DEFAULT NULL,
   `creatorName` varchar(50) DEFAULT NULL,
@@ -337,7 +337,7 @@ CREATE TABLE `company` (
   PRIMARY KEY (`id`),
   KEY `creatorId` (`creatorId`),
   CONSTRAINT `company_ibfk_1` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1234251 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1234590 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -357,7 +357,7 @@ CREATE TABLE `company_application` (
   `codeHost` varchar(255) DEFAULT '',
   `code` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -374,7 +374,7 @@ CREATE TABLE `company_limit` (
   `diskSize` int(11) DEFAULT NULL,
   `repositorySize` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -395,7 +395,7 @@ CREATE TABLE `company_log` (
   `creatorName` varchar(50) DEFAULT NULL,
   `creatorAvatar` varchar(200) NOT NULL DEFAULT '/avatar/default.png',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -412,7 +412,7 @@ CREATE TABLE `company_privilege` (
   `isAdmin` bit(1) DEFAULT b'0' COMMENT '??????',
   `canCreateProject` bit(1) DEFAULT b'0' COMMENT '???????',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=1144 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -430,7 +430,7 @@ CREATE TABLE `department` (
   PRIMARY KEY (`id`),
   KEY `group_ibfk_1` (`companyId`),
   CONSTRAINT `department_ibfk_1` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -460,7 +460,7 @@ CREATE TABLE `discussion` (
   CONSTRAINT `discussion_ibfk_1` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`),
   CONSTRAINT `discussion_ibfk_2` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_discussion_company` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1905164 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1906893 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -491,7 +491,7 @@ CREATE TABLE `document` (
   CONSTRAINT `document_ibfk_1` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`),
   CONSTRAINT `document_ibfk_2` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_document_company` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1012 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -515,11 +515,8 @@ CREATE TABLE `document_history` (
   PRIMARY KEY (`id`),
   KEY `FK_document_history_user_idx` (`updaterId`),
   KEY `FK_document_history_document_idx` (`documentId`),
-  KEY `FK_document_history_project_idx` (`projectId`),
-  CONSTRAINT `FK_document_history_document` FOREIGN KEY (`documentId`) REFERENCES `document` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_document_history_project` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_document_history_user` FOREIGN KEY (`updaterId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=371864101 DEFAULT CHARSET=utf8;
+  KEY `FK_document_history_project_idx` (`projectId`)
+) ENGINE=MyISAM AUTO_INCREMENT=371864972 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -549,7 +546,7 @@ CREATE TABLE `event` (
   KEY `FK_event_company` (`companyId`),
   CONSTRAINT `event_ibfk_2` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_event_company` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -565,7 +562,7 @@ CREATE TABLE `git_user_email` (
   `email` varchar(255) NOT NULL,
   `companyId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -586,7 +583,7 @@ CREATE TABLE `github_info` (
   `onboardUserId` int(11) DEFAULT NULL,
   `type` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -627,7 +624,7 @@ CREATE TABLE `invitation` (
   KEY `companyId` (`companyId`),
   CONSTRAINT `invitation_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
   CONSTRAINT `invitation_ibfk_2` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28425684 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28426482 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -646,7 +643,7 @@ CREATE TABLE `invitation_projects` (
   KEY `invitationId` (`invitationId`),
   CONSTRAINT `invitation_projects_ibfk_1` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`),
   CONSTRAINT `invitation_projects_ibfk_2` FOREIGN KEY (`invitationId`) REFERENCES `invitation` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=406 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1412 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -670,7 +667,7 @@ CREATE TABLE `iteration` (
   `updated` datetime NOT NULL,
   `deleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=746 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -688,7 +685,7 @@ CREATE TABLE `iteration_object` (
   `completed` bit(1) DEFAULT NULL,
   `completedTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=585 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -705,7 +702,7 @@ CREATE TABLE `iteration_story` (
   `status` varchar(45) DEFAULT NULL,
   `completedTime` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -722,7 +719,7 @@ CREATE TABLE `iteration_todo` (
   `status` varchar(45) NOT NULL,
   `completedTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5451 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -743,7 +740,7 @@ CREATE TABLE `keyword` (
   `deleted` bit(1) NOT NULL DEFAULT b'0',
   `tfidf` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27296 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -764,10 +761,10 @@ CREATE TABLE `notification` (
   KEY `notification.userId` (`userId`),
   KEY `notification.companyId` (`companyId`),
   KEY `notification.activityId` (`activityId`),
-  CONSTRAINT `notification.userId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `notification.companyId` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `notification.activityId` FOREIGN KEY (`activityId`) REFERENCES `activity` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `notification?activityId` FOREIGN KEY (`activityId`) REFERENCES `activity` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `notification?companyId` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `notification?userId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2029 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -795,7 +792,7 @@ CREATE TABLE `project` (
   KEY `creatorId` (`creatorId`),
   CONSTRAINT `project_ibfk_1` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`),
   CONSTRAINT `project_ibfk_2` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5532506 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5533076 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -813,7 +810,7 @@ CREATE TABLE `project_privilege` (
   PRIMARY KEY (`id`),
   KEY `projectId` (`projectId`),
   CONSTRAINT `projectId` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1968 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -828,7 +825,7 @@ CREATE TABLE `project_todo_id` (
   `todoId` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=426 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -843,7 +840,7 @@ CREATE TABLE `project_todo_status` (
   `projectId` int(11) NOT NULL,
   `status` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=992 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -884,7 +881,7 @@ CREATE TABLE `pull_request` (
   CONSTRAINT `pr_creator_id` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`),
   CONSTRAINT `pr_project_id` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`),
   CONSTRAINT `pr_todo_id` FOREIGN KEY (`todoId`) REFERENCES `todo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21757 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22106 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -899,7 +896,7 @@ CREATE TABLE `pull_request_push` (
   `pullRequestId` int(11) NOT NULL,
   `pushId` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -921,7 +918,7 @@ CREATE TABLE `pull_request_reviewer` (
   CONSTRAINT `prr_project_id` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`),
   CONSTRAINT `prr_pull_request_id` FOREIGN KEY (`pullRequestId`) REFERENCES `pull_request` (`id`),
   CONSTRAINT `prr_reviewer_id` FOREIGN KEY (`reviewerId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2903 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3303 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -943,7 +940,7 @@ CREATE TABLE `push` (
   `companyId` int(11) DEFAULT NULL,
   `creatorAvatar` varchar(200) NOT NULL DEFAULT '/avatar/default.png',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5711 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -961,7 +958,7 @@ CREATE TABLE `repo_branch_privilege` (
   `userId` int(11) NOT NULL,
   `refName` varchar(100) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -982,7 +979,7 @@ CREATE TABLE `repository` (
   `updatedBranch` varchar(128) COLLATE utf8_bin DEFAULT NULL,
   `companyId` int(11) NOT NULL DEFAULT '1',
   `lastCommitId` varchar(128) COLLATE utf8_bin DEFAULT '1',
-  `lastCommitShortMessage` varchar(128) COLLATE utf8_bin DEFAULT NULL,
+  `lastCommitShortMessage` varchar(4096) COLLATE utf8_bin DEFAULT NULL,
   `lastCommitUsername` varchar(128) COLLATE utf8_bin DEFAULT NULL,
   `lastCommitTimestamp` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -991,7 +988,7 @@ CREATE TABLE `repository` (
   KEY `fk_repository_company` (`companyId`),
   CONSTRAINT `fk_repository_company` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_repository_project` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1009,7 +1006,7 @@ CREATE TABLE `repository_privilege` (
   `defaultOwner` int(11) NOT NULL,
   `action` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=234 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1024,7 +1021,7 @@ CREATE TABLE `repository_privilege_user` (
   `userId` int(11) NOT NULL,
   `repositoryRrivilegeId` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1057,7 +1054,7 @@ CREATE TABLE `review` (
   CONSTRAINT `review_creator_id` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`),
   CONSTRAINT `review_project_id` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`),
   CONSTRAINT `review_pull_request_id` FOREIGN KEY (`pullRequestId`) REFERENCES `pull_request` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29031903 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29032010 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1076,7 +1073,7 @@ CREATE TABLE `sshkey` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `sshkey_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1107,7 +1104,7 @@ CREATE TABLE `step` (
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   `creatorAvatar` varchar(200) NOT NULL DEFAULT '/avatar/default.png',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1137,7 +1134,7 @@ CREATE TABLE `story` (
   `completable` tinyint(1) NOT NULL DEFAULT '1',
   `creatorAvatar` varchar(200) NOT NULL DEFAULT '/avatar/default.png',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1153,7 +1150,7 @@ CREATE TABLE `story_todo` (
   `todoId` int(11) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1175,7 +1172,7 @@ CREATE TABLE `subscriber` (
   KEY `FK_subscriber_company` (`companyId`),
   CONSTRAINT `FK_subscriber_company` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`),
   CONSTRAINT `subscriber_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10042 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47835 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1191,7 +1188,7 @@ CREATE TABLE `suggestion` (
   `email` varchar(200) DEFAULT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1208,7 +1205,7 @@ CREATE TABLE `tag` (
   PRIMARY KEY (`id`),
   KEY `tag_projectId` (`projectId`),
   CONSTRAINT `tag_projectId` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1226,7 +1223,7 @@ CREATE TABLE `tag_attach` (
   PRIMARY KEY (`id`),
   KEY `tagId` (`tagId`),
   CONSTRAINT `tagId` FOREIGN KEY (`tagId`) REFERENCES `tag` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1274,7 +1271,7 @@ CREATE TABLE `todo` (
   CONSTRAINT `todo_ibfk_2` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`),
   CONSTRAINT `todo_ibfk_3` FOREIGN KEY (`assigneeId`) REFERENCES `user` (`id`),
   CONSTRAINT `todo_ibfk_4` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54324229 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=54331252 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1318,7 +1315,7 @@ CREATE TABLE `todolist` (
   `updated` datetime NOT NULL,
   `bcId` int(11) DEFAULT NULL,
   `companyId` int(11) DEFAULT NULL,
-  `archived` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'todolist??',
+  `archived` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'todolist归档',
   `creatorAvatar` varchar(200) NOT NULL DEFAULT '/avatar/default.png',
   PRIMARY KEY (`id`),
   KEY `projectId` (`projectId`),
@@ -1327,7 +1324,7 @@ CREATE TABLE `todolist` (
   CONSTRAINT `FK_todolist_company` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`),
   CONSTRAINT `todolist_ibfk_1` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`),
   CONSTRAINT `todolist_ibfk_2` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3457728 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3458942 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1359,7 +1356,7 @@ CREATE TABLE `topic` (
   CONSTRAINT `FK_topic_company` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`),
   CONSTRAINT `topic_ibfk_1` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`),
   CONSTRAINT `topic_ibfk_2` FOREIGN KEY (`lastUpdatorId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4531701 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4535125 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1405,7 +1402,7 @@ CREATE TABLE `upload` (
   CONSTRAINT `FK_upload_company` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`),
   CONSTRAINT `upload_ibfk_1` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`),
   CONSTRAINT `upload_ibfk_2` FOREIGN KEY (`creatorId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7442257 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7443637 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1429,7 +1426,7 @@ CREATE TABLE `user` (
   `username` varchar(50) DEFAULT NULL,
   `isManager` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=793342 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=793998 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1449,7 +1446,7 @@ CREATE TABLE `user_company` (
   KEY `companyId` (`companyId`),
   CONSTRAINT `user_company_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
   CONSTRAINT `user_company_ibfk_2` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=270 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1232 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1471,7 +1468,7 @@ CREATE TABLE `user_project` (
   KEY `FK_user_project_company` (`companyId`),
   CONSTRAINT `FK_user_project_company` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`),
   CONSTRAINT `user_project_ibfk_2` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=828 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2909 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1511,4 +1508,4 @@ CREATE TABLE `worklog` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-11 17:07:21
+-- Dump completed on 2015-09-14 14:01:59

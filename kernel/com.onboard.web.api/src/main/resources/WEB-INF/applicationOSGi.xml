@@ -52,4 +52,26 @@
   <osgi:reference id="helpTipService" interface="com.onboard.service.help.HelpTipService" />
   <osgi:reference id="cacheManager" interface="org.springframework.cache.CacheManager" />
   
+  
+  <!-- interceptors -->
+  <osgi:reference id="attachmentCreatorRequired" interface="com.onboard.service.security.interceptors.AttachmentCreatorRequired" />
+  <osgi:reference id="commentCreatorRequired" interface="com.onboard.service.security.interceptors.CommentCreatorRequired" />
+  <osgi:reference id="companyAdminInSpecificProjectRequired" interface="com.onboard.service.security.interceptors.CompanyAdminInSpecificProjectRequired" />
+  <osgi:reference id="companyAdminRequired" interface="com.onboard.service.security.interceptors.CompanyAdminRequired" />
+  <osgi:reference id="companyChecking" interface="com.onboard.service.security.interceptors.CompanyChecking" />
+  <osgi:reference id="companyMemberRequired" interface="com.onboard.service.security.interceptors.CompanyMemberRequired" />
+  <osgi:reference id="companyOwnerRequired" interface="com.onboard.service.security.interceptors.CompanyOwnerRequired" />
+  <osgi:reference id="discussionCreatorRequired" interface="com.onboard.service.security.interceptors.DiscussionCreatorRequired" />
+  <osgi:reference id="documentCreatorRequired" interface="com.onboard.service.security.interceptors.DocumentCreatorRequired" />
+  <osgi:reference id="eventCreatorRequired" interface="com.onboard.service.security.interceptors.EventCreatorRequired" />
+  <osgi:reference id="invitationPermissionRequired" interface="com.onboard.service.security.interceptors.InvitationPermissionRequired" />
+  <osgi:reference id="loginRequired" interface="com.onboard.service.security.interceptors.LoginRequired" />
+  <osgi:reference id="managerRequired" interface="com.onboard.service.security.interceptors.ManagerRequired" />
+  <osgi:reference id="projectAdminRequired" interface="com.onboard.service.security.interceptors.ProjectAdminRequired" />
+  <osgi:reference id="projectChecking" interface="com.onboard.service.security.interceptors.ProjectChecking" />
+  <osgi:reference id="projectCreationPrivilegeRequired" interface="com.onboard.service.security.interceptors.ProjectCreationPrivilegeRequired" />
+  <osgi:reference id="projectMemberRequired" interface="com.onboard.service.security.interceptors.ProjectMemberRequired" />
+  <osgi:reference id="projectNotArchivedRequired" interface="com.onboard.service.security.interceptors.ProjectNotArchivedRequired" />
+  <osgi:reference id="uploadCreatorRequired" interface="com.onboard.service.security.interceptors.UploadCreatorRequired" />
+  <osgi:reference id="userChecking" interface="com.onboard.service.security.interceptors.UserChecking" />
 </beans>

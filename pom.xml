@@ -34,6 +34,7 @@
     <module>kernel/com.onboard.service.security</module>
     <module>kernel/com.onboard.service.security.impl</module>
     <module>kernel/com.onboard.service.websocket</module>
+    <module>kernel/com.onboard.service.websocket.impl</module>
     <module>kernel/com.onboard.service.collaboration</module>
     <module>kernel/com.onboard.service.collaboration.impl</module>
     <module>kernel/com.onboard.service.activity</module>

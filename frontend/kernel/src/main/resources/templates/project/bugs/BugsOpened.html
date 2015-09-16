@@ -41,17 +41,11 @@
                 <i class="fa fa-sort-desc" ng-show="predicate=='title' &amp;&amp; reverse"></i>
                 <i class="fa fa-sort-asc" ng-show="predicate=='title' &amp;&amp; !reverse"></i></a>
             </th>
-            <th class="col-sm-1">
-              <a href="" ng-click="predicate='creatorName'; reverse=!reverse">创建人
-                <i class="fa fa-sort" ng-show="predicate != 'creatorName'"></i>
-                <i class="fa fa-sort-desc" ng-show="predicate=='creatorName' &amp;&amp; reverse"></i>
-                <i class="fa fa-sort-asc" ng-show="predicate=='creatorName' &amp;&amp; !reverse"></i></a>
-            </th>
             <th class="col-sm-2">
-              <a href="" ng-click="predicate='createdTime'; reverse=!reverse">创建日期
-                <i class="fa fa-sort" ng-show="predicate != 'createdTime'"></i>
-                <i class="fa fa-sort-desc" ng-show="predicate=='createdTime' &amp;&amp; reverse"></i>
-                <i class="fa fa-sort-asc" ng-show="predicate=='createdTime' &amp;&amp; !reverse"></i></a>
+              <a href="" ng-click="predicate='dueTime'; reverse=!reverse">截止日期
+                <i class="fa fa-sort" ng-show="predicate != 'dueTime'"></i>
+                <i class="fa fa-sort-desc" ng-show="predicate=='dueTime' &amp;&amp; reverse"></i>
+                <i class="fa fa-sort-asc" ng-show="predicate=='dueTime' &amp;&amp; !reverse"></i></a>
             </th>
             <th class="col-sm-1">
               <a href="" ng-click="predicate='bugAssigneeDTO.name'; reverse=!reverse">责任人
@@ -67,9 +61,8 @@
             <td>{{ priorities[bug.priority-1].desc }}</td>
             <td class="pointer title" ng-click="viewBugDrawer($event,bug)">
               <a href="" ng-click="viewBugDrawer($event,bug)">{{ bug.title }}</a></td>
-            <td>{{ bug.creatorName }}</td>
-            <td class="createdTime">
-                {{ bug.createdTime | date:'MM-dd HH:mm' }}
+            <td class="dueTime">
+                {{ bug.dueTime | date:'MM-dd' }}
                 <span ng-if="bug.level == 'warning'" class="level">
                   <i class="fa fa-exclamation-circle" data-toggle="tooltip" data-placement="right" title="这个bug存在的时间已经超过了最近三个月已修复Bug的平均水平！"></i>
                 </span>

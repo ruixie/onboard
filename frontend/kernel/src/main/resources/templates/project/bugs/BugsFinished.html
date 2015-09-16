@@ -30,18 +30,12 @@
             <i class="fa fa-sort-desc" ng-show="predicate=='title' &amp;&amp; reverse"></i>
             <i class="fa fa-sort-asc" ng-show="predicate=='title' &amp;&amp; !reverse"></i></a>
         </th>
-        <th class="col-sm-1">
-          <a href="" ng-click="predicate='creatorName'; reverse=!reverse">创建人
-            <i class="fa fa-sort" ng-show="predicate != 'creatorName'"></i>
-            <i class="fa fa-sort-desc" ng-show="predicate=='creatorName' &amp;&amp; reverse"></i>
-            <i class="fa fa-sort-asc" ng-show="predicate=='creatorName' &amp;&amp; !reverse"></i></a>
-        </th>
-        <th class="col-sm-2">
-          <a href="" ng-click="predicate='createdTime'; reverse=!reverse">创建日期
-            <i class="fa fa-sort" ng-show="predicate != 'createdTime'"></i>
-            <i class="fa fa-sort-desc" ng-show="predicate=='createdTime' &amp;&amp; reverse"></i>
-            <i class="fa fa-sort-asc" ng-show="predicate=='createdTime' &amp;&amp; !reverse"></i></a>
-        </th>
+            <th class="col-sm-2">
+              <a href="" ng-click="predicate='dueTime'; reverse=!reverse">截止日期
+                <i class="fa fa-sort" ng-show="predicate != 'dueTime'"></i>
+                <i class="fa fa-sort-desc" ng-show="predicate=='dueTime' &amp;&amp; reverse"></i>
+                <i class="fa fa-sort-asc" ng-show="predicate=='dueTime' &amp;&amp; !reverse"></i></a>
+            </th>
         <th class="col-sm-1">
           <a href="" ng-click="predicate='bugAssigneeDTO.name'; reverse=!reverse">责任人
             <i class="fa fa-sort" ng-show="predicate != 'bugAssigneeDTO.name'"></i>
@@ -56,8 +50,7 @@
         <td>{{ priorities[bug.priority-1].desc }}</td>
         <td class="pointer" ng-click="viewBugDrawer($event,bug)">
           <a href="" ng-click="viewBugDrawer($event,bug)">{{ bug.title }}</a></td>
-        <td>{{ bug.creatorName }}</td>
-        <td>{{ bug.createdTime | date:'MM-dd HH:mm' }}</td>
+        <td>{{ bug.dueTime | date:'MM-dd' }}</td>
         <td>{{ bug.bugAssigneeDTO.name }}</td>
       </tr>
       </tbody>

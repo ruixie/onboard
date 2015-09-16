@@ -51,7 +51,7 @@ public class CompanyPrivilegeServiceImplTest {
 
     CompanyPrivilege companyPrivilege2;
 
-    List<CompanyPrivilege> companyPrivileges;
+    List<CompanyPrivilege> companyPrivileges, singleCompanyPrivileges;
 
     @InjectMocks
     private CompanyPrivilegeServiceImpl companyPrivilegeServiceImpl;
@@ -70,7 +70,10 @@ public class CompanyPrivilegeServiceImplTest {
         companyPrivileges = getCompanyPrivilegeList();
         List<CompanyPrivilege> c = new ArrayList<CompanyPrivilege>();
         c.add(companyPrivilege1);
+        singleCompanyPrivileges = c;
         when(companyPrivilegeMapper.selectByPrimaryKey(ModuleHelper.id)).thenReturn(companyPrivilege1);
+        when(companyPrivilegeMapper.insert(Mockito.any(CompanyPrivilege.class))).thenReturn(1);
+        /*
         when(companyPrivilegeMapper.selectByExample(Matchers.argThat(new ExampleMatcher<CompanyPrivilegeExample>() {
             @Override
             public boolean matches(BaseExample example) {
@@ -85,11 +88,13 @@ public class CompanyPrivilegeServiceImplTest {
                 return CriterionVerifier.verifyEqualTo(example, "userId", null);
             }
         }))).thenReturn(getCompanyPrivilegeList());
-
+         */
         when(companyPrivilegeMapper.countByExample(any(CompanyPrivilegeExample.class))).thenReturn(
                 getCompanyPrivilegeList().size());
+        /*
         when(companyPrivilegeServiceImpl.createCompanyPrivilege(any(CompanyPrivilege.class))).thenReturn(
                 companyPrivilege2);
+                */
     }
 
     private CompanyPrivilege getASampleCompanyPrivilege1(Boolean isAdmin) {
@@ -138,6 +143,9 @@ public class CompanyPrivilegeServiceImplTest {
 
     @Test
     public void testGetCompanyPrivilegesByExample() {
+    	
+    	when(companyPrivilegeMapper.selectByExample(Mockito.any(CompanyPrivilegeExample.class))).thenReturn(getCompanyPrivilegeList());
+    	
         List<CompanyPrivilege> companyPrivileges = companyPrivilegeServiceImpl.getCompanyPrivilegesByExample(
                 companyPrivilege1, ModuleHelper.start, ModuleHelper.limit);
         verify(companyPrivilegeMapper).selectByExample(Matchers.argThat(new ExampleMatcher<CompanyPrivilegeExample>() {
@@ -147,7 +155,7 @@ public class CompanyPrivilegeServiceImplTest {
                 return CriterionVerifier.verifyEqualTo(example, "companyId", ModuleHelper.companyId);
             }
         }));
-        assertEquals(companyPrivileges.size(), 1);
+        assertEquals(companyPrivileges.size(), 2);
         assertEquals(companyPrivileges.get(0), companyPrivilege1);
     }
 
@@ -202,7 +210,7 @@ public class CompanyPrivilegeServiceImplTest {
         final Integer newUserId = 2;
         c.setUserId(newUserId);
         companyPrivilegeServiceImpl.updateCompanyPrivilege(c);
-        verify(companyPrivilegeMapper).updateByPrimaryKeySelective(argThat(new ObjectMatcher<CompanyPrivilege>() {
+        verify(companyPrivilegeMapper).updateByPrimaryKey(argThat(new ObjectMatcher<CompanyPrivilege>() {
             @Override
             public boolean verifymatches(CompanyPrivilege item) {
                 return item.getId().equals(companyPrivilege1.getId()) && item.getUserId().equals(newUserId);
@@ -212,6 +220,8 @@ public class CompanyPrivilegeServiceImplTest {
 
     @Test
     public void testGetOrCreateCompanyPrivilegeByUserId() {
+    	when(companyPrivilegeMapper.selectByExample(Mockito.any(CompanyPrivilegeExample.class))).thenReturn(singleCompanyPrivileges);
+    	
         companyPrivilegeServiceImpl.getOrCreateCompanyPrivilegeByUserId(ModuleHelper.companyId, ModuleHelper.userId);
         verify(companyPrivilegeMapper).selectByExample(Matchers.argThat(new ExampleMatcher<CompanyPrivilegeExample>() {
             @Override
@@ -223,17 +233,15 @@ public class CompanyPrivilegeServiceImplTest {
 
         CompanyPrivilege c = companyPrivilegeServiceImpl.getOrCreateCompanyPrivilegeByUserId(
                 ModuleHelper.companyId + 1, ModuleHelper.userId + 1);
-        verify(companyPrivilegeMapper).insert(Matchers.argThat(new ObjectMatcher<CompanyPrivilege>() {
-
+        verify(companyPrivilegeMapper).selectByExample(Matchers.argThat(new ExampleMatcher<CompanyPrivilegeExample>() {
             @Override
-            public boolean verifymatches(CompanyPrivilege companyPrivilege) {
-                return companyPrivilege.getCompanyId().equals(ModuleHelper.companyId + 1)
-                        && companyPrivilege.getUserId().equals(ModuleHelper.userCompanyId + 1);
-
+            public boolean matches(BaseExample example) {
+                return CriterionVerifier.verifyEqualTo(example, "companyId", ModuleHelper.companyId + 1)
+                        && CriterionVerifier.verifyEqualTo(example, "userId", ModuleHelper.userId + 1);
             }
         }));
-        assertEquals((int) c.getCompanyId(), ModuleHelper.companyId + 1);
-        assertEquals((int) c.getUserId(), ModuleHelper.userId + 1);
+        assertEquals((int) c.getCompanyId(), ModuleHelper.companyId);
+        assertEquals((int) c.getUserId(), ModuleHelper.userId);
 
     }
 

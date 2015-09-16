@@ -25,8 +25,10 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import com.onboard.domain.model.Activity;
 import com.onboard.domain.model.Todo;
@@ -37,6 +39,7 @@ import com.onboard.service.activity.ActivityActionType;
 import com.onboard.service.collaboration.TodoService;
 import com.onboard.test.moduleutils.ModuleHelper;
 
+@RunWith(MockitoJUnitRunner.class)
 public class TodoActivityGeneratorTest {
 
     private Todo todo;
@@ -57,6 +60,7 @@ public class TodoActivityGeneratorTest {
         todo = ModuleHelper.getASampleTodo();
         user = ModuleHelper.getASampleUser();
         when(userService.getById(any(Integer.class))).thenReturn(user);
+        when(todoService.getById(any(Integer.class))).thenReturn(todo);
     }
 
     @Test
@@ -103,7 +107,7 @@ public class TodoActivityGeneratorTest {
     @Test
     public void testEnrichModel() {
         BaseProjectItem ret = todoActivityGenerator.enrichModel(todo);
-        verify(todoService, times(0)).getById(anyInt());
+        verify(todoService, times(1)).getById(anyInt());
         assertEquals(ret.getId(), todo.getId());
         assertEquals(ret.getCompanyId(), todo.getCompanyId());
         assertEquals(ret.getCreatorId(), todo.getCreatorId());

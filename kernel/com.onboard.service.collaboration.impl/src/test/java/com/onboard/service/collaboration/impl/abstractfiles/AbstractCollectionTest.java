@@ -33,6 +33,7 @@ import com.onboard.domain.mapper.model.common.BaseItem;
 import com.onboard.domain.model.Collection;
 import com.onboard.domain.model.Project;
 import com.onboard.domain.model.type.BaseProjectItem;
+import com.onboard.domain.model.type.Recommendable;
 import com.onboard.service.collaboration.ProjectService;
 import com.onboard.service.common.identifiable.IdentifiableManager;
 import com.onboard.test.moduleutils.ModuleHelper;
@@ -87,7 +88,7 @@ public abstract class AbstractCollectionTest {
     }
 
     private void initIdentifiableManager() {
-        BaseProjectItem identifiable = AbstractCollectionTest.getASampleIdentifiable();
+    	Recommendable identifiable = AbstractCollectionTest.getASampleRecommendable();
 
         when(mockedIdentifiableManager.getIdentifiableByTypeAndId(Mockito.anyString(), Mockito.anyInt()))
                 .thenReturn(identifiable);
@@ -128,8 +129,8 @@ public abstract class AbstractCollectionTest {
         return new CollectionExample(getASampleCollection());
     }
 
-    public static BaseProjectItem getASampleIdentifiable() {
-        return new BaseProjectItem() {
+    public static Recommendable getASampleRecommendable() {
+        return new Recommendable() {
 
             /**
              * 
@@ -254,6 +255,12 @@ public abstract class AbstractCollectionTest {
                 // TODO Auto-generated method stub
                 return false;
             }
+
+			@Override
+			public String generateText() {
+				// TODO Auto-generated method stub
+				return null;
+			}
         };
     }
 

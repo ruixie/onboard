@@ -236,6 +236,11 @@ public class TopicServiceImpl implements TopicService {
             if (topic.getLastUpdator() == null) {
                 topic.setLastUpdator(userMapper.selectByPrimaryKey(topic.getLastUpdatorId()));
             }
+            
+            String a = topic.getExcerpt();
+            String b = HtmlTextParser.getPlainText(a);
+            
+            
             topic.setExcerpt(HtmlTextParser.getPlainText(topic.getExcerpt()));
 
             BaseOperateItem identifiable = identifiableManager.getIdentifiableByTypeAndId(topic.getRefType(),

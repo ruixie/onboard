@@ -16,6 +16,7 @@
 package com.onboard.service.collaboration.impl.test;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,7 +32,9 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.onboard.domain.mapper.ProjectMapper;
 import com.onboard.domain.mapper.ProjectPrivilegeMapper;
 import com.onboard.domain.mapper.UserCompanyMapper;
 import com.onboard.domain.mapper.UserProjectMapper;
@@ -48,7 +51,10 @@ import com.onboard.service.account.AccountService;
 import com.onboard.service.account.CompanyService;
 import com.onboard.service.account.UserService;
 import com.onboard.service.activity.ActivityService;
+import com.onboard.service.collaboration.ProjectService;
+import com.onboard.service.collaboration.activity.ActivityRecorderHelper;
 import com.onboard.service.collaboration.impl.ProjectMemberService;
+import com.onboard.service.web.SessionService;
 import com.onboard.test.exampleutils.CriterionVerifier;
 import com.onboard.test.exampleutils.ExampleMatcher;
 import com.onboard.test.exampleutils.ObjectMatcher;
@@ -59,6 +65,15 @@ public class ProjectMemberServiceImplTest {
 
     @InjectMocks
     private ProjectMemberService projectMemberService;
+    
+	@Mock
+	private ProjectService projectService;
+		
+	@Mock
+	private SessionService sessionService;
+    
+    @Mock
+    private ProjectMapper projectMapper;
 
     @Mock
     private UserProjectMapper userProjectMapper;
@@ -112,35 +127,44 @@ public class ProjectMemberServiceImplTest {
             public boolean verifymatches(String string) {
                 return string.equals("1@qq.com");
             }
-        }))).thenReturn(new User());
+        }))).thenReturn(ModuleHelper.getASampleUser());
+        when(projectMapper.selectByPrimaryKey(Mockito.eq(ModuleHelper.projectId))).thenReturn(project);
+        
+
+        ActivityRecorderHelper.setProjectService(projectService);
+        when(projectService.getById(anyInt())).thenReturn(project);
+        ActivityRecorderHelper.setUserService(userService);
+        when(userService.getById(anyInt())).thenReturn(ModuleHelper.getASampleUser());
+        ActivityRecorderHelper.setSession(sessionService);
+        when(sessionService.getCurrentUser()).thenReturn(ModuleHelper.getASampleUser());
     }
 
     @Test
     public void testadd() {
         projectMemberService.add(company.getId(), project.getId(), 1, 2, 3, 4, 5);
-        verify(companyService, times(4)).containsUser(any(Integer.class), any(Integer.class));
-        verify(userCompanyMapper, times(2)).insert(any(UserCompany.class));
-        verify(userProjectMapper, times(4)).selectByExample(Matchers.argThat(new ExampleMatcher<UserProjectExample>() {
+        verify(companyService, times(5)).containsUser(any(Integer.class), any(Integer.class));
+        verify(userCompanyMapper, times(3)).insert(any(UserCompany.class));
+        verify(userProjectMapper, times(5)).selectByExample(Matchers.argThat(new ExampleMatcher<UserProjectExample>() {
             @Override
             public boolean matches(BaseExample example) {
                 return CriterionVerifier.verifyEqualTo(example, "projectId", project.getId());
             }
         }));
-        verify(userProjectMapper, times(2)).insert(any(UserProject.class));
-        verify(accountService, times(2)).addActivityInfo(any(User.class), any(Integer.class));
+        verify(userProjectMapper, times(5)).insert(any(UserProject.class));
+        verify(accountService, times(5)).addActivityInfo(any(User.class), any(Integer.class));
     }
 
     @Test
     public void testRemove() {
         projectMemberService.remove(project.getId(), 1, 2, 3, 4, 5);
-        verify(userProjectMapper, times(4)).deleteByExample(Matchers.argThat(new ExampleMatcher<UserProjectExample>() {
+        verify(userProjectMapper, times(1)).deleteByExample(Matchers.argThat(new ExampleMatcher<UserProjectExample>() {
             @Override
             public boolean matches(BaseExample example) {
                 return CriterionVerifier.verifyEqualTo(example, "projectId", project.getId())
                         && CriterionVerifier.verifyEqualTo(example, "userId", 5);
             }
         }));
-        verify(projectPrivilegeMapper, times(4)).deleteByExample(
+        verify(projectPrivilegeMapper, times(1)).deleteByExample(
                 Matchers.argThat(new ExampleMatcher<ProjectPrivilegeExample>() {
                     @Override
                     public boolean matches(BaseExample example) {
@@ -148,13 +172,13 @@ public class ProjectMemberServiceImplTest {
                                 && CriterionVerifier.verifyEqualTo(example, "userId", 5);
                     }
                 }));
-        verify(activityService, times(4)).create(any(Activity.class));
+        verify(activityService, times(5)).create(any(Activity.class));
     }
 
     @Test
     public void testInvite() {
         projectMemberService.invite(company.getId(), project.getId(), "1@qq.com", "2@qq.com", "3@qq.com");
-        verify(userService, times(2)).getUserByEmail(Matchers.argThat(new ObjectMatcher<String>() {
+        verify(userService, times(1)).getUserByEmail(Matchers.argThat(new ObjectMatcher<String>() {
             @Override
             public boolean verifymatches(String string) {
                 return string.equals("3@qq.com");
@@ -166,7 +190,8 @@ public class ProjectMemberServiceImplTest {
                     public boolean verifymatches(String string) {
                         return string.equals("2@qq.com");
                     }
-                }));
+                }), any(List.class));
+        /*
         ProjectMemberService roleServiceImplSpy = Mockito.spy(projectMemberService);
         verify(roleServiceImplSpy, times(0)).add(Matchers.argThat(new ObjectMatcher<Integer>() {
             @Override
@@ -179,6 +204,7 @@ public class ProjectMemberServiceImplTest {
                 return integer.equals(project.getId());
             }
         }), any(Integer.class));
+        */
     }
 
     @Test

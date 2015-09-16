@@ -116,7 +116,7 @@ public class ProjectMemberService {
             User user = userService.getUserByEmail(email);
             if (user == null) {
                 accountService.sendInvitation(companyId, email,
-                        Arrays.asList(projectMapper.selectByPrimaryKey(projectId)));
+                  Arrays.asList(projectMapper.selectByPrimaryKey(projectId)));
             } else {
                 add(companyId, projectId, user.getId());
             }

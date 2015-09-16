@@ -96,12 +96,12 @@ public class ActivityRecorderHelper {
     }
 
     @Autowired
-    public void setSession(SessionService session) {
+    public static void setSession(SessionService session) {
         ActivityRecorderHelper.session = session;
     }
 
     @Autowired
-    public void setUserService(UserService userService) {
+    public static void setUserService(UserService userService) {
         ActivityRecorderHelper.userService = userService;
     }
 

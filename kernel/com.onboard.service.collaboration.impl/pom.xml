@@ -79,6 +79,11 @@
       <artifactId>com.onboard.test.utils</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.domain.model</artifactId>
+      <version>${project.version}</version>
+    </dependency>
     <!-- dependencies for test -->
     <dependency>
       <groupId>org.springframework</groupId>

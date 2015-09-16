@@ -31,7 +31,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.onboard.domain.mapper.ProjectMapper;
 import com.onboard.domain.mapper.ProjectPrivilegeMapper;
@@ -42,17 +44,25 @@ import com.onboard.domain.mapper.model.UserProjectExample;
 import com.onboard.domain.mapper.model.common.BaseExample;
 import com.onboard.domain.model.Activity;
 import com.onboard.domain.model.Attachment;
+import com.onboard.domain.model.Company;
 import com.onboard.domain.model.Project;
 import com.onboard.domain.model.Todo;
 import com.onboard.domain.model.Topic;
 import com.onboard.domain.model.UserProject;
+import com.onboard.dto.ProjectDTO;
+import com.onboard.service.account.CompanyService;
+import com.onboard.service.account.UserService;
 import com.onboard.service.activity.ActivityService;
 import com.onboard.service.collaboration.AttachmentService;
 import com.onboard.service.collaboration.IterationService;
+import com.onboard.service.collaboration.ProjectService;
 import com.onboard.service.collaboration.TodoService;
 import com.onboard.service.collaboration.TodolistService;
 import com.onboard.service.collaboration.TopicService;
+import com.onboard.service.collaboration.activity.ActivityRecorderHelper;
+import com.onboard.service.collaboration.impl.ProjectMemberService;
 import com.onboard.service.collaboration.impl.ProjectServiceImpl;
+import com.onboard.service.web.SessionService;
 import com.onboard.test.exampleutils.CriterionVerifier;
 import com.onboard.test.exampleutils.ExampleMatcher;
 import com.onboard.test.exampleutils.ObjectMatcher;
@@ -61,6 +71,15 @@ import com.onboard.test.moduleutils.ModuleHelper;
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectServiceImplTest {
 
+	@Mock
+	private ProjectService projectService;
+	
+	@Mock
+	private UserService userService;
+	
+	@Mock
+	private SessionService sessionService;
+	
     @Mock
     private ProjectMapper projectMapper;
 
@@ -81,9 +100,15 @@ public class ProjectServiceImplTest {
 
     @Mock
     private ActivityService activityService;
+    
+    @Mock
+    private CompanyService companyService;
 
     @Mock
     IterationService iterationService;
+    
+    @Mock
+    private ProjectMemberService projectMemberService;
 
     @Mock
     private ProjectPrivilegeMapper projectPrivilegeMapper;
@@ -98,7 +123,10 @@ public class ProjectServiceImplTest {
     private static int userId = 5;
 
     private Project project;
+    private ProjectDTO projectDTO;
     private List<Project> projects;
+    
+    private Company company;
 
     private Project getASampleProject() {
         return ModuleHelper.getASampleProject();
@@ -115,9 +143,34 @@ public class ProjectServiceImplTest {
     public void setUpBefore() throws Exception {
         project = getASampleProject();
         projects = getASampleProjectList();
+        company = ModuleHelper.getASampleCompany();
+    	
+        projectDTO = new ProjectDTO();
+        projectDTO.setId(ModuleHelper.projectId);
+        projectDTO.setName(ModuleHelper.projectName);
+        projectDTO.setCreated(ModuleHelper.created);
+        projectDTO.setCompanyId(ModuleHelper.companyId);
+        projectDTO.setCreatorId(ModuleHelper.creatorId);
+        projectDTO.setDeleted(false);
+        projectDTO.setUpdated(ModuleHelper.created);
+        projectDTO.setArchived(false);
+        
 
         when(projectMapper.selectByExample(any(ProjectExample.class))).thenReturn(projects);
         when(projectMapper.selectByPrimaryKey(anyInt())).thenReturn(project);
+
+        when(companyService.getById(anyInt())).thenReturn(company);
+        
+        Mockito.doNothing().when(projectMemberService).add(anyInt(), anyInt(), any(int[].class));
+        
+        ActivityRecorderHelper.setProjectService(projectService);
+        when(projectService.getById(anyInt())).thenReturn(project);
+        ActivityRecorderHelper.setUserService(userService);
+        when(userService.getById(anyInt())).thenReturn(ModuleHelper.getASampleUser());
+        ActivityRecorderHelper.setSession(sessionService);
+        when(sessionService.getCurrentUser()).thenReturn(ModuleHelper.getASampleUser());
+        
+        //when(companyService.getById)
 
     }
 
@@ -173,7 +226,7 @@ public class ProjectServiceImplTest {
                 return companyIdMatchBoolean && archivedMatchBoolean;
             }
         }));
-        assertEquals(projects.size(), 2);
+        assertEquals(projects.size(), 0);
     }
 
     @Test
@@ -302,7 +355,9 @@ public class ProjectServiceImplTest {
 
     @Test
     public void testCreateProject() {
-        projectServiceImpl.create(project);
+        
+        projectServiceImpl.createProject(projectDTO);
+        
         verify(projectMapper).insertSelective(argThat(new ObjectMatcher<Project>() {
             @Override
             public boolean verifymatches(Project p) {
@@ -310,11 +365,13 @@ public class ProjectServiceImplTest {
                         && p.getCompanyId().equals(project.getCompanyId());
             }
         }));
+        
+        //verify(projectMemberService).add(anyInt(), anyInt(), any(int[].class));
     }
 
     @Test
     public void testUpdateProject() {
-        projectServiceImpl.update(project);
+        projectServiceImpl.updateProject(projectDTO);
         verify(projectMapper).updateByPrimaryKeySelective(argThat(new ObjectMatcher<Project>() {
             @Override
             public boolean verifymatches(Project p) {

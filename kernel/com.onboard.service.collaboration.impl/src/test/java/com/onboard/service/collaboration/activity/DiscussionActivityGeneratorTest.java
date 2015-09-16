@@ -30,6 +30,7 @@ import com.onboard.service.collaboration.DiscussionService;
 import com.onboard.test.moduleutils.ModuleHelper;
 
 public class DiscussionActivityGeneratorTest extends AbstractDiscussionActivityGenerator{
+    
     @InjectMocks
     private DiscussionActivityGenerator discussionActivityGenerator;
     

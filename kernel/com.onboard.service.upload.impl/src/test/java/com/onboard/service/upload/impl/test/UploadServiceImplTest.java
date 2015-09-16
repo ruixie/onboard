@@ -15,14 +15,9 @@
  *******************************************************************************/
 package com.onboard.service.upload.impl.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,9 +84,6 @@ public class UploadServiceImplTest {
     @Before
     public void setUpBefore() throws Exception {
         initUploadMapperOPerations();
-        UploadServiceImpl uploadServiceImplSpy = Mockito.spy(uploadServiceImpl);
-        Mockito.doReturn(ModuleHelper.type).when(uploadServiceImplSpy).getModelType();
-
     }
 
     private Upload getASampleUpload(Boolean deleted) {

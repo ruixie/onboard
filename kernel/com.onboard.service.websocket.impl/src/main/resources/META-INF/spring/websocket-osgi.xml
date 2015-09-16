@@ -13,7 +13,6 @@
 
   <reference id="redisStringTemplate" interface="org.springframework.data.redis.core.StringRedisTemplate" />
 
-  <service id="updateIOSPuhser" interface="com.onboard.service.activity.ActivityHook" ref="updateIOSPuhserBean" />
   <service id="updateHTMLPuhser" interface="com.onboard.service.activity.ActivityHook" ref="updateHTMLPuhserBean" />
   <service id="webSocketService" interface="com.onboard.service.websocket.WebSocketService" ref="webSocketServiceBean" />
   <service id="redisPublisher" interface="com.onboard.service.activity.ActivityHook" ref="redisPublisherBean" />

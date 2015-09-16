@@ -47,8 +47,6 @@
     <module>kernel/com.onboard.service.upload.impl</module>
     <module>kernel/com.onboard.service.sampleProject</module>
     <module>kernel/com.onboard.service.sampleProject.impl</module>
-    <module>kernel/com.onboard.service.github</module>
-    <module>kernel/com.onboard.service.github.impl</module>
     <module>kernel/com.onboard.service.help</module>
     <module>kernel/com.onboard.service.help.impl</module>
     <module>kernel/com.onboard.web.api</module>

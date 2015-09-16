@@ -43,8 +43,6 @@
   <osgi:reference id="documentHistoryService" interface="com.onboard.service.wiki.DocumentHistoryService" />
   <osgi:reference id="searchService" interface="com.onboard.service.index.SearchService" />
   <osgi:reference id="sampleProjectService" interface="com.onboard.service.sampleProject.SampleProjectService" />
-  <osgi:reference id="githubService" interface="com.onboard.service.github.GithubService" />
-  <osgi:reference id="githubInfoService" interface="com.onboard.service.github.GithubInfoService" />
   <osgi:reference id="collectionService" interface="com.onboard.service.collaboration.CollectionService" />
   <osgi:reference id="notificationService" interface="com.onboard.service.notification.NotificationService" />
   

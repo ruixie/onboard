@@ -56,14 +56,14 @@ public class User extends UserObject implements Typeable, BaseOperateItem {
         return this.getId() == null ? super.hashCode() : this.getId();
     }
 
-    private Integer groupId;
+    private Integer departmentId;
 
-    public Integer getGroupId() {
-        return groupId;
+    public Integer getDepartmentId() {
+        return departmentId;
     }
 
-    public void setGroupId(Integer groupId) {
-        this.groupId = groupId;
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
     @Override

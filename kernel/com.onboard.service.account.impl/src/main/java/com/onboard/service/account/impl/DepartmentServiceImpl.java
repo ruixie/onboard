@@ -71,10 +71,10 @@ public class DepartmentServiceImpl extends AbstractBaseService<Department, Depar
     }
 
     @Override
-    public void sortDepartment(List<Integer> groupIds) {
+    public void sortDepartment(List<Integer> departmentIds) {
         Department department = new Department();
-        for (int i = 0; i < groupIds.size(); i++) {
-            department.setId(groupIds.get(i));
+        for (int i = 0; i < departmentIds.size(); i++) {
+            department.setId(departmentIds.get(i));
             department.setCustomOrder(i);
             departmentMapper.updateByPrimaryKeySelective(department);
         }
@@ -93,7 +93,7 @@ public class DepartmentServiceImpl extends AbstractBaseService<Department, Depar
     @Override
     public void fillUserDepartmentInCompany(User user, int companyId) {
         Department department = this.getDepartmentByCompanyIdByUserId(companyId, user.getId());
-        user.setGroupId(department == null ? 0 : department.getId());
+        user.setDepartmentId(department == null ? 0 : department.getId());
     }
 
     @Override

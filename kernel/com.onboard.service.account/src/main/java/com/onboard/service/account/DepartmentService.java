@@ -29,7 +29,6 @@ import com.onboard.service.base.BaseService;
  * @author xuchen
  * 
  */
-// TODO: The usage "department" and "group" should be united.
 public interface DepartmentService extends
 		BaseService<Department, DepartmentExample> {
 
@@ -44,10 +43,10 @@ public interface DepartmentService extends
 	/**
 	 * Update the order of departments according to the given list
 	 * 
-	 * @param groupIds
-	 *            An list of group-id which indicated the new order
+	 * @param departmentIds
+	 *            An list of departmentIds which indicated the new order
 	 */
-	void sortDepartment(List<Integer> groupIds);
+	void sortDepartment(List<Integer> departmentIds);
 
 	/**
 	 * Get department by the given user and the given company (Which means this
@@ -63,7 +62,7 @@ public interface DepartmentService extends
 
 	/**
 	 * Get department by the given user and the given company, then set the
-	 * groupId field of the user using this department
+	 * departmentId field of the user using this department
 	 * 
 	 * @param user
 	 *            An object of user
@@ -74,7 +73,7 @@ public interface DepartmentService extends
 
 	/**
 	 * For each user in a given list of users, get department by the user and
-	 * the given company, then set the groupId field of the user using this
+	 * the given company, then set the departmentId field of the user using this
 	 * department
 	 * 
 	 * @param users

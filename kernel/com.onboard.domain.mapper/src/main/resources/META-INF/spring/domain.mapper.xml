@@ -193,16 +193,6 @@
     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
   </bean>
 
-  <bean id="documentMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
-    <property name="mapperInterface" value="com.onboard.domain.mapper.DocumentMapper" />
-    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
-  </bean>
-
-  <bean id="documentHistoryMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
-    <property name="mapperInterface" value="com.onboard.domain.mapper.DocumentHistoryMapper" />
-    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
-  </bean>
-
   <bean id="uploadMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
     <property name="mapperInterface" value="com.onboard.domain.mapper.UploadMapper" />
     <property name="sqlSessionFactory" ref="sqlSessionFactory" />

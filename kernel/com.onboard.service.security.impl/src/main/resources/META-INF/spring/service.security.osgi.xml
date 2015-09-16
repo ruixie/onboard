@@ -44,9 +44,6 @@
   <service id="discussionCreatorRequired" interface="com.onboard.service.security.interceptors.DiscussionCreatorRequired"
     ref="discussionCreatorRequiredBean" />
     
-  <service id="documentCreatorRequired" interface="com.onboard.service.security.interceptors.DocumentCreatorRequired"
-    ref="documentCreatorRequiredBean" />
-    
   <service id="eventCreatorRequired" interface="com.onboard.service.security.interceptors.EventCreatorRequired"
     ref="eventCreatorRequiredBean" />
     

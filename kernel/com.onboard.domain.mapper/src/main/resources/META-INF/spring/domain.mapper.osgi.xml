@@ -46,8 +46,6 @@
   <service id="keywordMapperDao" interface="com.onboard.domain.mapper.KeywordMapper" ref="keywordMapperBean" />
   <service id="collectionMapperDao" interface="com.onboard.domain.mapper.CollectionMapper" ref="collectionMapperBean" />
   <service id="trashMapperDao" interface="com.onboard.domain.mapper.TrashMapper" ref="trashMapperBean" />
-  <service id="documentMapperDao" interface="com.onboard.domain.mapper.DocumentMapper" ref="documentMapperBean" />
-  <service id="documentHistoryMapperDao" interface="com.onboard.domain.mapper.DocumentHistoryMapper" ref="documentHistoryMapperBean" />
   <service id="uploadMapperDao" interface="com.onboard.domain.mapper.UploadMapper" ref="uploadMapperBean" />
   <service id="githubInfoMapperDao" interface="com.onboard.domain.mapper.GithubInfoMapper" ref="githubInfoMapperBean" />
   <service id="helpTipMapperDao" interface="com.onboard.domain.mapper.HelpTipMapper" ref="helpTipMapperBean" />

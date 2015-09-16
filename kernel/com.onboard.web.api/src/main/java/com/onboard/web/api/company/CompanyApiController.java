@@ -34,7 +34,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.onboard.domain.model.Company;
-import com.onboard.domain.model.Document;
 import com.onboard.domain.model.Project;
 import com.onboard.domain.transform.CompanyTransform;
 import com.onboard.dto.CompanyDTO;
@@ -48,7 +47,6 @@ import com.onboard.service.security.interceptors.CompanyChecking;
 import com.onboard.service.security.interceptors.CompanyMemberRequired;
 import com.onboard.service.security.interceptors.LoginRequired;
 import com.onboard.service.web.SessionService;
-import com.onboard.service.wiki.DocumentService;
 
 @Controller
 @RequestMapping("/")
@@ -68,19 +66,10 @@ public class CompanyApiController {
     private ProjectService projectService;
 
     @Autowired
-    private DocumentService documentService;
-
-    @Autowired
     private SampleProjectService sampleProjectService;
 
     @Autowired
     private RoleService roleService;
-
-    private int getDocumentCount(int projectId) {
-        Document doc = new Document();
-        doc.setProjectId(projectId);
-        return documentService.countBySample(doc);
-    }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     @Interceptors({ LoginRequired.class })
@@ -127,7 +116,6 @@ public class CompanyApiController {
             int projectId = projectDTO.getId();
             projectDTO.setTopicCount(projectService.getTopicCount(projectId));
             projectDTO.setTodoCount(projectService.getTodoCount(projectId));
-            projectDTO.setDocumentCount(getDocumentCount(projectId));
             projectDTO.setUserCount(projectService.getUserCount(projectId));
             projectDTO.setAttachmentCount(projectService.getAttachmentCount(projectId));
             projectDTO.setIsCurrentUserAdmin(roleService.projectAdmin(userId, companyId, projectId));

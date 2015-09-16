@@ -29,7 +29,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import com.onboard.domain.model.Discussion;
-import com.onboard.domain.model.Document;
 import com.onboard.domain.model.Project;
 import com.onboard.domain.model.Todo;
 import com.onboard.domain.model.Todolist;
@@ -43,7 +42,6 @@ import com.onboard.service.collaboration.TodolistService;
 import com.onboard.service.sampleProject.SampleProjectService;
 import com.onboard.service.sampleProject.model.SampleProject;
 import com.onboard.service.upload.UploadService;
-import com.onboard.service.wiki.DocumentService;
 
 /**
  * {@link com.onboard.plugin.sampleProject.SampleProjectService} Service
@@ -51,17 +49,22 @@ import com.onboard.service.wiki.DocumentService;
  * @author xingliang
  * 
  */
-//@Transactional
+// @Transactional
 @Service("sampleProjectServiceBean")
 public class SampleProjectServiceImpl implements SampleProjectService {
 
-    @Autowired ProjectService projectService;
-    @Autowired DiscussionService discussionService;
-    @Autowired TodolistService todolistService;
-    @Autowired TodoService todoService;
-    @Autowired DocumentService documentService;
-    @Autowired UploadService uploadService;
-    @Autowired AttachmentService attachmentService;
+    @Autowired
+    ProjectService projectService;
+    @Autowired
+    DiscussionService discussionService;
+    @Autowired
+    TodolistService todolistService;
+    @Autowired
+    TodoService todoService;
+    @Autowired
+    UploadService uploadService;
+    @Autowired
+    AttachmentService attachmentService;
 
     public static final Logger logger = LoggerFactory.getLogger(SampleProjectServiceImpl.class);
     private static final String RESOURCE_PATH = "com/onboard/service/service/sampleProject/";
@@ -105,15 +108,6 @@ public class SampleProjectServiceImpl implements SampleProjectService {
                     todo.setPriority(1);
                     todoService.create(todo);
                 }
-            }
-            // 示例文档
-            List<Document> documents = sample.getSampleDocuments();
-            for (Document document : documents) {
-                document.setProjectId(project.getId());
-                document.setCompanyId(companyId);
-                document.setCreatorId(creator.getId());
-                document.setCreatorName(creator.getName());
-                documentService.create(document);
             }
 
         } catch (JsonParseException e) {

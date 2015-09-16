@@ -15,7 +15,6 @@
   <osgi:reference id="projectService" interface="com.onboard.service.collaboration.ProjectService"/>
   <osgi:reference id="todoService" interface="com.onboard.service.collaboration.TodoService"/>
   <osgi:reference id="discussionService" interface="com.onboard.service.collaboration.DiscussionService"/>
-  <osgi:reference id="documentService" interface="com.onboard.service.wiki.DocumentService"/>
   <osgi:reference id="uploadService" interface="com.onboard.service.upload.UploadService"/>
 
   <!-- 开放的服务 -->

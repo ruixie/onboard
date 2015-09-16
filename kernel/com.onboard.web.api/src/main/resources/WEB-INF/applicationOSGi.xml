@@ -39,8 +39,6 @@
   <osgi:reference id="bugService" interface="com.onboard.service.collaboration.BugService" />
   <osgi:reference id="keywordService" interface="com.onboard.service.collaboration.KeywordService" />
   <osgi:reference id="idInProjectService" interface="com.onboard.service.collaboration.IdInProjectService" />
-  <osgi:reference id="documentService" interface="com.onboard.service.wiki.DocumentService" />
-  <osgi:reference id="documentHistoryService" interface="com.onboard.service.wiki.DocumentHistoryService" />
   <osgi:reference id="searchService" interface="com.onboard.service.index.SearchService" />
   <osgi:reference id="sampleProjectService" interface="com.onboard.service.sampleProject.SampleProjectService" />
   <osgi:reference id="githubService" interface="com.onboard.service.github.GithubService" />
@@ -62,7 +60,6 @@
   <osgi:reference id="companyMemberRequired" interface="com.onboard.service.security.interceptors.CompanyMemberRequired" />
   <osgi:reference id="companyOwnerRequired" interface="com.onboard.service.security.interceptors.CompanyOwnerRequired" />
   <osgi:reference id="discussionCreatorRequired" interface="com.onboard.service.security.interceptors.DiscussionCreatorRequired" />
-  <osgi:reference id="documentCreatorRequired" interface="com.onboard.service.security.interceptors.DocumentCreatorRequired" />
   <osgi:reference id="eventCreatorRequired" interface="com.onboard.service.security.interceptors.EventCreatorRequired" />
   <osgi:reference id="invitationPermissionRequired" interface="com.onboard.service.security.interceptors.InvitationPermissionRequired" />
   <osgi:reference id="loginRequired" interface="com.onboard.service.security.interceptors.LoginRequired" />

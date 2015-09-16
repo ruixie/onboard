@@ -41,8 +41,6 @@
     <module>kernel/com.onboard.service.activity.impl</module>
     <module>kernel/com.onboard.service.notification</module>
     <module>kernel/com.onboard.service.notification.impl</module>
-    <module>kernel/com.onboard.service.wiki</module>
-    <module>kernel/com.onboard.service.wiki.impl</module>
     <module>kernel/com.onboard.service.upload</module>
     <module>kernel/com.onboard.service.upload.impl</module>
     <module>kernel/com.onboard.service.sampleProject</module>

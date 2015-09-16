@@ -85,11 +85,6 @@
     </dependency>
     <dependency>
       <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.service.wiki</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.onboard</groupId>
       <artifactId>com.onboard.service.sampleProject</artifactId>
       <version>${project.version}</version>
     </dependency>

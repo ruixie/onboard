@@ -34,21 +34,18 @@ import com.onboard.domain.model.Activity;
 import com.onboard.domain.model.Bug;
 import com.onboard.domain.model.Comment;
 import com.onboard.domain.model.Discussion;
-import com.onboard.domain.model.Document;
 import com.onboard.domain.model.Step;
 import com.onboard.domain.model.Todo;
 import com.onboard.domain.transform.ActivityTransForm;
 import com.onboard.domain.transform.BugTransForm;
 import com.onboard.domain.transform.CommentTransform;
 import com.onboard.domain.transform.DiscussionTransform;
-import com.onboard.domain.transform.DocumentTransform;
 import com.onboard.domain.transform.StepTransform;
 import com.onboard.domain.transform.TodoTransform;
 import com.onboard.dto.ActivityDTO;
 import com.onboard.dto.BugDTO;
 import com.onboard.dto.CommentDTO;
 import com.onboard.dto.DiscussionDTO;
-import com.onboard.dto.DocumentDTO;
 import com.onboard.dto.StepDTO;
 import com.onboard.dto.TodoDTO;
 import com.onboard.service.account.UserService;
@@ -60,7 +57,6 @@ import com.onboard.service.collaboration.ProjectService;
 import com.onboard.service.collaboration.StepService;
 import com.onboard.service.collaboration.TodoService;
 import com.onboard.service.security.interceptors.CompanyMemberRequired;
-import com.onboard.service.wiki.DocumentService;
 
 @RequestMapping("/{companyId}/stats")
 @Controller
@@ -86,9 +82,6 @@ public class StatsApiController {
 
     @Autowired
     private DiscussionService discussionService;
-
-    @Autowired
-    private DocumentService documentService;
 
     @Autowired
     private CommentService commentService;
@@ -161,18 +154,6 @@ public class StatsApiController {
         Date until = new Date(end);
         List<Discussion> discussions = discussionService.getDiscussionsByCompanyIdBetweenDates(companyId, since, until);
         return Lists.transform(discussions, DiscussionTransform.DISCUSSION_DTO_FUNCTION);
-    }
-
-    @RequestMapping(value = "/documents", method = RequestMethod.GET)
-    @Interceptors({ CompanyMemberRequired.class })
-    @ResponseBody
-    public List<DocumentDTO> getCompanyDocuments(@PathVariable int companyId, @RequestParam(value = "start") long start,
-            @RequestParam(value = "end") long end) {
-        Date since = new Date(start);
-        Date until = new Date(end);
-        List<Document> documents = documentService.getDocumentsByCompanyIdBetweenDates(companyId, since, until);
-        logger.info("There are {} documents", documents.size());
-        return Lists.transform(documents, DocumentTransform.DOCUMENT_DTO_FUNCTION);
     }
 
     @RequestMapping(value = "/comments", method = RequestMethod.GET)

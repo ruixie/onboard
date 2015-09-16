@@ -38,7 +38,6 @@ public class ProjectDTO implements DTO {
     private Integer attachmentCount;
     private Integer todoCount;
     private Integer userCount;
-    private Integer documentCount;
     private Boolean isCurrentUserAdmin;
 
     private List<Integer> members;
@@ -171,14 +170,6 @@ public class ProjectDTO implements DTO {
 
     public void setUserCount(Integer userCount) {
         this.userCount = userCount;
-    }
-
-    public Integer getDocumentCount() {
-        return documentCount;
-    }
-
-    public void setDocumentCount(Integer documentCount) {
-        this.documentCount = documentCount;
     }
 
     public Boolean getIsCurrentUserAdmin() {

@@ -174,15 +174,15 @@ public class DepartmentSerivceImplTest extends AbstractDepartmentServiceTest {
         User user = ModuleHelper.getASampleUser();
         departmentServiceImpl.fillUserDepartmentInCompany(user, ModuleHelper.companyId);
         
-        assertEquals(user.getGroupId(), department.getId());
+        assertEquals(user.getDepartmentId(), department.getId());
     }
     
     @Test 
     public void testFillUsersDepartmentInCompany() {
         departmentServiceImpl.fillUsersDepartmentInCompany(userList, ModuleHelper.companyId);
         
-        assertEquals(userList.get(0).getGroupId(), department.getId());
-        assertEquals(userList.get(1).getGroupId(), department.getId());
+        assertEquals(userList.get(0).getDepartmentId(), department.getId());
+        assertEquals(userList.get(1).getDepartmentId(), department.getId());
     }
     
 }

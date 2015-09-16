@@ -130,7 +130,7 @@ public class UserCompanyObject implements BaseItem {
      *
      * @mbggenerated Wed Aug 26 19:51:19 CST 2015
      */
-    public Integer getGroupId() {
+    public Integer getDepartmentId() {
         return groupId;
     }
 
@@ -142,7 +142,7 @@ public class UserCompanyObject implements BaseItem {
      *
      * @mbggenerated Wed Aug 26 19:51:19 CST 2015
      */
-    public void setGroupId(Integer groupId) {
+    public void setDepartmentId(Integer groupId) {
         this.groupId = groupId;
     }
 
@@ -156,7 +156,7 @@ public class UserCompanyObject implements BaseItem {
         this.id = parent.getId();
         this.userId = parent.getUserId();
         this.companyId = parent.getCompanyId();
-        this.groupId = parent.getGroupId();
+        this.groupId = parent.getDepartmentId();
     }
 
     /**

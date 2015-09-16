@@ -50,11 +50,11 @@ public class DepartmentServiceImpl extends AbstractBaseService<Department, Depar
     @Override
     public void delete(int id) {
         UserCompany userCompany = new UserCompany();
-        userCompany.setGroupId(id);
+        userCompany.setDepartmentId(id);
         List<UserCompany> useCompanyList = userCompayMapper.selectByExample(new UserCompanyExample(userCompany));
         // 删除分组的话，此分组内所有成员的分组设为null
         for (UserCompany item : useCompanyList) {
-            item.setGroupId(null);
+            item.setDepartmentId(null);
             userCompayMapper.updateByExample(item, new UserCompanyExample(item));
         }
         departmentMapper.deleteByPrimaryKey(id);
@@ -62,19 +62,19 @@ public class DepartmentServiceImpl extends AbstractBaseService<Department, Depar
 
     @Override
     public void updateDepartmentOfUser(UserCompany userCompany) {
-        Integer groupId = userCompany.getGroupId();
-        userCompany.setGroupId(null);
+        Integer departmentId = userCompany.getDepartmentId();
+        userCompany.setDepartmentId(null);
         UserCompanyExample example = new UserCompanyExample(userCompany);
-        userCompany.setGroupId(groupId);
+        userCompany.setDepartmentId(departmentId);
         userCompany.setId(userCompayMapper.selectByExample(example).get(0).getId());
         userCompayMapper.updateByExample(userCompany, example);
     }
 
     @Override
-    public void sortDepartment(List<Integer> groupIds) {
+    public void sortDepartment(List<Integer> departmentIds) {
         Department department = new Department();
-        for (int i = 0; i < groupIds.size(); i++) {
-            department.setId(groupIds.get(i));
+        for (int i = 0; i < departmentIds.size(); i++) {
+            department.setId(departmentIds.get(i));
             department.setCustomOrder(i);
             departmentMapper.updateByPrimaryKeySelective(department);
         }
@@ -87,13 +87,13 @@ public class DepartmentServiceImpl extends AbstractBaseService<Department, Depar
         userCompany.setUserId(userId);
         List<UserCompany> result = userCompayMapper.selectByExample(new UserCompanyExample(userCompany));
 
-        return result.get(0).getGroupId() == null ? null : departmentMapper.selectByPrimaryKey(result.get(0).getGroupId());
+        return result.get(0).getDepartmentId() == null ? null : departmentMapper.selectByPrimaryKey(result.get(0).getDepartmentId());
     }
 
     @Override
     public void fillUserDepartmentInCompany(User user, int companyId) {
         Department department = this.getDepartmentByCompanyIdByUserId(companyId, user.getId());
-        user.setGroupId(department == null ? 0 : department.getId());
+        user.setDepartmentId(department == null ? 0 : department.getId());
     }
 
     @Override

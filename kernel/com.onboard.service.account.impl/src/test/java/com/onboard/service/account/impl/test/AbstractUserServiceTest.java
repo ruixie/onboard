@@ -162,7 +162,7 @@ public abstract class AbstractUserServiceTest {
     public UserCompany getASampleUserCompany() {
         UserCompany userCompany = new UserCompany();
         userCompany.setCompanyId(ModuleHelper.companyId);
-        userCompany.setGroupId(ModuleHelper.groupId);
+        userCompany.setDepartmentId(ModuleHelper.groupId);
         userCompany.setId(ModuleHelper.userCompanyId);
         userCompany.setUserId(ModuleHelper.userId);
         return userCompany;

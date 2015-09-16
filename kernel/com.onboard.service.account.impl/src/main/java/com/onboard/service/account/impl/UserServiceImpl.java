@@ -370,7 +370,7 @@ public class UserServiceImpl extends AbstractBaseService<User, UserExample> impl
     // TODO 函数名顺序和参数顺序不一致
     public List<User> getUserByCompanyIdByDepartmentId(int groupId, int companyId) {
         UserCompany sample = new UserCompany();
-        sample.setGroupId(groupId);
+        sample.setDepartmentId(groupId);
         sample.setCompanyId(companyId);
         UserCompanyExample example = new UserCompanyExample(sample);
         List<UserCompany> userCompanyList = userCompanyMapper.selectByExample(example);

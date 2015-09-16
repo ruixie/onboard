@@ -168,7 +168,7 @@ public class ModuleHelper {
     public static UserCompany getASampleUserCompany() {
         UserCompany uc = new UserCompany();
         uc.setId(userCompanyId);
-        uc.setGroupId(groupId);
+        uc.setDepartmentId(groupId);
         return uc;
     }
 

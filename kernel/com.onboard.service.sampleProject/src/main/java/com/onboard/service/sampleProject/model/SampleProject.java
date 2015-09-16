@@ -18,7 +18,6 @@ package com.onboard.service.sampleProject.model;
 import java.util.List;
 
 import com.onboard.domain.model.Discussion;
-import com.onboard.domain.model.Document;
 import com.onboard.domain.model.Project;
 import com.onboard.domain.model.Todolist;
 
@@ -35,8 +34,6 @@ public class SampleProject {
     private List<Discussion> sampleDiscussions;
 
     private List<Todolist> sampleTodolists;
-
-    private List<Document> sampleDocuments;
 
     private List<SampleFile> sampleFiles;
 
@@ -66,14 +63,6 @@ public class SampleProject {
 
     public List<Discussion> getSampleDiscussions() {
         return sampleDiscussions;
-    }
-
-    public List<Document> getSampleDocuments() {
-        return sampleDocuments;
-    }
-
-    public void setSampleDocuments(List<Document> sampleDocuments) {
-        this.sampleDocuments = sampleDocuments;
     }
 
     public List<SampleFile> getSampleFiles() {

@@ -121,6 +121,10 @@
       <artifactId>mockito-core</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.htmlparser</groupId>
+      <artifactId>com.springsource.org.htmlparser</artifactId>
+    </dependency>
   </dependencies>
   
   <build>

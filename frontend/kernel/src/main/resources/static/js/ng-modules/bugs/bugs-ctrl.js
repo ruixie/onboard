@@ -32,8 +32,8 @@ angular.module('bugs')
             $scope.projectId = $state.params.projectId;
             $scope.companyId = $state.params.companyId;
 
-            $scope.predicate = 'idInProject';
-            $scope.reverse = true;
+            $scope.predicate = 'dueTime';
+            $scope.reverse = false;
 
             $scope.openNewBugDrawer = function($event) {
                 $event.stopPropagation();

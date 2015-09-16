@@ -45,9 +45,6 @@ public class BasicIdentifiableInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     protected IdentifiableManager identifiableManager;
 
-    @Autowired
-    LoginRequired loginRequiredInterceptor;
-
     public static final Logger logger = LoggerFactory.getLogger(BasicIdentifiableInterceptor.class);
 
     /**
@@ -82,8 +79,8 @@ public class BasicIdentifiableInterceptor extends HandlerInterceptorAdapter {
                 if (id < 0 || getIdentifiable(request, modelType, id) == null) {
                     throw new ResourceNotFoundException();
                 } else {
-                    //TODO: mod BaseProjectItem to BaseOperateItem
-                    identifiable = (BaseProjectItem)identifiableManager.getIdentifiableByTypeAndId(modelType, id);
+                    // TODO: mod BaseProjectItem to BaseOperateItem
+                    identifiable = (BaseProjectItem) identifiableManager.getIdentifiableByTypeAndId(modelType, id);
                 }
             }
         }
@@ -94,7 +91,7 @@ public class BasicIdentifiableInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // logger.info("Prehandle...");
-        if (!loginRequiredInterceptor.preHandle(request, response, handler)) {
+        if (session.getCurrentUser() == null) {
             return false;
         }
 
@@ -160,9 +157,9 @@ public class BasicIdentifiableInterceptor extends HandlerInterceptorAdapter {
         if (companyId == null || projectId == null) {
             return null;
         }
-        
-        //TODO: mod BaseProjectItem to BaseOperateItem
-        BaseProjectItem identifiable = (BaseProjectItem)identifiableManager.getIdentifiableByTypeAndId(modelType, id);
+
+        // TODO: mod BaseProjectItem to BaseOperateItem
+        BaseProjectItem identifiable = (BaseProjectItem) identifiableManager.getIdentifiableByTypeAndId(modelType, id);
 
         if (identifiable != null && identifiable.getCompanyId().equals(companyId)
                 && identifiable.getProjectId().equals(projectId)) {

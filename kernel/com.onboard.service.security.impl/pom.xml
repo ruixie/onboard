@@ -20,6 +20,18 @@
       <artifactId>guava</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.elevenframework</groupId>
+      <artifactId>org.elevenframework.web.api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty.orbit</groupId>
+      <artifactId>javax.servlet</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.web.servlet</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.onboard</groupId>
       <artifactId>com.onboard.service.security</artifactId>
       <version>${project.version}</version>
@@ -68,7 +80,8 @@
             <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
             <Bundle-Version>${project.version}</Bundle-Version>
             <Private-Package>
-                com.onboard.service.security.impl
+                com.onboard.service.security.impl,
+                com.onboard.service.security.interceptors.impl
             </Private-Package>
           </instructions>
         </configuration>

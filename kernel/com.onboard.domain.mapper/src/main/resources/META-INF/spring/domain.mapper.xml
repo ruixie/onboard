@@ -198,11 +198,6 @@
     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
   </bean>
 
-  <bean id="githubInfoMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
-    <property name="mapperInterface" value="com.onboard.domain.mapper.GithubInfoMapper" />
-    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
-  </bean>
-
   <bean id="trashMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
     <property name="mapperInterface" value="com.onboard.domain.mapper.TrashMapper" />
     <property name="sqlSessionFactory" ref="sqlSessionFactory" />

@@ -23,7 +23,7 @@ import com.onboard.domain.mapper.model.common.BaseExample;
 import com.onboard.domain.mapper.model.common.BaseItem;
 
 public interface BaseMapper<R extends BaseItem, E extends BaseExample> {
-    
+
     int countByExample(E example);
 
     int deleteByExample(E example);

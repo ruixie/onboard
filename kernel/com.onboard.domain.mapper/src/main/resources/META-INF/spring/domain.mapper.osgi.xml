@@ -47,6 +47,5 @@
   <service id="collectionMapperDao" interface="com.onboard.domain.mapper.CollectionMapper" ref="collectionMapperBean" />
   <service id="trashMapperDao" interface="com.onboard.domain.mapper.TrashMapper" ref="trashMapperBean" />
   <service id="uploadMapperDao" interface="com.onboard.domain.mapper.UploadMapper" ref="uploadMapperBean" />
-  <service id="githubInfoMapperDao" interface="com.onboard.domain.mapper.GithubInfoMapper" ref="githubInfoMapperBean" />
   <service id="helpTipMapperDao" interface="com.onboard.domain.mapper.HelpTipMapper" ref="helpTipMapperBean" />
 </beans:beans>

@@ -27,7 +27,7 @@ import com.onboard.service.index.custom.IndexableServices;
 
 @Service("indexableServicesBean")
 public class IndexableServicesImpl implements IndexableServices {
-    
+
     private static final Map<String, IndexableService> indexableServices = Collections
             .synchronizedMap(new HashMap<String, IndexableService>());
 
@@ -45,15 +45,15 @@ public class IndexableServicesImpl implements IndexableServices {
 
     @Override
     public IndexableService getIndexableService(Indexable indexable) {
-        if(indexable == null){
+        if (indexable == null) {
             return null;
         }
         return indexableServices.get(indexable.getType());
     }
-    
+
     @Override
     public IndexableService getIndexableService(String modelType) {
-        if(modelType == null){
+        if (modelType == null) {
             return null;
         }
         return indexableServices.get(modelType);

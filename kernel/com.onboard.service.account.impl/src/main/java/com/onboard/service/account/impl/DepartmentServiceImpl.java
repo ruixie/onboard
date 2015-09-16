@@ -50,11 +50,11 @@ public class DepartmentServiceImpl extends AbstractBaseService<Department, Depar
     @Override
     public void delete(int id) {
         UserCompany userCompany = new UserCompany();
-        userCompany.setGroupId(id);
+        userCompany.setDepartmentId(id);
         List<UserCompany> useCompanyList = userCompayMapper.selectByExample(new UserCompanyExample(userCompany));
         // 删除分组的话，此分组内所有成员的分组设为null
         for (UserCompany item : useCompanyList) {
-            item.setGroupId(null);
+            item.setDepartmentId(null);
             userCompayMapper.updateByExample(item, new UserCompanyExample(item));
         }
         departmentMapper.deleteByPrimaryKey(id);
@@ -62,10 +62,10 @@ public class DepartmentServiceImpl extends AbstractBaseService<Department, Depar
 
     @Override
     public void updateDepartmentOfUser(UserCompany userCompany) {
-        Integer groupId = userCompany.getGroupId();
-        userCompany.setGroupId(null);
+        Integer departmentId = userCompany.getDepartmentId();
+        userCompany.setDepartmentId(null);
         UserCompanyExample example = new UserCompanyExample(userCompany);
-        userCompany.setGroupId(groupId);
+        userCompany.setDepartmentId(departmentId);
         userCompany.setId(userCompayMapper.selectByExample(example).get(0).getId());
         userCompayMapper.updateByExample(userCompany, example);
     }
@@ -87,7 +87,7 @@ public class DepartmentServiceImpl extends AbstractBaseService<Department, Depar
         userCompany.setUserId(userId);
         List<UserCompany> result = userCompayMapper.selectByExample(new UserCompanyExample(userCompany));
 
-        return result.get(0).getGroupId() == null ? null : departmentMapper.selectByPrimaryKey(result.get(0).getGroupId());
+        return result.get(0).getDepartmentId() == null ? null : departmentMapper.selectByPrimaryKey(result.get(0).getDepartmentId());
     }
 
     @Override

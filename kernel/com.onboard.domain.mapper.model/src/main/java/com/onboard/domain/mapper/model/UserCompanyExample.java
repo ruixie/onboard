@@ -259,8 +259,8 @@ public class UserCompanyExample implements BaseExample {
         if (sample.getCompanyId() != null) {
             criteria.andCompanyIdEqualTo(sample.getCompanyId());
         }
-        if (sample.getGroupId() != null) {
-            criteria.andGroupIdEqualTo(sample.getGroupId());
+        if (sample.getDepartmentId() != null) {
+            criteria.andGroupIdEqualTo(sample.getDepartmentId());
         }
     }
 

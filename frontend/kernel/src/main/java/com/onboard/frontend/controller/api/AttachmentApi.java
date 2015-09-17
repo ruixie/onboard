@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.onboard.frontend.exception.InternalException;
 import com.onboard.frontend.exception.ResourceNotFoundException;
 import com.onboard.frontend.model.dto.AttachmentDTO;
-import com.onboard.frontend.service.net.impl.NetServiceImpl;
+import com.onboard.frontend.service.net.NetService;
 
 @RestController
 public class AttachmentApi {
@@ -38,7 +38,7 @@ public class AttachmentApi {
     private final static String ATTACHMENT_BYTE = ATTACHMENT_HEADER + "/byte/%d";
 
     @Autowired
-    private NetServiceImpl netService;
+    private NetService netService;
 
     @RequestMapping(value = "/api/{companyId}/projects/{projectId}/attachments/{attachmentId}/download", method = RequestMethod.GET)
     @ResponseBody
@@ -58,7 +58,7 @@ public class AttachmentApi {
         return new HttpEntity<byte[]>(bytes, header);
     }
 
-    @RequestMapping(value ="/api/{companyId}/projects/{projectId}/attachments/text/{attachmentId}" , method = RequestMethod.GET)
+    @RequestMapping(value = "/api/{companyId}/projects/{projectId}/attachments/text/{attachmentId}", method = RequestMethod.GET)
     @ResponseBody
     public HttpEntity<byte[]> renderTxtInPage(@PathVariable("companyId") int companyId, @PathVariable("projectId") int projectId,
             @PathVariable("attachmentId") int attachmentId) throws InternalException {
@@ -73,7 +73,7 @@ public class AttachmentApi {
         header.setContentType(getContentType(attachment.getContentType()));
         return new HttpEntity<byte[]>(bytes, header);
     }
-    
+
     @RequestMapping(value = "/api/{companyId}/projects/{projectId}/attachments/capacity", method = RequestMethod.GET)
     @ResponseBody
     public String doGetProxy(HttpServletRequest request, HttpServletResponse response) {
@@ -133,14 +133,14 @@ public class AttachmentApi {
         header.setContentType(MediaType.parseMediaType("application/pdf"));
         return new HttpEntity<byte[]>(bytes, header);
     }
-    
+
     @RequestMapping(value = "/api/{companyId}/projects/{projectId}/attachments/{attachmentId}", method = RequestMethod.GET)
     @ResponseBody
     public AttachmentDTO getAttachment(@PathVariable("companyId") int companyId, @PathVariable("projectId") int projectId,
             @PathVariable("attachmentId") int attachmentId) {
-      String attachmentUri = String.format(ATTACHMENT_ID, companyId, projectId,attachmentId);
-      AttachmentDTO attachmentDTO = netService.getForObject(attachmentUri, AttachmentDTO.class);
-      
+        String attachmentUri = String.format(ATTACHMENT_ID, companyId, projectId, attachmentId);
+        AttachmentDTO attachmentDTO = netService.getForObject(attachmentUri, AttachmentDTO.class);
+
         return attachmentDTO;
     }
 

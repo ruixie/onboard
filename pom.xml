@@ -19,10 +19,10 @@
   <modules>
     <module>kernel/com.onboard.domain.mapper.model</module>
     <module>kernel/com.onboard.domain.model</module>
-    <module>kernel/com.onboard.api</module>
+    <module>kernel/com.onboard.domain.index</module>
+    <module>kernel/com.onboard.domain.index.impl</module>
+    <module>kernel/com.onboard.domain.dto</module>
     <module>kernel/com.onboard.domain.transform</module>
-    <module>kernel/com.onboard.service.index</module>
-    <module>kernel/com.onboard.service.index.impl</module>
     <module>kernel/com.onboard.domain.mapper</module>
     <module>test/com.onboard.test.utils</module>
     <module>kernel/com.onboard.service.common</module>

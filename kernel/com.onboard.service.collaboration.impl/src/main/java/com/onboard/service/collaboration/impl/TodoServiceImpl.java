@@ -24,8 +24,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javax.annotation.PostConstruct;
-
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,24 +118,6 @@ public class TodoServiceImpl extends AbstractBaseService<Todo, TodoExample> impl
             }
         }
 
-    }
-
-    @PostConstruct
-    public void initTodoStatus() {
-        TodoExample example = new TodoExample(new Todo());
-        example.getOredCriteria().get(0).andStatusIsNull();
-        List<Todo> todos = todoMapper.selectByExample(example);
-        for (Todo todo : todos) {
-            Todo updatedTodo = new Todo(todo.getId());
-            if (todo.getCompleted()) {
-                updatedTodo.setStatus(IterationItemStatus.CLOSED.getValue());
-            } else if (todo.getDoing()) {
-                updatedTodo.setStatus(IterationItemStatus.INPROGESS.getValue());
-            } else {
-                updatedTodo.setStatus(IterationItemStatus.TODO.getValue());
-            }
-            todoMapper.updateByPrimaryKeySelective(updatedTodo);
-        }
     }
 
     @Override

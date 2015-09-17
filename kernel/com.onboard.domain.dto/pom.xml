@@ -9,9 +9,9 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>com.onboard.api</artifactId>
-  <name>com.onboard.api</name>
-  <description>com.onboard.api</description>
+  <artifactId>com.onboard.domain.dto</artifactId>
+  <name>com.onboard.domain.dto</name>
+  <description>com.onboard.domain.dto</description>
   <packaging>bundle</packaging>
 
   <dependencies>

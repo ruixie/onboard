@@ -26,12 +26,12 @@
     </dependency>
     <dependency>
       <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.api</artifactId>
+      <artifactId>com.onboard.domain.dto</artifactId>
       <version>${project.version}</version>
     </dependency>    
     <dependency>
       <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.service.index</artifactId>
+      <artifactId>com.onboard.domain.index</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>

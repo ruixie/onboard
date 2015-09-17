@@ -9,9 +9,9 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>com.onboard.service.index</artifactId>
-  <name>com.onboard.service.index</name>
-  <description>com.onboard.service.index</description>
+  <artifactId>com.onboard.domain.index</artifactId>
+  <name>com.onboard.domain.index</name>
+  <description>com.onboard.domain.index</description>
   <packaging>bundle</packaging>
 
   <dependencies>

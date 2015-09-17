@@ -1,6 +1,0 @@
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.onboard.service.security;version=${project.version},\
- com.onboard.service.security.auth;version=${project.version},\
- com.onboard.service.security.exception;version=${project.version},\
- com.onboard.service.security.interceptors;version=${project.version},\
- com.onboard.service.security.utils;version=${project.version}

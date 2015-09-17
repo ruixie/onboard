@@ -24,7 +24,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Maps;
-import com.onboard.domain.model.*;
+import com.onboard.domain.model.Activity;
+import com.onboard.domain.model.IterationItemStatus;
+import com.onboard.domain.model.Project;
+import com.onboard.domain.model.Todo;
+import com.onboard.domain.model.TodoType;
+import com.onboard.domain.model.Todolist;
+import com.onboard.domain.model.User;
 import com.onboard.domain.model.type.BaseProjectItem;
 import com.onboard.service.account.UserService;
 import com.onboard.service.activity.ActivityActionType;
@@ -36,9 +42,7 @@ import com.onboard.service.collaboration.TodolistService;
 /**
  * 生成任务相关活动信息的辅助类
  * 
- * TODO: content, assignee和due
- * date的更新信息生成可以优化，在现有的页面交互模式下可以正确工作，即它们是分别通过不同的请求来更新的。
- * 如果在同一个请求中更新，那么产生的Activity信息可能有错误
+ * TODO: content, assignee和due date的更新信息生成可以优化，在现有的页面交互模式下可以正确工作，即它们是分别通过不同的请求来更新的。 如果在同一个请求中更新，那么产生的Activity信息可能有错误
  * ，主要在于null值的判断（比如传入todo的assignee为null，是不去设置（如改变content），还是就是要设置为null）
  * 
  * @author yewei
@@ -126,7 +130,7 @@ public class TodoActivityGenerator implements ActivityGenerator {
         activity.setProjectId(todo.getProjectId());
         activity.setCompanyId(todo.getCompanyId());
 
-        return activity;
+        return ActivityRecorderHelper.enrichActivity(activity);
 
     }
 
@@ -295,8 +299,7 @@ public class TodoActivityGenerator implements ActivityGenerator {
         }
 
         if (todo.getAssigneeId() != null && todo.getDueDate() != null) {
-            activity.setContent(String.format(ASSIGNEE_AND_DUEDATE_SET, user.getName(),
-                    dateFormat.format(todo.getDueDate())));
+            activity.setContent(String.format(ASSIGNEE_AND_DUEDATE_SET, user.getName(), dateFormat.format(todo.getDueDate())));
         } else if (todo.getAssigneeId() != null) {
             activity.setContent(String.format(ASSIGNEE_SET, user.getName()));
         } else if (todo.getDueDate() != null) {

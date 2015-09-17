@@ -16,7 +16,6 @@
 package com.onboard.service.collaboration.activity;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,27 +74,20 @@ public class IterationActivityGenerator implements ActivityGenerator {
         return new Iteration(iterationService.getById(identifiable.getId()));
     }
 
-    private Activity enrichActivity(Activity activity) {
-        activity.setCreatorId(sessionService.getCurrentUser().getId());
-        activity.setCreatorName(sessionService.getCurrentUser().getName());
-        activity.setCreated(new Date());
-        return activity;
-    }
-
     private Activity generateActivityByActionType(String actionType, String subject, Iteration iteration) {
         Activity activity = ActivityHelper.generateActivityByActionType(actionType, subject, iteration);
         activity.setProjectId(iteration.getProjectId());
         activity.setCompanyId(iteration.getCompanyId());
         activity.setTarget(iteration.getName());
-        return enrichActivity(activity);
+        return ActivityRecorderHelper.enrichActivity(activity);
     }
 
     @Override
     public Activity generateCreateActivity(BaseProjectItem item) {
         return null;
-//        Iteration iteration = (Iteration) item;
-//        Activity activity = generateActivityByActionType(ActivityActionType.CREATE, CREATE_ITERATION_SUBJECT, iteration);
-//        return activity;
+        // Iteration iteration = (Iteration) item;
+        // Activity activity = generateActivityByActionType(ActivityActionType.CREATE, CREATE_ITERATION_SUBJECT, iteration);
+        // return activity;
     }
 
     @Override

@@ -67,7 +67,7 @@ public class ProjectActivityGenerator implements ActivityGenerator {
         activity.setProjectId(project.getId());
         activity.setCompanyId(project.getCompanyId());
 
-        return activity;
+        return ActivityRecorderHelper.enrichActivity(activity);
 
     }
 

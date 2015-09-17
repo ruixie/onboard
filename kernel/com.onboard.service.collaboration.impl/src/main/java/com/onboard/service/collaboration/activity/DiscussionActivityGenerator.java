@@ -55,7 +55,7 @@ public class DiscussionActivityGenerator implements ActivityGenerator {
         activity.setProjectId(discussion.getProjectId());
         activity.setCompanyId(discussion.getCompanyId());
 
-        return activity;
+        return ActivityRecorderHelper.enrichActivity(activity);
 
     }
 

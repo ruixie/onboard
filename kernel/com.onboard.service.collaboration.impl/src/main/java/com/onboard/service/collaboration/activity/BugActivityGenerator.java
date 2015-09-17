@@ -15,8 +15,6 @@
  *******************************************************************************/
 package com.onboard.service.collaboration.activity;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,14 +69,7 @@ public class BugActivityGenerator implements ActivityGenerator {
         activity.setProjectId(bug.getProjectId());
         activity.setCompanyId(bug.getCompanyId());
         activity.setTarget(bug.getTitle());
-        return enrichActivity(activity);
-    }
-
-    private Activity enrichActivity(Activity activity) {
-        activity.setCreatorId(sessionService.getCurrentUser().getId());
-        activity.setCreatorName(sessionService.getCurrentUser().getName());
-        activity.setCreated(new Date());
-        return activity;
+        return ActivityRecorderHelper.enrichActivity(activity);
     }
 
     @Override

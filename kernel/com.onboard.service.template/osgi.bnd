@@ -1,3 +1,0 @@
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.onboard.service.account;version=${project.version}, \
- com.onboard.service.account.ss;version=${project.version}

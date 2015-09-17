@@ -18,6 +18,7 @@
   </properties>
 
   <modules>
+    <module>kernel/com.onboard.osgi.dependencies</module>
     <module>kernel/com.onboard.domain.mapper.model</module>
     <module>kernel/com.onboard.domain.model</module>
     <module>kernel/com.onboard.domain.index</module>

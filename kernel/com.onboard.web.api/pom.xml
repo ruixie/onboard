@@ -34,8 +34,9 @@
       <artifactId>com.springsource.org.hibernate.validator</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.elevenframework</groupId>
-      <artifactId>org.elevenframework.web.api</artifactId>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.osgi.dependencies</artifactId>
+      <version>${project.version}</version>
     </dependency>
     
     <dependency>

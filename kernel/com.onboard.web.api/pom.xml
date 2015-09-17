@@ -55,11 +55,6 @@
     </dependency>
     <dependency>
       <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.service.github</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.onboard</groupId>
       <artifactId>com.onboard.service.activity</artifactId>
       <version>${project.version}</version>
     </dependency>

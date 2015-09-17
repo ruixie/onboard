@@ -68,19 +68,6 @@
             ]
         }
     ],
-    "sampleDocuments": [
-        {
-            "title": "欢迎来到Onboard",
-            "content": "编辑此页面来熟悉Onboard的文档功能吧",
-            "isHomePage": false
-        },
-        {
-            "title": "文档主页",
-            "content": "编辑这个页面来完善项目的索引吧",
-            "isHomePage": true
-        }
-        
-    ],
     "sampleFiles": [
         {
             "name": "logo.jpg",

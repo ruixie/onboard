@@ -37,38 +37,39 @@ public class SampleProjectServiceImplTest extends AbstractSampleProjectTest {
 
     @Test
     public void testCreateSampleProjectByCompanyId() {
-        sampleProjectServiceImpl.createSampleProjectByCompanyId(ModuleHelper.companyId, ModuleHelper.getASampleUser());
-        verify(mockedProjectService, times(1)).createProject(Mockito.argThat(new ObjectMatcher<ProjectDTO>() {
-            @Override
-            public boolean verifymatches(ProjectDTO item) {
-                return item.getCompanyId().equals(ModuleHelper.companyId) && item.getCreatorId().equals(ModuleHelper.userId);
-            }
-        }));
-        verify(mockedDiscussionService, times(3)).create(Mockito.argThat(new ObjectMatcher<Discussion>() {
-            @Override
-            public boolean verifymatches(Discussion item) {
-                return item.getCompanyId().equals(ModuleHelper.companyId) && item.getCreatorId().equals(ModuleHelper.userId)
-                        && item.getProjectId().equals(ModuleHelper.projectId)
-                        && item.getCreatorName().equals(ModuleHelper.userName);
-            }
-        }));
-        verify(mockedTodolistService, times(2)).create(Mockito.argThat(new ObjectMatcher<Todolist>() {
-            @Override
-            public boolean verifymatches(Todolist item) {
-                return item.getCompanyId().equals(ModuleHelper.companyId) && item.getCreatorId().equals(ModuleHelper.userId)
-                        && item.getProjectId().equals(ModuleHelper.projectId)
-                        && item.getCreatorName().equals(ModuleHelper.userName);
-            }
-        }));
-        verify(mockedTodoService, times(4)).create(Mockito.argThat(new ObjectMatcher<Todo>() {
-            @Override
-            public boolean verifymatches(Todo item) {
-                return item.getCompanyId().equals(ModuleHelper.companyId) && item.getCreatorId().equals(ModuleHelper.userId)
-                        && item.getProjectId().equals(ModuleHelper.projectId)
-                        && item.getCreatorName().equals(ModuleHelper.userName)
-                        && item.getTodolistId().equals(ModuleHelper.todolistId);
-            }
-        }));
+
+         sampleProjectServiceImpl.createSampleProjectByCompanyId(ModuleHelper.companyId, ModuleHelper.getASampleUser());
+         verify(mockedProjectService, times(1)).createProject(Mockito.argThat(new ObjectMatcher<ProjectDTO>() {
+         @Override
+         public boolean verifymatches(ProjectDTO item) {
+         return item.getCompanyId().equals(ModuleHelper.companyId) && item.getCreatorId().equals(ModuleHelper.userId);
+         }
+         }));
+         verify(mockedDiscussionService, times(3)).create(Mockito.argThat(new ObjectMatcher<Discussion>() {
+         @Override
+         public boolean verifymatches(Discussion item) {
+         return item.getCompanyId().equals(ModuleHelper.companyId) && item.getCreatorId().equals(ModuleHelper.userId)
+         && item.getProjectId().equals(ModuleHelper.projectId)
+         && item.getCreatorName().equals(ModuleHelper.userName);
+         }
+         }));
+         verify(mockedTodolistService, times(2)).create(Mockito.argThat(new ObjectMatcher<Todolist>() {
+         @Override
+         public boolean verifymatches(Todolist item) {
+         return item.getCompanyId().equals(ModuleHelper.companyId) && item.getCreatorId().equals(ModuleHelper.userId)
+         && item.getProjectId().equals(ModuleHelper.projectId)
+         && item.getCreatorName().equals(ModuleHelper.userName);
+         }
+         }));
+         verify(mockedTodoService, times(4)).create(Mockito.argThat(new ObjectMatcher<Todo>() {
+         @Override
+         public boolean verifymatches(Todo item) {
+         return item.getCompanyId().equals(ModuleHelper.companyId) && item.getCreatorId().equals(ModuleHelper.userId)
+         && item.getProjectId().equals(ModuleHelper.projectId)
+         && item.getCreatorName().equals(ModuleHelper.userName)
+         && item.getTodolistId().equals(ModuleHelper.todolistId);
+         }
+         }));
     }
 
 }

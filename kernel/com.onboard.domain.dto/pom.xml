@@ -9,30 +9,15 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>com.onboard.domain.transform</artifactId>
-  <name>com.onboard.domain.transform</name>
-  <description>com.onboard.domain.transform</description>
+  <artifactId>com.onboard.domain.dto</artifactId>
+  <name>com.onboard.domain.dto</name>
+  <description>com.onboard.domain.dto</description>
   <packaging>bundle</packaging>
 
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.domain.model</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.domain.dto</artifactId>
-      <version>${project.version}</version>
-    </dependency>    
-    <dependency>
-      <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.domain.index</artifactId>
-      <version>${project.version}</version>
     </dependency>
   </dependencies>
   
@@ -49,7 +34,7 @@
             <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
             <Bundle-Version>${project.version}</Bundle-Version>
             <Export-Package>
-                com.onboard.domain.transform
+                com.onboard.dto
             </Export-Package>
           </instructions>
         </configuration>

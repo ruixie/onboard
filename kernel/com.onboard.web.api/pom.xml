@@ -34,8 +34,9 @@
       <artifactId>com.springsource.org.hibernate.validator</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.elevenframework</groupId>
-      <artifactId>org.elevenframework.web.api</artifactId>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.osgi.dependencies</artifactId>
+      <version>${project.version}</version>
     </dependency>
     
     <dependency>
@@ -48,14 +49,10 @@
       <artifactId>com.onboard.service.security</artifactId>
       <version>${project.version}</version>
     </dependency>
+    
     <dependency>
       <groupId>com.onboard</groupId>
       <artifactId>com.onboard.service.help</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.service.github</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
@@ -107,6 +104,9 @@
                 com.onboard.web.api.*,
                 com.onboard.web.exception.handler
             </Private-Package>
+            <Export-Package>
+                com.onboard.web.api
+            </Export-Package>
             <Import-Bundle>
                 <!-- web context -->
                 org.springframework.beans;version="[3.0.5.RELEASE,3.1.0.RELEASE]",
@@ -117,7 +117,7 @@
                 org.springframework.web;version="[3.0.5.RELEASE,3.1.0.RELEASE]",
                 org.springframework.web.servlet;version="[3.0.5.RELEASE,3.1.0.RELEASE]",
                 org.eclipse.virgo.web.dm;version="[3.0.2.RELEASE,4)",
-                org.elevenframework.web.api
+                com.onboard.osgi.dependencies;version="[3.0.0.SNAPSHOT,4)"
             </Import-Bundle>
             <Import-Package>
                 <!-- dependency in configuration -->

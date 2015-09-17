@@ -9,9 +9,9 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>com.onboard.service.web.impl</artifactId>
-  <name>com.onboard.service.web.impl</name>
-  <description>com.onboard.service.web.impl</description>
+  <artifactId>com.onboard.domain.index</artifactId>
+  <name>com.onboard.domain.index</name>
+  <description>com.onboard.domain.index</description>
   <packaging>bundle</packaging>
 
   <dependencies>
@@ -20,35 +20,12 @@
       <artifactId>guava</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.osgi.dependencies</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.jetty.orbit</groupId>
-      <artifactId>javax.servlet</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>org.springframework.context</artifactId>
+      <groupId>org.aspectj</groupId>
+      <artifactId>com.springsource.org.aspectj.weaver</artifactId>
     </dependency>
     <dependency>
       <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.domain.mapper</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.service.web</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.test.utils</artifactId>
+      <artifactId>com.onboard.domain.model</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>
@@ -65,13 +42,13 @@
           <instructions>
             <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
             <Bundle-Version>${project.version}</Bundle-Version>
-            <Private-Package>
-                com.onboard.service.web.impl
-            </Private-Package>
+            <Export-Package>
+                com.onboard.service.index,
+                com.onboard.service.index.*
+            </Export-Package>
           </instructions>
         </configuration>
       </plugin>  
     </plugins>
   </build>
-
 </project>

@@ -42,13 +42,6 @@
     <dependencies>
       <!-- Validation Fix for JDK 7, 8 -->
       <dependency>
-        <groupId>com.onboard</groupId>
-        <artifactId>com.onboard.validation.fix</artifactId>
-        <version>1.0.0</version>
-        <scope>provided</scope>
-      </dependency>
-
-      <dependency>
         <groupId>org.eclipse.gemini</groupId>
         <artifactId>org.eclipse.gemini.blueprint.io</artifactId>
         <version>${blueprint.version}</version>
@@ -411,7 +404,7 @@
       </dependency>
       <dependency>
         <groupId>org.jcraft</groupId>
-        <artifactId>jsch-osgi</artifactId>
+        <artifactId>jsch</artifactId>
         <version>0.1.41</version>
         <scope>provided</scope>
       </dependency>
@@ -468,7 +461,7 @@
       <!-- Thymeleaf Spring Library -->
       <dependency>
         <groupId>org.thymeleaf</groupId>
-        <artifactId>thymeleaf-osgi</artifactId>
+        <artifactId>thymeleaf</artifactId>
         <version>${thymeleaf.version}</version>
         <scope>provided</scope>
         <exclusions>
@@ -484,7 +477,7 @@
       </dependency>
       <dependency>
         <groupId>org.thymeleaf</groupId>
-        <artifactId>thymeleaf-spring3-osgi</artifactId>
+        <artifactId>thymeleaf-spring3</artifactId>
         <version>${thymeleaf.version}</version>
         <scope>provided</scope>
         <exclusions>
@@ -648,23 +641,6 @@
         <scope>provided</scope>
       </dependency>
       <dependency>
-        <groupId>cn.jpush.api</groupId>
-        <artifactId>jpush-client-osgi</artifactId>
-        <version>3.2.3</version>
-        <exclusions>
-          <exclusion>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-          </exclusion>
-        </exclusions>
-        <scope>provided</scope>
-      </dependency>
-
-      <dependency>
         <groupId>com.sun.jersey</groupId>
         <artifactId>jersey-core</artifactId>
         <version>${jersey.version}</version>
@@ -723,12 +699,6 @@
 
       <!-- Upyun SDK Library -->
       <dependency>
-        <groupId>me.ruici</groupId>
-        <artifactId>upyun-java</artifactId>
-        <version>0.0.3</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
         <groupId>com.github.kevinsawicki</groupId>
         <artifactId>http-request</artifactId>
         <version>5.6</version>
@@ -753,11 +723,6 @@
 
   <dependencies>
     <!-- Validation Fix for JDK 7, 8 -->
-    <dependency>
-      <groupId>com.onboard</groupId>
-      <artifactId>com.onboard.validation.fix</artifactId>
-    </dependency>
-
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
@@ -860,7 +825,7 @@
     </dependency>
     <dependency>
       <groupId>org.jcraft</groupId>
-      <artifactId>jsch-osgi</artifactId>
+      <artifactId>jsch</artifactId>
     </dependency>
     <dependency>
       <groupId>com.googlecode.javaewah</groupId>
@@ -887,11 +852,11 @@
     <!-- Thymeleaf Spring Library -->
     <dependency>
       <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf-osgi</artifactId>
+      <artifactId>thymeleaf</artifactId>
     </dependency>
     <dependency>
       <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf-spring3-osgi</artifactId>
+      <artifactId>thymeleaf-spring3</artifactId>
     </dependency>
 
     <dependency>
@@ -942,11 +907,6 @@
       <artifactId>aliyun-openservices</artifactId>
     </dependency>
     <dependency>
-      <groupId>cn.jpush.api</groupId>
-      <artifactId>jpush-client-osgi</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-core</artifactId>
     </dependency>
@@ -984,10 +944,10 @@
     </dependency>
 
     <!-- Upyun SDK Library -->
-    <dependency>
+    <!-- <dependency>
       <groupId>me.ruici</groupId>
       <artifactId>upyun-java</artifactId>
-    </dependency>
+    </dependency> -->
     <dependency>
       <groupId>com.github.kevinsawicki</groupId>
       <artifactId>http-request</artifactId>

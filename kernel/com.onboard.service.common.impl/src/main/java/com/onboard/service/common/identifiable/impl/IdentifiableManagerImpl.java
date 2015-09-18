@@ -19,6 +19,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.onboard.domain.mapper.model.common.BaseExample;
@@ -35,6 +37,8 @@ import com.onboard.service.common.identifiable.IdentifiableManager;
  */
 @Service("identifiableManagerBean")
 public class IdentifiableManagerImpl implements IdentifiableManager {
+    
+    public static Logger logger = LoggerFactory.getLogger(IdentifiableManagerImpl.class);
 
     private final Map<String, BaseService<? extends BaseOperateItem, ? extends BaseExample>> identifialbeMap = Collections
             .synchronizedMap(new HashMap<String, BaseService<? extends BaseOperateItem, ? extends BaseExample>>());

@@ -30,7 +30,7 @@
   <reference id="emailTemplateEngine" interface="com.onboard.service.email.TemplateEngineService" />
   
   <!-- 开放的服务 -->
-  <service id="uploadService" interface="com.onboard.service.upload.UploadService" ref="uploadServiceBean"/>
+  <service id="uploadService" interface="com.onboard.service.upload.UploadService, com.onboard.service.base.BaseService" ref="uploadServiceBean"/>
 
   <!-- ActivityGenerator服务 -->
   <service id="uploadActivityGenerator" interface="com.onboard.service.activity.ActivityGenerator"

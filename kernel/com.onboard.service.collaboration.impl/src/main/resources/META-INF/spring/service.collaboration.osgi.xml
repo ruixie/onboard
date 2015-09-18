@@ -68,17 +68,17 @@
   </list> -->
   
   <!-- Identifiable服务 -->
-  <service id="discussionService" interface="com.onboard.service.collaboration.DiscussionService" ref="discussionServiceBean" />
-  <service id="todoService" interface="com.onboard.service.collaboration.TodoService, com.onboard.service.collaboration.ProjectItemService" ref="todoServiceBean" />
-  <service id="todolistService" interface="com.onboard.service.collaboration.TodolistService" ref="todolistServiceBean" />
-  <service id="commentService" interface="com.onboard.service.collaboration.CommentService" ref="commentServiceBean" />
-  <service id="attachmentService" interface="com.onboard.service.collaboration.AttachmentService" ref="attachmentServiceBean" />
-  <service id="projectService" interface="com.onboard.service.collaboration.ProjectService" ref="projectServiceBean" />
-  <service id="IterationService" interface="com.onboard.service.collaboration.IterationService" ref="iterationServiceBean" />
+  <service id="discussionService" interface="com.onboard.service.collaboration.DiscussionService, com.onboard.service.base.BaseService" ref="discussionServiceBean" />
+  <service id="todoService" interface="com.onboard.service.collaboration.TodoService, com.onboard.service.collaboration.ProjectItemService, com.onboard.service.base.BaseService" ref="todoServiceBean" />
+  <service id="todolistService" interface="com.onboard.service.collaboration.TodolistService, com.onboard.service.base.BaseService" ref="todolistServiceBean" />
+  <service id="commentService" interface="com.onboard.service.collaboration.CommentService, com.onboard.service.base.BaseService" ref="commentServiceBean" />
+  <service id="attachmentService" interface="com.onboard.service.collaboration.AttachmentService, com.onboard.service.base.BaseService" ref="attachmentServiceBean" />
+  <service id="projectService" interface="com.onboard.service.collaboration.ProjectService, com.onboard.service.base.BaseService" ref="projectServiceBean" />
+  <service id="IterationService" interface="com.onboard.service.collaboration.IterationService, com.onboard.service.base.BaseService" ref="iterationServiceBean" />
   <service id="companyApplicationService" interface="com.onboard.service.collaboration.CompanyApplicationService" ref="companyApplicationServiceBean" />
-  <service id="bugService" interface="com.onboard.service.collaboration.BugService, com.onboard.service.collaboration.ProjectItemService" ref="bugServiceBean" />
-  <service id="storyService" interface="com.onboard.service.collaboration.StoryService" ref="storyServiceBean" />
-  <service id="stepService" interface="com.onboard.service.collaboration.StepService, com.onboard.service.collaboration.ProjectItemService" ref="stepServiceBean" />
+  <service id="bugService" interface="com.onboard.service.collaboration.BugService, com.onboard.service.collaboration.ProjectItemService, com.onboard.service.base.BaseService" ref="bugServiceBean" />
+  <service id="storyService" interface="com.onboard.service.collaboration.StoryService, com.onboard.service.base.BaseService" ref="storyServiceBean" />
+  <service id="stepService" interface="com.onboard.service.collaboration.StepService, com.onboard.service.collaboration.ProjectItemService, com.onboard.service.base.BaseService" ref="stepServiceBean" />
   <service id="keywordService" interface="com.onboard.service.collaboration.KeywordService" ref="keywordServiceBean" />
   <service id="collectionService" interface="com.onboard.service.collaboration.CollectionService" ref="collectionServiceBean" />
   

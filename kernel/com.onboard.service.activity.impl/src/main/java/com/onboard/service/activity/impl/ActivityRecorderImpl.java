@@ -136,6 +136,9 @@ public class ActivityRecorderImpl implements ActivityRecorder {
 
         activity.setCreatorName(session.getCurrentUser().getName());
         activity.setCreatorId(userId);
+        if (activity.getCreatorAvatar() == null || activity.getCreatorAvatar().length() < 1) {
+            activity.setCreatorAvatar("/avatar/default.png");
+        }
         activity.setCreated(new Date());
         activity.setTarget(ActivityHelper.cutoffActivityTitle(activity.getTarget()));
 

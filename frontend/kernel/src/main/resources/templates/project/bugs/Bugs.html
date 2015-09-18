@@ -22,30 +22,7 @@
       <li class="second-nav-button" ng-click="openNewBugDrawer($event)"><i class="fa fa-plus"></i> 新建缺陷</li>
     </ul>
 
-    <!--<div class="pull-right">-->
-      <!--<a type="button" class="btn btn-primary btn-sm" ng-click="openNewBugDrawer($event)">-->
-        <!--<i class="fa fa-plus"></i> 新建Bug-->
-      <!--</a>-->
-    <!--</div>-->
 
-    <!-- <div class="pull-right">
-      <div class="btn-group select-bug-list">
-        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
-                aria-expanded="false">
-          <span ng-show="$state.is('company.project.bugs.opened')">进行中的Bug</span>
-          <span ng-show="$state.is('company.project.bugs.finished')">已完成的Bug</span>
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li ng-class="{active: $state.is('company.project.bugs.opened')}">
-            <a ui-sref="company.project.bugs.opened">进行中的Bug</a>
-          </li>
-          <li ng-class="{active: $state.is('company.project.bugs.finished')}">
-            <a ui-sref="company.project.bugs.finished">已完成的Bug</a>
-          </li>
-        </ul>
-      </div>
-    </div> -->
     
     <div class="pull-right" ng-hide="memberFilterHide">
       <div class="btn-group select-bug-list">

@@ -91,8 +91,8 @@ public class IterationApiController {
             @RequestParam(value = "start", required = false, defaultValue = "0") Integer start,
             @RequestParam(value = "limit", required = false, defaultValue = "5") Integer limit) {
         if (status.equals(IterationStatus.COMPLETED.getValue())) {
-            return Lists.transform(iterationService.getCompleteIterationsByProjectId(projectId, start, limit),
-                    IterationTransform.ITERATION_DTO_FUNCTION);
+            List<Iteration> iterations = iterationService.getCompleteIterationsByProjectId(projectId, start, limit);
+            return Lists.newArrayList(Lists.transform(iterations, IterationTransform.ITERATION_DTO_FUNCTION));
         } else if (status.equals(IterationStatus.ACTIVE.getValue())) {
             Iteration activeIteration = iterationService.getCurrentIterationByProjectId(projectId);
             if (activeIteration == null) {

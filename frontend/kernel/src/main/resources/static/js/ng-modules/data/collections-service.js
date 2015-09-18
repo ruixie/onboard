@@ -8,7 +8,7 @@
 
 angular.module('data')
     .service('collectionService', ['url', '$http', '$q', 'dataProxy', function (url, $http, $q, dataProxy) {
-        var collections = null;
+        var collections = [];
         this.getCollectionList = dataProxy( function(updata) {
             return $http.get('api/collections').then( function(response) {
                 console.log('1111');

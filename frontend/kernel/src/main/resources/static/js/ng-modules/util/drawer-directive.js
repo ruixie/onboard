@@ -65,18 +65,18 @@ angular.module('util')
                     };
 
                     scope.collect = function() {
-                        console.log(scope.isCollected);
+                        //console.log(scope.isCollected);
                         if (scope.isCollected) {
                             collectionService.delCollection(scope.colleInfo.id).then(function (data) {
                                 scope.isCollected = !scope.isCollected;
-                                console.log(data);
+                                //console.log(data);
                             });
                         }
                         else {
                             collectionService.addCollection(scope.type, scope.id).then( function(data) {
                                 scope.isCollected = !scope.isCollected;
-                                scope.colleInfo = data.data;
-                                console.log(data);
+                                scope.colleInfo = data;
+                                //console.log(data);
                             });
                         }
                     };

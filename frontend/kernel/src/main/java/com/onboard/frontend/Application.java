@@ -1,7 +1,5 @@
 package com.onboard.frontend;
 
-import java.util.Map;
-
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 
@@ -25,7 +23,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.RequestContextFilter;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 
-import com.google.common.collect.Maps;
 import com.onboard.frontend.service.web.RequestFilter;
 import com.onboard.frontend.websocket.RedisMessageReceiver;
 
@@ -42,8 +39,6 @@ public class Application {
     @Bean
     RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
-        Map<String, String> sdfas = Maps.newHashMap();
-        sdfas.keySet();
         container.setConnectionFactory(connectionFactory);
 
         container.addMessageListener(listenerAdapter, new PatternTopic("channel"));

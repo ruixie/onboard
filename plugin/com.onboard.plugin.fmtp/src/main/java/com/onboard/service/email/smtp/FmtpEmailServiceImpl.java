@@ -34,10 +34,10 @@ public class FmtpEmailServiceImpl implements InternalEmailService {
     public Future<Boolean> sendEmail(String from, String to, String[] cc, String[] bcc, String subject, String content,
             String replyTo) {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.126.com");
+        mailSender.setHost("");
         mailSender.setPort(25);
-        mailSender.setUsername("xl5555123@gmail.com");
-        mailSender.setPassword("xgd 5191168");
+        mailSender.setUsername("");
+        mailSender.setPassword("");
         boolean result = false;
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);

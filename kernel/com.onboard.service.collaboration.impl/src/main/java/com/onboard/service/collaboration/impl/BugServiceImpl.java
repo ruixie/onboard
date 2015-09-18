@@ -44,6 +44,7 @@ import com.onboard.service.collaboration.IterationService;
 import com.onboard.service.collaboration.ProjectItemService;
 import com.onboard.service.collaboration.ProjectService;
 import com.onboard.service.common.subscrible.SubscriberService;
+import com.onboard.service.web.SessionService;
 
 /**
  * {@link com.onboard.service.collaboration.BugService} Service implementation
@@ -56,13 +57,22 @@ import com.onboard.service.common.subscrible.SubscriberService;
 public class BugServiceImpl extends AbstractBaseService<Bug, BugExample> implements BugService, ProjectItemService {
     public static final int DEFAULT_LIMIT = -1;
 
-    @Autowired BugMapper bugMapper;
-    @Autowired SubscriberService subscriberService;
-    @Autowired CommentService commentService;
-    @Autowired UserService userService;
-    @Autowired IdInProjectService idInProjectService;
-    @Autowired IterationService iterationService;
-    @Autowired ProjectService projectService;
+    @Autowired
+    BugMapper bugMapper;
+    @Autowired
+    SubscriberService subscriberService;
+    @Autowired
+    CommentService commentService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    IdInProjectService idInProjectService;
+    @Autowired
+    IterationService iterationService;
+    @Autowired
+    ProjectService projectService;
+    @Autowired
+    SessionService sessionService;
 
     private static int MIN_BUG_NUMBER = 10;
 
@@ -100,6 +110,10 @@ public class BugServiceImpl extends AbstractBaseService<Bug, BugExample> impleme
     @Override
     public Bug create(Bug item) {
         item.setIdInProject(idInProjectService.getNextIdByProjectId(item.getProjectId()));
+        item.setCreated(new Date());
+        item.setCreatorAvatar(sessionService.getCurrentUser().getAvatar());
+        item.setCreatorId(sessionService.getCurrentUser().getId());
+        item.setCreatorName(sessionService.getCurrentUser().getName());
         bugMapper.insert(item);
         iterationService.addIterable(item);
         return item;

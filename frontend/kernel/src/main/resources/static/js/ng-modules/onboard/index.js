@@ -6,7 +6,7 @@
     // 该文件包括：全局的service配置、全局常量service。
 
 angular.module('onboard', ['ui.router', 'angularMoment', 'company', 'ng.confirmField',
-    'angularFileUpload', "util", 'data', 'websocket'])   //, 'mgcrea.ngStrap'
+    'angularFileUpload', "util", 'data', 'websocket', 'plugin'])   //, 'mgcrea.ngStrap'
 
     .service('onboardHttpInterceptor', ['$q', '$location', '$timeout', '$rootScope', function($q, $location, $timeout, $rootScope) {
         // optional method

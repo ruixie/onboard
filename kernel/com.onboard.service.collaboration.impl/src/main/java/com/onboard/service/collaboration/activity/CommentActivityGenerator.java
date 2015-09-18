@@ -57,7 +57,7 @@ public class CommentActivityGenerator implements ActivityGenerator {
         activity.setProjectId(comment.getProjectId());
         activity.setCompanyId(comment.getCompanyId());
 
-        return activity;
+        return ActivityRecorderHelper.enrichActivity(activity);
     }
 
     @Override

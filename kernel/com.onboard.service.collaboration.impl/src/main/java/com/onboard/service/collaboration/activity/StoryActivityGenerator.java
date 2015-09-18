@@ -15,7 +15,6 @@
  *******************************************************************************/
 package com.onboard.service.collaboration.activity;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,14 +95,7 @@ public class StoryActivityGenerator implements ActivityGenerator {
         activity.setCompanyId(story.getCompanyId());
         activity.setTarget(story.getDescription());
         activity.setContent(story.getDescription());
-        return enrichActivity(activity);
-    }
-
-    private Activity enrichActivity(Activity activity) {
-        activity.setCreatorId(sessionService.getCurrentUser().getId());
-        activity.setCreatorName(sessionService.getCurrentUser().getName());
-        activity.setCreated(new Date());
-        return activity;
+        return ActivityRecorderHelper.enrichActivity(activity);
     }
 
     @Override
@@ -123,8 +115,7 @@ public class StoryActivityGenerator implements ActivityGenerator {
             activity.setContent(String.format(UPDATE_STORY_PRIORITY_SUBJECT, PR_MAP.get(origin.getPriority()),
                     PR_MAP.get(updated.getPriority())));
         } else if (!updated.getDescription().equals(origin.getDescription())) {
-            activity.setContent(String.format(UPDATE_STORY_TITLE_SUBJECT, origin.getDescription(),
-                    updated.getDescription()));
+            activity.setContent(String.format(UPDATE_STORY_TITLE_SUBJECT, origin.getDescription(), updated.getDescription()));
         } else if (!updated.getAcceptanceLevel().equals(origin.getAcceptanceLevel())) {
             activity.setContent(UPDATE_STORY_ACCEPTANCE_LEVEL_SUBJECT);
         } else if (updated.getCompleted() && !origin.getCompleted()) {

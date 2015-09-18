@@ -40,6 +40,7 @@ import com.onboard.service.base.AbstractBaseService;
 import com.onboard.service.collaboration.IterableService;
 import com.onboard.service.collaboration.StepService;
 import com.onboard.service.collaboration.StoryService;
+import com.onboard.service.web.SessionService;
 
 /**
  * {@link StoryService}接口实现
@@ -49,8 +50,7 @@ import com.onboard.service.collaboration.StoryService;
  */
 @Transactional
 @Service("storyServiceBean")
-public class StoryServiceImpl extends AbstractBaseService<Story, StoryExample> 
-        implements StoryService, IterableService<Story> {
+public class StoryServiceImpl extends AbstractBaseService<Story, StoryExample> implements StoryService, IterableService<Story> {
 
     public final static Logger LOGGER = LoggerFactory.getLogger(StoryServiceImpl.class);
 
@@ -61,6 +61,9 @@ public class StoryServiceImpl extends AbstractBaseService<Story, StoryExample>
 
     @Autowired
     private StepService stepService;
+
+    @Autowired
+    private SessionService sessionService;
 
     @Override
     public Story getById(int storyId) {
@@ -145,6 +148,9 @@ public class StoryServiceImpl extends AbstractBaseService<Story, StoryExample>
         story.setDeleted(false);
         story.setCompleted(false);
         story.setCompletable(true);
+        story.setCreatorAvatar(sessionService.getCurrentUser().getAvatar());
+        story.setCreatorId(sessionService.getCurrentUser().getId());
+        story.setCreatorName(sessionService.getCurrentUser().getName());
 
         storyMapper.insert(story);
         if (null != story.getParentStoryId() && ROOT_ID != story.getParentStoryId()) {
@@ -173,8 +179,8 @@ public class StoryServiceImpl extends AbstractBaseService<Story, StoryExample>
         fillStorySteps(newStory);
         return newStory;
     }
-    
-    private void deleteByStory(Story story){
+
+    private void deleteByStory(Story story) {
         story.setDeleted(true);
         storyMapper.updateByPrimaryKeySelective(story);
         for (Story childStory : story.getChildStories()) {

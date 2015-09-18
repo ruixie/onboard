@@ -63,7 +63,7 @@ public class TodolistActivityGenerator implements ActivityGenerator {
         activity.setProjectId(todolist.getProjectId());
         activity.setCompanyId(todolist.getCompanyId());
 
-        return activity;
+        return ActivityRecorderHelper.enrichActivity(activity);
     }
 
     @Override
@@ -115,7 +115,8 @@ public class TodolistActivityGenerator implements ActivityGenerator {
             } else if (changeName) {
                 activity.setContent(String.format(NAME_UPDATE, originalList.getName(), modifiedList.getName()));
             } else if (changeDescription) {
-                activity.setContent(String.format(DESCRIPTION_UPDATE, originalList.getDescription(), modifiedList.getDescription()));
+                activity.setContent(String.format(DESCRIPTION_UPDATE, originalList.getDescription(),
+                        modifiedList.getDescription()));
             } else {
                 return null;
             }

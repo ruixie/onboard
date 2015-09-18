@@ -36,7 +36,17 @@ import com.onboard.domain.mapper.model.ProjectExample;
 import com.onboard.domain.mapper.model.ProjectPrivilegeExample;
 import com.onboard.domain.mapper.model.ProjectTodoStatusExample;
 import com.onboard.domain.mapper.model.UserProjectExample;
-import com.onboard.domain.model.*;
+import com.onboard.domain.model.Activity;
+import com.onboard.domain.model.Attachment;
+import com.onboard.domain.model.Company;
+import com.onboard.domain.model.IterationItemStatus;
+import com.onboard.domain.model.Project;
+import com.onboard.domain.model.ProjectPrivilege;
+import com.onboard.domain.model.ProjectTodoStatus;
+import com.onboard.domain.model.Todo;
+import com.onboard.domain.model.Topic;
+import com.onboard.domain.model.User;
+import com.onboard.domain.model.UserProject;
 import com.onboard.domain.transform.ProjectTransform;
 import com.onboard.dto.ProjectDTO;
 import com.onboard.service.account.CompanyService;
@@ -159,8 +169,7 @@ public class ProjectServiceImpl extends AbstractBaseService<Project, ProjectExam
         return getProjectListByArchivedByUserByCompany(userId, companyId, start, limit, true);
     }
 
-    public List<Project> getProjectListByArchivedByUserByCompany(int userId, int companyId, int start, int limit,
-            Boolean archived) {
+    public List<Project> getProjectListByArchivedByUserByCompany(int userId, int companyId, int start, int limit, Boolean archived) {
         List<Project> projects = new ArrayList<Project>();
 
         UserProject userProject = new UserProject();
@@ -241,17 +250,18 @@ public class ProjectServiceImpl extends AbstractBaseService<Project, ProjectExam
         Project project = ProjectTransform.projectDTOtoProject(projectDTO);
         project.setCreated(new Date());
         project.setUpdated(project.getCreated());
+        project.setCreatorAvatar(sessionService.getCurrentUser().getAvatar());
+        project.setCreatorId(sessionService.getCurrentUser().getId());
+        project.setCreatorName(sessionService.getCurrentUser().getName());
         projectMapper.insertSelective(project);
 
         Company company = companyService.getById(project.getCompanyId());
-        projectMemberService.add(project.getCompanyId(), project.getId(), project.getCreatorId(),
-                company.getCreatorId());
+        projectMemberService.add(project.getCompanyId(), project.getId(), project.getCreatorId(), company.getCreatorId());
         if (projectDTO.getMembers() != null) {
             projectMemberService.add(project.getCompanyId(), project.getId(), Ints.toArray(projectDTO.getMembers()));
         }
         if (projectDTO.getEmails() != null) {
-            projectMemberService.invite(project.getCompanyId(), project.getId(),
-                    projectDTO.getEmails().toArray(new String[0]));
+            projectMemberService.invite(project.getCompanyId(), project.getId(), projectDTO.getEmails().toArray(new String[0]));
         }
         iterationService.addNewIterationForProject(project);
         return project;
@@ -270,12 +280,10 @@ public class ProjectServiceImpl extends AbstractBaseService<Project, ProjectExam
 
             // TEMP FIX: we will not remove any body as some bug in the page
             projectMemberService.remove(project.getId(), Ints.toArray(Sets.difference(existing, upcoming)));
-            projectMemberService.add(project.getCompanyId(), project.getId(),
-                    Ints.toArray(Sets.difference(upcoming, existing)));
+            projectMemberService.add(project.getCompanyId(), project.getId(), Ints.toArray(Sets.difference(upcoming, existing)));
         }
         if (projectDTO.getEmails() != null) {
-            projectMemberService.invite(project.getCompanyId(), project.getId(),
-                    projectDTO.getEmails().toArray(new String[0]));
+            projectMemberService.invite(project.getCompanyId(), project.getId(), projectDTO.getEmails().toArray(new String[0]));
         }
 
         return project;
@@ -357,8 +365,7 @@ public class ProjectServiceImpl extends AbstractBaseService<Project, ProjectExam
     public List<String> getTodoStatusByProjectId(Integer projectId) {
         ProjectTodoStatus sample = new ProjectTodoStatus();
         sample.setProjectId(projectId);
-        List<ProjectTodoStatus> statuses = projectTodoStatusMapper
-                .selectByExample(new ProjectTodoStatusExample(sample));
+        List<ProjectTodoStatus> statuses = projectTodoStatusMapper.selectByExample(new ProjectTodoStatusExample(sample));
         List<String> result;
         // 如果已经有数据，直接返回
         if (!statuses.isEmpty()) {
@@ -385,8 +392,7 @@ public class ProjectServiceImpl extends AbstractBaseService<Project, ProjectExam
         ProjectTodoStatus sample = new ProjectTodoStatus();
         sample.setProjectId(projectId);
         sample.setStatus(todoStatus);
-        List<ProjectTodoStatus> statuses = projectTodoStatusMapper
-                .selectByExample(new ProjectTodoStatusExample(sample));
+        List<ProjectTodoStatus> statuses = projectTodoStatusMapper.selectByExample(new ProjectTodoStatusExample(sample));
         if (!statuses.isEmpty()) {
             return false;
         }

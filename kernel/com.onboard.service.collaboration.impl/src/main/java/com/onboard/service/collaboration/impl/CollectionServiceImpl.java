@@ -60,6 +60,7 @@ public class CollectionServiceImpl implements CollectionService {
             collection.setProjectId(identifiable.getProjectId());
             collection.setCreatorId(identifiable.getCreatorId());
             collection.setCreatorName(identifiable.getCreatorName());
+            collection.setCreatorAvatar(identifiable.getCreatorAvatar());
             collection.setProjectName(projectService.getById(identifiable.getProjectId()).getName());
             collectionMapper.insertSelective(collection);
             return collection;

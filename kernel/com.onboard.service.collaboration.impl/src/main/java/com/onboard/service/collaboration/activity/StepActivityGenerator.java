@@ -81,7 +81,7 @@ public class StepActivityGenerator implements ActivityGenerator {
 
     @Autowired
     private StepService stepService;
-    
+
     @Autowired
     private ProjectService projectService;
 
@@ -101,10 +101,9 @@ public class StepActivityGenerator implements ActivityGenerator {
         activity.setProjectId(step.getProjectId());
         activity.setCompanyId(step.getCompanyId());
         activity.setProjectName(projectService.getById(step.getProjectId()).getName());
-        return activity;
+        return ActivityRecorderHelper.enrichActivity(activity);
 
     }
-
 
     private String getDueDateChangeContent(Step step, Step modifiedStep) {
         if (modifiedStep.getDueDate() != null && !modifiedStep.getDueDate().equals(step.getDueDate())) {
@@ -141,15 +140,14 @@ public class StepActivityGenerator implements ActivityGenerator {
     private Activity generateUpdateStatusActivity(Step step, Step modifiedStep) {
         String content = String.format(STATUS_SUBJECT, TODO_STATUS_MAP.get(step.getStatus()),
                 TODO_STATUS_MAP.get(modifiedStep.getStatus()));
-        if(modifiedStep.getIterationStatus().equals(IterationItemStatus.CLOSED.getValue())){
+        if (modifiedStep.getIterationStatus().equals(IterationItemStatus.CLOSED.getValue())) {
             content = "完成了任务";
-        }else if(modifiedStep.getIterationStatus().equals(IterationItemStatus.INPROGESS.getValue())){
+        } else if (modifiedStep.getIterationStatus().equals(IterationItemStatus.INPROGESS.getValue())) {
             content = "正在做任务";
-        }else if(modifiedStep.getIterationStatus().equals(IterationItemStatus.TODO.getValue())){
+        } else if (modifiedStep.getIterationStatus().equals(IterationItemStatus.TODO.getValue())) {
             content = "停止了任务";
         }
-        Activity activity = generateActivityByActionType(
-                modifiedStep.getStatus(), content, step);
+        Activity activity = generateActivityByActionType(modifiedStep.getStatus(), content, step);
         return activity;
     }
 
@@ -164,7 +162,7 @@ public class StepActivityGenerator implements ActivityGenerator {
         assigneeContent = getAssigneeChangeContent(step, modifiedStep);
         duedateContent = getDueDateChangeContent(step, modifiedStep);
         String content = null;
-        
+
         // TODO: if
         // 顺序判断改变的话，activity信息会有误，null值到底是表示“该属性修改为null”还是“忽略该属性”这个问题没有得到彻底解决
 
@@ -204,8 +202,7 @@ public class StepActivityGenerator implements ActivityGenerator {
         }
 
         if (todo.getAssigneeId() != null && todo.getDueDate() != null) {
-            activity.setContent(String.format(ASSIGNEE_AND_DUEDATE_SET, user.getName(),
-                    dateFormat.format(todo.getDueDate())));
+            activity.setContent(String.format(ASSIGNEE_AND_DUEDATE_SET, user.getName(), dateFormat.format(todo.getDueDate())));
         } else if (todo.getAssigneeId() != null) {
             activity.setContent(String.format(ASSIGNEE_SET, user.getName()));
         } else if (todo.getDueDate() != null) {
@@ -229,7 +226,7 @@ public class StepActivityGenerator implements ActivityGenerator {
             return generateUpdateStatusActivity(todo, modifiedTodo);
         } else {
             return generateUpdateActivityWithContent(todo, modifiedTodo);
-        } 
+        }
     }
 
     @Override

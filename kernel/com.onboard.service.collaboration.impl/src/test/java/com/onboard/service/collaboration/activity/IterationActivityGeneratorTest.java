@@ -120,13 +120,14 @@ public class IterationActivityGeneratorTest {
         User user = new User();
         user.setId(ModuleHelper.id);
         user.setName(ModuleHelper.name);
+        user.setAvatar(ModuleHelper.creatorAvatar);
 
         Iteration modifiedIteration = getASampleIteration("active");
 
         when(sessionService.getCurrentUser()).thenReturn(user);
         Activity activity = iterationActivityGenerator.generateUpdateActivity(iteration, modifiedIteration);
 
-        verify(sessionService, times(2)).getCurrentUser();
+        verify(sessionService, times(5)).getCurrentUser();
         assertEquals(content, activity.getContent());
         assertEquals((int) activity.getAttachId(), ModuleHelper.id);
         assertEquals(activity.getAttachType(), "iteration");

@@ -84,6 +84,7 @@ public class ActivityRecorderHelper {
             activity.setCreatorId(session.getCurrentUser().getId());
             activity.setCreatorName(session.getCurrentUser().getName());
             activity.setCreated(new Date());
+            activity.setCreatorAvatar(session.getCurrentUser().getAvatar());
 
             return activity;
         }
@@ -103,6 +104,14 @@ public class ActivityRecorderHelper {
     @Autowired
     public static void setUserService(UserService userService) {
         ActivityRecorderHelper.userService = userService;
+    }
+
+    public static Activity enrichActivity(Activity activity) {
+        activity.setCreatorId(session.getCurrentUser().getId());
+        activity.setCreatorName(session.getCurrentUser().getName());
+        activity.setCreated(new Date());
+        activity.setCreatorAvatar(session.getCurrentUser().getAvatar());
+        return activity;
     }
 
 }

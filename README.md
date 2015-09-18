@@ -9,7 +9,7 @@ Onboard是用于软件开发团队在开发过程中对生产过程进行协同�
 - 缺陷管理：对产品安全性能的管理，帮助提高产品的质量
 - 话题与讨论：为团队成员提供在线讨论的平台
 - 日历与回顾：记录团队和项目的大事件，并为所有操作提供记录
-- 文档与文件管理：将项目中重要的文档文件集中存储，便于协同编辑和共享。  
+- 文档与文件管理：将项目中重要的文档文件集中存储，便于协同编辑和共享。
 
 ### 安装
 
@@ -35,14 +35,15 @@ Path里需要添加Mybatis Migration的路径，如“%MIGRATION_HOME%\bin”
 - 设置 Installed JREs (Eclipse --Windows--Preferences--Java--Installed JREs)，将安装的JDK引入
 - 安装 Virgo Runtime Server 插件 (Eclipse -- Help --Install New Software,  Work with ""Virgo IDE Releases" - http://download.eclipse.org/virgo/release/tooling/" 添加上面路径， 安装 Eclipse Virgo Tools，
 
-#### Git clone代码到本地
+#### 搭建Onboard开发环境
 
-- 使用git克隆源代码
-- 将../database/environments/ddevelopment.properties.sample重命名为development.properties，并修改此数据库相关配置，此为数据库的基本设置
-- 将../frontend/kernel/src/main/resources/application.examples.properties重命名为application.properties，此为前端的基本设置
-- 将../onboard.properties.sample重命名为onboard.properties，并复制到 Virgo安装目录/repository/usr中，此为后端的基本设置
-- git 克隆相关依赖jar包到本地 git clone https://github.com/sercxtyf/onboardDependency.git
-- 将Virgo需要用到的第三方库（外链：Virgo第三方库仓库）复制到 Virgo安装目录/repository/usr中
+1. 使用git克隆源代码 git clone https://github.com/sercxtyf/onboard.git
+1. 将../database/environments/ddevelopment.properties.sample重命名为development.properties，并修改此数据库相关配置，此为数据库的基本设置
+1. 将../frontend/kernel/src/main/resources/application.examples.properties重命名为application.properties，此为前端的基本设置
+1. 将../onboard.properties.sample重命名为onboard.properties，并复制到 Virgo安装目录/repository/usr中，此为后端的基本设置
+1. git 克隆相关依赖jar包到本地 git clone https://github.com/sercxtyf/onboardDependency.git
+1. 将Maven依赖的第三方库文件复制到 {user.home}/.m2/repository 目录
+1. 将Virgo需要用到的第三方库（外链：Virgo第三方库仓库）复制到 Virgo安装目录/repository/usr中
 
 #### 初始化数据库
 
@@ -52,7 +53,8 @@ Path里需要添加Mybatis Migration的路径，如“%MIGRATION_HOME%\bin”
 
 #### 编译后端
 
-- 在Eclipse中导入Maven Project（选定Onboard的根目录），并对parent包右键Run As - Maven Build - clean install，以进行构建。
+1. 在Eclipse中导入Maven Project（选定Onboard的根目录），导入com.onboard.parent及相关项目，对parent包右键Run As - Maven Build - clean install，以进行构建。
+1. 选中项目（参考下面启动顺序列表项目），右键，Virgo， Add OSGi Bundle Project Nature 以添加到Virgo容器中
 
 #### 配置Virgo
 
@@ -104,7 +106,7 @@ Path里需要添加Mybatis Migration的路径，如“%MIGRATION_HOME%\bin”
 
 我们在OSGI中文社区上开放了一个用于提问的论坛，地址为http://osgi.com.cn/onboard/discussions。
 
-同时你也可以加入到OSGI中文社区的QQ群(184592447)当中来，Onboard和OSGI的开发者都在当中哦！
+同时你也可以加入到OSGI中文社区的QQ群(**184592447**)当中来，Onboard和OSGI的开发者都在当中哦！
 
 ### 关于我们
 

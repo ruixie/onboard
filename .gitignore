@@ -6,7 +6,6 @@ target
 MANIFEST.MF
 TEST.MF
 bin
-database/environments
 velocity.log
 npm-debug.log
 generatorConfig.xml

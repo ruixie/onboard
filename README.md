@@ -113,12 +113,6 @@ Path里需要添加Mybatis Migration的路径，如“%MIGRATION_HOME%\bin”
 - 在成功后，右键选中com.onboard.frontend.kernel/src/main/java/Application.java, Run As - Java Application，以进行部署。
 - 随后，可在本地127.0.0.1:8000中查看启动的前端
 
-### 参与开发
-
-Onboard的额外功能开发主要是通过编写插件的形式，可以自由的在大多数层级的页面/前后端加入定制的内容，有关插件的编写方法，请查阅下列的各类指南。
-
-外链：插件编写指南
-
 ### 答疑论坛
 
 我们在OSGI中文社区上开放了一个用于提问的论坛，地址为http://osgi.com.cn/onboard/discussions。

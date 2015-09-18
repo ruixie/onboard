@@ -35,10 +35,8 @@
            ref="cacheManagerBean" />
            
   <!-- IdentifiableManager对identifiableServices的监听 -->
-  <list id="identifiableServices" cardinality="0..N"
-        interface="com.onboard.service.base.BaseService">
-    <listener bind-method="addIdentifiableService" unbind-method="removeIdentifiableService"
-              ref="identifiableManagerBean"/>
+  <list id="identifiableServices" cardinality="0..N" interface="com.onboard.service.base.BaseService">
+    <listener bind-method="addIdentifiableService" unbind-method="removeIdentifiableService" ref="identifiableManagerBean"/>
   </list>
   <!-- IdentifiableAttachManager对IdentifiableAttachService的监听 -->
   <list id="identifiableAttachServices" cardinality="0..N"

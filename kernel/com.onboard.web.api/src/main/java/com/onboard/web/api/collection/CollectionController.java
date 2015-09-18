@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.google.common.collect.Lists;
 import com.onboard.domain.model.Collection;
 import com.onboard.domain.model.User;
-import com.onboard.domain.model.type.ProjectItem;
+import com.onboard.domain.model.type.Recommendable;
 import com.onboard.domain.transform.CollectionTransform;
 import com.onboard.dto.CollectionDTO;
 import com.onboard.service.collaboration.CollectionService;
@@ -68,8 +68,7 @@ public class CollectionController {
 
         User user = sessionService.getCurrentUser();
         if (attachType != null && attachType.length() > 0) {
-            return Lists.transform(
-                    collectionService.getCollectionsByAttachTypeAndId(user.getId(), attachId, attachType),
+            return Lists.transform(collectionService.getCollectionsByAttachTypeAndId(user.getId(), attachId, attachType),
                     CollectionTransform.COLLECTION_DTO_FUNCTION);
         }
         return Lists.transform(collectionService.getCollectionsByUserId(user.getId()),
@@ -96,10 +95,10 @@ public class CollectionController {
     @ResponseBody
     public CollectionDTO createCollection(@Valid @RequestBody CollectionForm collection) {
         int userId = sessionService.getCurrentUser().getId();
-        ProjectItem identifiable = (ProjectItem)identifiableManager.getIdentifiableByTypeAndId(collection.getAttachType(),
+        Recommendable recommendable = (Recommendable) identifiableManager.getIdentifiableByTypeAndId(collection.getAttachType(),
                 collection.getAttachId());
-        if (identifiable == null
-                || !roleService.projectMember(userId, identifiable.getCompanyId(), identifiable.getProjectId())) {
+        if (recommendable == null
+                || !roleService.projectMember(userId, recommendable.getCompanyId(), recommendable.getProjectId())) {
             throw new NoPermissionException();
         }
         Collection newCollection = collectionService.createCollection(userId, collection.getAttachId(),

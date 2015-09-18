@@ -19,15 +19,17 @@ angular.module('util')
                     scope.open = function (option) {
                         $.extend(scope, option.params, option.data);
                         scope.type = option.type;
-                        collectionService.isCollected(scope.type, scope.id).then(function(data) {
-                            if (data.length > 0) {
-                                scope.isCollected = true;
-                                scope.colleInfo = data[0];
-                            }   else {
-                                scope.isCollected = false;
-                                scope.colleInfo = null;
-                            }
-                        });
+                        if (scope.id != undefined) {
+	                        collectionService.isCollected(scope.type, scope.id).then(function(data) {
+	                            if (data.length > 0) {
+	                                scope.isCollected = true;
+	                                scope.colleInfo = data[0];
+	                            }   else {
+	                                scope.isCollected = false;
+	                                scope.colleInfo = null;
+	                            }
+	                        });
+                        }
                         $drawer.attr('class', 'modal drawer '+ option.sizeClass);
                         $drawer.drawer('show');
 

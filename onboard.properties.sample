@@ -38,27 +38,5 @@ site.static.protocol=http://
 
 sshserver.port=22
 
-plugins.document.defaultTitle=\u4E3B\u9875
-plugins.document.defaultContent=\u7F16\u8F91\u672C\u9875\u9762\u6765\u5B8C\u5584\u6587\u6863\u7684\u7D22\u5F15
-
-/*data.userSeperate 用于区分在本地调试时区分用户 填自己的名字加以区分*/
-data.userSeperate=pkutxq
-
-data.jenkinsHost=http://localhost:8080
-
-/*jenkins 回调时的主机IP 每次修改IP后要修改*/
 data.host=${site.protocol}${site.host}
-data.privateRepositoryHost=localhost:5000
-data.credentialsId=
-data.github.state=
-/*git 认证时的主机IP 每次修改IP后要修改*/
-data.github.client_id=
-#data.github.client_id=
-data.github.scope=user:email,repo
-data.github.state=
-#data.github.client_secret=
-data.github.client_secret=
-data.bitbucket.key=
-data.bitbucket.secret=
-data.bitbucket.osm=oauth_signature_method=HMAC-SHA1
 user.defaultUser=-1

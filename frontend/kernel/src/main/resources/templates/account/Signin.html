@@ -60,11 +60,6 @@
       </div>
 
       <div class="login-third-party">
-          <div class="third-href">
-              <span class="thirdpart-signin-span">使用第三方登陆</span>
-              <a th:href="@{/account/thirdpartSignin}" title="使用Github账号登陆" class="pull-right"><i class="fa fa-github fa-2x"></i></a>
-              <!--<a th:href="${githubSigninCallback}" ><i class="fa fa-bitbucket fa-4"></i></a>-->
-          </div>
 
           <div class="alert alert-danger alert-dismissible" th:if="${githubLoginError}">
               <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span

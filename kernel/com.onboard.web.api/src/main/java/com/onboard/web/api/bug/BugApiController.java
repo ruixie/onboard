@@ -41,8 +41,10 @@ import com.onboard.domain.transform.BugTransForm;
 import com.onboard.dto.BugDTO;
 import com.onboard.service.account.UserService;
 import com.onboard.service.collaboration.BugService;
+import com.onboard.service.collaboration.KeywordService;
 import com.onboard.service.security.interceptors.ProjectMemberRequired;
 import com.onboard.service.web.SessionService;
+import com.onboard.web.api.exception.ResourceNotFoundException;
 import com.onboard.web.api.iteration.IterationApiController;
 
 @RequestMapping(value = "/{companyId}/projects/{projectId}/bugs")
@@ -58,7 +60,10 @@ public class BugApiController {
     private SessionService sessionService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
+
+    @Autowired
+    private KeywordService keywordService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     @Interceptors({ ProjectMemberRequired.class })
@@ -211,6 +216,17 @@ public class BugApiController {
     @ResponseBody
     public Long getBugThirdQuarterDurationByProject(@PathVariable int projectId) {
         return bugService.getCompletedBugThirdQuarterDurationByProjectIdDateBackByMonth(projectId, 3);
+    }
+
+    @RequestMapping(value = "/{bugId}/keywords", method = RequestMethod.GET)
+    @ResponseBody
+    @Interceptors({ ProjectMemberRequired.class })
+    public List<String> getBugKeywords(@PathVariable("bugId") int bugId) {
+        Bug bug = bugService.getById(bugId);
+        if (bug == null) {
+            throw new ResourceNotFoundException();
+        }
+        return keywordService.getKeywordsByText(bug.generateText());
     }
 
     class BugStat {

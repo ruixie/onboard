@@ -35,10 +35,16 @@
     <thymeleaf.version>2.1.2.RELEASE</thymeleaf.version>
     <junit.version>4.11</junit.version>
     <mockito.version>1.9.5</mockito.version>
+    <javax.mail.version>1.4.4</javax.mail.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>javax.mail</groupId>
+        <artifactId>mail</artifactId>
+        <version>${javax.mail.version}</version>
+      </dependency>
       <!-- Validation Fix for JDK 7, 8 -->
       <dependency>
         <groupId>org.eclipse.gemini</groupId>

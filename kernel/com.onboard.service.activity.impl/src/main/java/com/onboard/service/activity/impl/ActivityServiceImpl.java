@@ -190,7 +190,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public Activity create(Activity activity) {
-        activityMapper.insert(activity);
+        activityMapper.insertSelective(activity);
         return activity;
     }
 

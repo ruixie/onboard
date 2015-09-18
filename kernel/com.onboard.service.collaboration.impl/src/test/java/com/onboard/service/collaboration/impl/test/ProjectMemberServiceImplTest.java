@@ -32,7 +32,6 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.onboard.domain.mapper.ProjectMapper;
 import com.onboard.domain.mapper.ProjectPrivilegeMapper;
@@ -52,7 +51,6 @@ import com.onboard.service.account.CompanyService;
 import com.onboard.service.account.UserService;
 import com.onboard.service.activity.ActivityService;
 import com.onboard.service.collaboration.ProjectService;
-import com.onboard.service.collaboration.activity.ActivityRecorderHelper;
 import com.onboard.service.collaboration.impl.ProjectMemberService;
 import com.onboard.service.web.SessionService;
 import com.onboard.test.exampleutils.CriterionVerifier;
@@ -65,13 +63,13 @@ public class ProjectMemberServiceImplTest {
 
     @InjectMocks
     private ProjectMemberService projectMemberService;
-    
-	@Mock
-	private ProjectService projectService;
-		
-	@Mock
-	private SessionService sessionService;
-    
+
+    @Mock
+    private ProjectService projectService;
+
+    @Mock
+    private SessionService sessionService;
+
     @Mock
     private ProjectMapper projectMapper;
 
@@ -129,13 +127,12 @@ public class ProjectMemberServiceImplTest {
             }
         }))).thenReturn(ModuleHelper.getASampleUser());
         when(projectMapper.selectByPrimaryKey(Mockito.eq(ModuleHelper.projectId))).thenReturn(project);
-        
 
-        ActivityRecorderHelper.setProjectService(projectService);
+        // ActivityRecorderHelper.setProjectService(projectService);
         when(projectService.getById(anyInt())).thenReturn(project);
-        ActivityRecorderHelper.setUserService(userService);
+        // ActivityRecorderHelper.setUserService(userService);
         when(userService.getById(anyInt())).thenReturn(ModuleHelper.getASampleUser());
-        ActivityRecorderHelper.setSession(sessionService);
+        // ActivityRecorderHelper.setSession(sessionService);
         when(sessionService.getCurrentUser()).thenReturn(ModuleHelper.getASampleUser());
     }
 
@@ -164,14 +161,13 @@ public class ProjectMemberServiceImplTest {
                         && CriterionVerifier.verifyEqualTo(example, "userId", 5);
             }
         }));
-        verify(projectPrivilegeMapper, times(1)).deleteByExample(
-                Matchers.argThat(new ExampleMatcher<ProjectPrivilegeExample>() {
-                    @Override
-                    public boolean matches(BaseExample example) {
-                        return CriterionVerifier.verifyEqualTo(example, "projectId", project.getId())
-                                && CriterionVerifier.verifyEqualTo(example, "userId", 5);
-                    }
-                }));
+        verify(projectPrivilegeMapper, times(1)).deleteByExample(Matchers.argThat(new ExampleMatcher<ProjectPrivilegeExample>() {
+            @Override
+            public boolean matches(BaseExample example) {
+                return CriterionVerifier.verifyEqualTo(example, "projectId", project.getId())
+                        && CriterionVerifier.verifyEqualTo(example, "userId", 5);
+            }
+        }));
         verify(activityService, times(5)).create(any(Activity.class));
     }
 
@@ -184,27 +180,22 @@ public class ProjectMemberServiceImplTest {
                 return string.equals("3@qq.com");
             }
         }));
-        verify(accountService, times(1)).sendInvitation(any(Integer.class),
-                Matchers.argThat(new ObjectMatcher<String>() {
-                    @Override
-                    public boolean verifymatches(String string) {
-                        return string.equals("2@qq.com");
-                    }
-                }), any(List.class));
+        verify(accountService, times(1)).sendInvitation(any(Integer.class), Matchers.argThat(new ObjectMatcher<String>() {
+            @Override
+            public boolean verifymatches(String string) {
+                return string.equals("2@qq.com");
+            }
+        }), any(List.class));
         /*
-        ProjectMemberService roleServiceImplSpy = Mockito.spy(projectMemberService);
-        verify(roleServiceImplSpy, times(0)).add(Matchers.argThat(new ObjectMatcher<Integer>() {
-            @Override
-            public boolean verifymatches(Integer integer) {
-                return integer.equals(company.getId());
-            }
-        }), Matchers.argThat(new ObjectMatcher<Integer>() {
-            @Override
-            public boolean verifymatches(Integer integer) {
-                return integer.equals(project.getId());
-            }
-        }), any(Integer.class));
-        */
+         * ProjectMemberService roleServiceImplSpy = Mockito.spy(projectMemberService); verify(roleServiceImplSpy,
+         * times(0)).add(Matchers.argThat(new ObjectMatcher<Integer>() {
+         * 
+         * @Override public boolean verifymatches(Integer integer) { return integer.equals(company.getId()); } }),
+         * Matchers.argThat(new ObjectMatcher<Integer>() {
+         * 
+         * @Override public boolean verifymatches(Integer integer) { return integer.equals(project.getId()); } }),
+         * any(Integer.class));
+         */
     }
 
     @Test

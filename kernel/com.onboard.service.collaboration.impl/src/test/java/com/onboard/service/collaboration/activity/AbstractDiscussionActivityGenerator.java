@@ -33,15 +33,15 @@ import com.onboard.test.moduleutils.ModuleHelper;
 
 @RunWith(MockitoJUnitRunner.class)
 public abstract class AbstractDiscussionActivityGenerator {
-    
+
     @Mock
     protected DiscussionService mockedDiscussionService;
-    
+
     protected static ProjectService projectService;
-    
+
     protected BaseProjectItem baseProjectItem;
     protected Discussion discussion, discussionDeleted, discussionOtherProject;
-     
+
     protected Project project;
 
     @Before
@@ -50,20 +50,20 @@ public abstract class AbstractDiscussionActivityGenerator {
         discussionDeleted = getASampleDiscussion();
         discussionDeleted.setDeleted(true);
         discussionOtherProject = getASampleDiscussion();
-        discussionOtherProject.setProjectId(ModuleHelper.projectId+1);
+        discussionOtherProject.setProjectId(ModuleHelper.projectId + 1);
         project = ModuleHelper.getASampleProject();
         projectService = Mockito.mock(ProjectService.class);
         when(projectService.getById(anyInt())).thenReturn(project);
-        ActivityRecorderHelper.setProjectService(projectService);
-        //discussion = (Discussion) baseProjectItem;
+        // ActivityRecorderHelper.setProjectService(projectService);
+        // discussion = (Discussion) baseProjectItem;
         initDiscussionService();
     }
-    
+
     /** initDiscussionService **/
     private void initDiscussionService() {
         when(mockedDiscussionService.getById(anyInt())).thenReturn(discussion);
     }
-    
+
     /** **/
     private Discussion getASampleDiscussion() {
         Discussion d = new Discussion();
@@ -76,5 +76,5 @@ public abstract class AbstractDiscussionActivityGenerator {
         d.setDeleted(false);
         return d;
     }
-    
+
 }

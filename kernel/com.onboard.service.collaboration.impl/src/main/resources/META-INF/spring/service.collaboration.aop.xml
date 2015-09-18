@@ -3,16 +3,15 @@
   xmlns:beans="http://www.springframework.org/schema/beans"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
-
   <config>
     <pointcut id="copyItem"
-      expression="execution(* com.onboard.service.collaboration.*.copy*(com.onboard.domain..*.Identifiable+, java.lang.Integer,..)) and args(item,..)" />
+      expression="execution(* com.onboard.service.collaboration.*.copy*(com.onboard.domain..*.BaseItem+, java.lang.Integer,..)) and args(item,..)" />
     <pointcut id="createItem"
-      expression="execution(* com.onboard.service.collaboration.*.create*(com.onboard.domain..*.Identifiable+)) and args(item)" />
+      expression="execution(* com.onboard.service.collaboration.*.create*(com.onboard.domain..*.BaseItem+)) and args(item)" />
     <pointcut id="updateItem"
-      expression="execution(* com.onboard.service.collaboration.*.update*(com.onboard.domain..*.Identifiable+))" />
+      expression="execution(* com.onboard.service.collaboration.*.update*(com.onboard.domain..*.BaseItem+))" />
     <pointcut id="discardItem"
-      expression="execution(* com.onboard.service.collaboration.*.discard*(com.onboard.domain..*.Identifiable+))" />
+      expression="execution(* com.onboard.service.collaboration.*.discard*(com.onboard.domain..*.BaseItem+))" />
     <pointcut id="moveItem" expression="execution(* com.onboard.service.collaboration.*.move*(..)) and args(identifiable,projectId)" />
     <pointcut id="deleteItem" expression="execution(* com.onboard.service.collaboration.*.delete*(int))" />
 

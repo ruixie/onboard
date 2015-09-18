@@ -38,12 +38,16 @@ import com.onboard.test.moduleutils.ModuleHelper;
 public abstract class AbstractTodolistActivityGenerator {
     @Mock
     protected TodolistService mockedTodolistService;
-    
-    protected Todolist todolist, todolistWithTodos, todolistArchived, todolistDeleted, todolistMoved, todolistName, todolistDescription, todolistNameAndDescription;
+
+    protected Todolist todolist, todolistWithTodos, todolistArchived, todolistDeleted, todolistMoved, todolistName,
+            todolistDescription, todolistNameAndDescription;
 
     protected static ProjectService projectService;
     protected Project project;
-    
+
+    @Mock
+    protected ActivityRecorderHelper activityRecorderHelper;
+
     @Before
     public void setupTest() {
         todolist = getASampleTodolist();
@@ -56,25 +60,26 @@ public abstract class AbstractTodolistActivityGenerator {
         todolistArchived = getASampleTodolist();
         todolistArchived.setArchived(true);
         todolistName = getASampleTodolist();
-        todolistName.setName(ModuleHelper.name+"1");
+        todolistName.setName(ModuleHelper.name + "1");
         todolistDescription = getASampleTodolist();
-        todolistDescription.setDescription(ModuleHelper.description+"1");
+        todolistDescription.setDescription(ModuleHelper.description + "1");
         todolistNameAndDescription = getASampleTodolist();
-        todolistNameAndDescription.setName(ModuleHelper.name+"1");
-        todolistNameAndDescription.setDescription(ModuleHelper.description+"1");
-        
+        todolistNameAndDescription.setName(ModuleHelper.name + "1");
+        todolistNameAndDescription.setDescription(ModuleHelper.description + "1");
+
         project = ModuleHelper.getASampleProject();
         projectService = Mockito.mock(ProjectService.class);
         when(projectService.getById(anyInt())).thenReturn(project);
-        ActivityRecorderHelper.setProjectService(projectService);
+
+        // ActivityRecorderHelper.setProjectService(projectService);
         initTodolistService();
     }
-    
+
     /** initTodolistService **/
     private void initTodolistService() {
         when(mockedTodolistService.getById(anyInt())).thenReturn(todolist);
     }
-    
+
     private Todolist getASampleTodolist() {
         Todolist tl = new Todolist();
         tl.setId(ModuleHelper.todolistId);
@@ -86,7 +91,7 @@ public abstract class AbstractTodolistActivityGenerator {
         tl.setDeleted(false);
         return tl;
     }
-    
+
     private List<Todo> getAListOfSampleTodos() {
         List<Todo> list = new ArrayList<Todo>();
         list.add(ModuleHelper.getASampleTodo());

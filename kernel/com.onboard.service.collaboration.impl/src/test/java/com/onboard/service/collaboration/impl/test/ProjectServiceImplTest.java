@@ -33,7 +33,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.onboard.domain.mapper.ProjectMapper;
 import com.onboard.domain.mapper.ProjectPrivilegeMapper;
@@ -59,7 +58,6 @@ import com.onboard.service.collaboration.ProjectService;
 import com.onboard.service.collaboration.TodoService;
 import com.onboard.service.collaboration.TodolistService;
 import com.onboard.service.collaboration.TopicService;
-import com.onboard.service.collaboration.activity.ActivityRecorderHelper;
 import com.onboard.service.collaboration.impl.ProjectMemberService;
 import com.onboard.service.collaboration.impl.ProjectServiceImpl;
 import com.onboard.service.web.SessionService;
@@ -71,15 +69,15 @@ import com.onboard.test.moduleutils.ModuleHelper;
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectServiceImplTest {
 
-	@Mock
-	private ProjectService projectService;
-	
-	@Mock
-	private UserService userService;
-	
-	@Mock
-	private SessionService sessionService;
-	
+    @Mock
+    private ProjectService projectService;
+
+    @Mock
+    private UserService userService;
+
+    @Mock
+    private SessionService sessionService;
+
     @Mock
     private ProjectMapper projectMapper;
 
@@ -100,13 +98,13 @@ public class ProjectServiceImplTest {
 
     @Mock
     private ActivityService activityService;
-    
+
     @Mock
     private CompanyService companyService;
 
     @Mock
     IterationService iterationService;
-    
+
     @Mock
     private ProjectMemberService projectMemberService;
 
@@ -125,7 +123,7 @@ public class ProjectServiceImplTest {
     private Project project;
     private ProjectDTO projectDTO;
     private List<Project> projects;
-    
+
     private Company company;
 
     private Project getASampleProject() {
@@ -144,7 +142,7 @@ public class ProjectServiceImplTest {
         project = getASampleProject();
         projects = getASampleProjectList();
         company = ModuleHelper.getASampleCompany();
-    	
+
         projectDTO = new ProjectDTO();
         projectDTO.setId(ModuleHelper.projectId);
         projectDTO.setName(ModuleHelper.projectName);
@@ -154,23 +152,22 @@ public class ProjectServiceImplTest {
         projectDTO.setDeleted(false);
         projectDTO.setUpdated(ModuleHelper.created);
         projectDTO.setArchived(false);
-        
 
         when(projectMapper.selectByExample(any(ProjectExample.class))).thenReturn(projects);
         when(projectMapper.selectByPrimaryKey(anyInt())).thenReturn(project);
 
         when(companyService.getById(anyInt())).thenReturn(company);
-        
+
         Mockito.doNothing().when(projectMemberService).add(anyInt(), anyInt(), any(int[].class));
-        
-        ActivityRecorderHelper.setProjectService(projectService);
+
+        // ActivityRecorderHelper.setProjectService(projectService);
         when(projectService.getById(anyInt())).thenReturn(project);
-        ActivityRecorderHelper.setUserService(userService);
+        // ActivityRecorderHelper.setUserService(userService);
         when(userService.getById(anyInt())).thenReturn(ModuleHelper.getASampleUser());
-        ActivityRecorderHelper.setSession(sessionService);
+        // ActivityRecorderHelper.setSession(sessionService);
         when(sessionService.getCurrentUser()).thenReturn(ModuleHelper.getASampleUser());
-        
-        //when(companyService.getById)
+
+        // when(companyService.getById)
 
     }
 
@@ -219,10 +216,8 @@ public class ProjectServiceImplTest {
         verify(userProjectMapper).selectByExample(argThat(new ExampleMatcher<UserProjectExample>() {
             @Override
             public boolean matches(BaseExample example) {
-                Boolean companyIdMatchBoolean = CriterionVerifier.verifyEqualTo(example, "companyId",
-                        ModuleHelper.companyId);
-                Boolean archivedMatchBoolean = CriterionVerifier.verifyEqualTo(example, "userId",
-                        ModuleHelper.companyId);
+                Boolean companyIdMatchBoolean = CriterionVerifier.verifyEqualTo(example, "companyId", ModuleHelper.companyId);
+                Boolean archivedMatchBoolean = CriterionVerifier.verifyEqualTo(example, "userId", ModuleHelper.companyId);
                 return companyIdMatchBoolean && archivedMatchBoolean;
             }
         }));
@@ -236,10 +231,8 @@ public class ProjectServiceImplTest {
         verify(userProjectMapper).selectByExample(argThat(new ExampleMatcher<UserProjectExample>() {
             @Override
             public boolean matches(BaseExample example) {
-                Boolean companyIdMatchBoolean = CriterionVerifier.verifyEqualTo(example, "companyId",
-                        ModuleHelper.companyId);
-                Boolean archivedMatchBoolean = CriterionVerifier.verifyEqualTo(example, "userId",
-                        ModuleHelper.companyId);
+                Boolean companyIdMatchBoolean = CriterionVerifier.verifyEqualTo(example, "companyId", ModuleHelper.companyId);
+                Boolean archivedMatchBoolean = CriterionVerifier.verifyEqualTo(example, "userId", ModuleHelper.companyId);
                 return companyIdMatchBoolean && archivedMatchBoolean;
             }
         }));
@@ -305,8 +298,7 @@ public class ProjectServiceImplTest {
 
     @Test
     public void testGetDiscardedProjectListByCompany() {
-        projectServiceImpl.getDiscardedProjectListByCompany(ModuleHelper.companyId, ModuleHelper.start,
-                ModuleHelper.limit);
+        projectServiceImpl.getDiscardedProjectListByCompany(ModuleHelper.companyId, ModuleHelper.start, ModuleHelper.limit);
         verify(projectMapper).selectByExample(argThat(new ExampleMatcher<ProjectExample>() {
             @Override
             public boolean matches(BaseExample example) {
@@ -325,8 +317,7 @@ public class ProjectServiceImplTest {
 
     @Test
     public void testGetProjectsByCompany() {
-        List<Project> projectList = projectServiceImpl.getProjectsByCompany(companyId, ModuleHelper.start,
-                ModuleHelper.limit);
+        List<Project> projectList = projectServiceImpl.getProjectsByCompany(companyId, ModuleHelper.start, ModuleHelper.limit);
         verify(projectMapper).selectByExample(argThat(new ExampleMatcher<ProjectExample>() {
             @Override
             public boolean matches(BaseExample example) {
@@ -339,8 +330,8 @@ public class ProjectServiceImplTest {
 
     @Test
     public void testGetProjectListByOwnerByCompany() {
-        List<Project> projectList = projectServiceImpl.getProjectListByOwnerByCompany(userId, companyId,
-                ModuleHelper.start, ModuleHelper.limit);
+        List<Project> projectList = projectServiceImpl.getProjectListByOwnerByCompany(userId, companyId, ModuleHelper.start,
+                ModuleHelper.limit);
         verify(projectMapper).selectByExample(argThat(new ExampleMatcher<ProjectExample>() {
             @Override
             public boolean matches(BaseExample example) {
@@ -355,9 +346,9 @@ public class ProjectServiceImplTest {
 
     @Test
     public void testCreateProject() {
-        
+
         projectServiceImpl.createProject(projectDTO);
-        
+
         verify(projectMapper).insertSelective(argThat(new ObjectMatcher<Project>() {
             @Override
             public boolean verifymatches(Project p) {
@@ -365,8 +356,8 @@ public class ProjectServiceImplTest {
                         && p.getCompanyId().equals(project.getCompanyId());
             }
         }));
-        
-        //verify(projectMemberService).add(anyInt(), anyInt(), any(int[].class));
+
+        // verify(projectMemberService).add(anyInt(), anyInt(), any(int[].class));
     }
 
     @Test

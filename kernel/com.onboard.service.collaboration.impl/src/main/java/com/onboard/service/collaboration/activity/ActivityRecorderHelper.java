@@ -92,21 +92,22 @@ public class ActivityRecorderHelper {
     }
 
     @Autowired
-    public static void setProjectService(ProjectService projectService) {
+    public void setProjectService(ProjectService projectService) {
         ActivityRecorderHelper.projectService = projectService;
     }
 
     @Autowired
-    public static void setSession(SessionService session) {
+    public void setSession(SessionService session) {
         ActivityRecorderHelper.session = session;
     }
 
     @Autowired
-    public static void setUserService(UserService userService) {
+    public void setUserService(UserService userService) {
         ActivityRecorderHelper.userService = userService;
     }
 
     public static Activity enrichActivity(Activity activity) {
+
         activity.setCreatorId(session.getCurrentUser().getId());
         activity.setCreatorName(session.getCurrentUser().getName());
         activity.setCreated(new Date());

@@ -31,7 +31,7 @@ angular.module('upload')
             });
 
             $scope.showEditTag = function(current_tag) {
-                $scope.currentTagName = current_tag.tagName;
+                $scope.currentTagName = current_tag.tagname;
                 $("form.editTagForm").show();
             };
             //取消编辑tag
@@ -42,7 +42,7 @@ angular.module('upload')
             //修改tag
             $scope.updateByName = function() {
                 var updateTag = {
-                    tagName: $scope.currentTag.tagName
+                    tagname: $scope.currentTag.tagname
                 };
                 $http.post(url.projectApiUrl() + "/tags/" + $scope.currentTag.id, updateTag).success(function(data) {
                     $("form.editTagForm").hide();

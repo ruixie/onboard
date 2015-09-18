@@ -60,7 +60,7 @@
                 </form>
                 <ul class="nav nav-pills" role="tablist">
                   <li class="tag" role="presentation" ng-repeat="tag in tagList">
-                    <a ui-sref="company.project.tags({tagId:tag.id})" ng-click="hideAttachmentInfo()">{{tag.tagName}}
+                    <a ui-sref="company.project.tags({tagId:tag.id})" ng-click="hideAttachmentInfo()">{{tag.tagname}}
                     </a>
                     <span class="badge" ng-click="deleteTag(tag)">X</span>
                   </li>

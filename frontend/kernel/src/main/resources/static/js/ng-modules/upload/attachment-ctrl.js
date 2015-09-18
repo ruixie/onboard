@@ -82,7 +82,7 @@ angular.module('upload').controller('attachmentInfoCtrl', ['$scope', '$http', 'u
         //新建tag
         $scope.createTag = function () {
             $scope.newTag = {
-                tagName: $scope.name
+                tagname: $scope.name
             };
             $scope.newTagAttach = {
                 attachId: $scope.currentAttachment.id,
@@ -111,8 +111,6 @@ angular.module('upload').controller('attachmentInfoCtrl', ['$scope', '$http', 'u
             };
             $http.delete($scope.getUrl + "tags/" + tag.id + "/" + $scope.newTagAttach.attachType + "/" + $scope.newTagAttach.attachId)
                 .success(function (data) {
-                }).error(function () {
-                    confirm("删除失败！");
                 });
             $scope.tagList.splice($scope.tagList.indexOf(tag), 1);
         };

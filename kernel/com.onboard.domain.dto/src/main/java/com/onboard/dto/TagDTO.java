@@ -15,11 +15,10 @@
  *******************************************************************************/
 package com.onboard.dto;
 
-
 public class TagDTO implements DTO {
     private Integer id;
 
-    private String tagName;
+    private String tagname;
 
     private Integer projectId;
 
@@ -31,12 +30,12 @@ public class TagDTO implements DTO {
         this.id = id;
     }
 
-    public String getTagName() {
-        return tagName;
+    public String getTagname() {
+        return tagname;
     }
 
-    public void setTagName(String tagName) {
-        this.tagName = tagName;
+    public void setTagname(String tagname) {
+        this.tagname = tagname;
     }
 
     public Integer getProjectId() {

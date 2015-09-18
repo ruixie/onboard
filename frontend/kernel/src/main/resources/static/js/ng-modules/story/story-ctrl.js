@@ -14,7 +14,6 @@ angular.module('stories')
             $scope.updateStory();
         };
         storyService.getStoryById(true, $scope.projectId, $scope.companyId, $scope.id).then(function(story){
-            console.log(story);
             $scope.story = story;
             $scope.story_form = story;
             if($scope.story.acceptanceLevel == null || $scope.story.acceptanceLevel == ''){
@@ -31,7 +30,6 @@ angular.module('stories')
                 companyId : $scope.story.companyId
             });
         },function(error){
-            console.log('获取需求失败');
         });
 
         $scope.updateTitle = function(){
@@ -43,7 +41,6 @@ angular.module('stories')
             $scope.story.update()
                 .then(function(){})
                 .catch(function(){
-                    console.log('更新需求失败');
                     $scope.state = 'error';
                     $scope.message = '更新需求失败';
                 });
@@ -55,7 +52,6 @@ angular.module('stories')
             return $sce.trustAsHtml(htmlString);
         };
         $scope.generateHtml = function(pre, description, post) {
-            console.log(pre);
             return $sce.trustAsHtml(
                 "<ul>" +
                 "<li>作为" + (pre ? pre : "……") + "，</li>" +
@@ -110,7 +106,6 @@ angular.module('stories')
             }
             $scope.story.update().then(function(updateStory){
             }).catch(function(error){
-                console.log('更新需求失败');
                 $scope.acceptRulestate = 'error';
                 $scope.ruleMessage = '更新需求失败';
             });

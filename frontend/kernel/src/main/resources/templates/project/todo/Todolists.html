@@ -7,32 +7,17 @@
 
 <div th:fragment="todolists" id="todolists">
   <div class="center-panel-nav">
-    <!-- <div class="center-panel-nav-shadow"></div> -->
-    <!--a class="toggle-sidebar-btn btn btn-primary" href="#" ng-click="toggleSidebar()"><i class="fa fa-bars"></i></a-->
-
-    <h3>待办事项</h3>
-
-    <div class="pull-right">
-      <div class="btn-group">
-        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
-                aria-expanded="false">
-          <span ng-show="$state.is('company.project.todolists.open')">进行中清单</span>
-          <span ng-show="$state.is('company.project.todolists.archived')">归档清单</span>
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li ng-class="{active: $state.is('company.project.todolists.open')}">
-            <a ui-sref="company.project.todolists.open">进行中清单</a>
-          </li>
-          <li ng-class="{active: $state.is('company.project.todolists.archived')}">
-            <a ui-sref="company.project.todolists.archived">所有归档清单</a>
-          </li>
-        </ul>
-      </div>
-      <button type="button" class="btn btn-primary btn-sm" dropdown-form-toggle="newTodolistForm"
-              ng-click="newTodolistForm.open=!newTodolistForm.open;focusTodolistName()" >
-        <i class="fa fa-plus"></i> 新建待办清单
-      </button>
+    <h3>
+      <span>待办事项</span>
+      <small>
+        <span>——方便的任务管理系统，高效的项目管理方式</span>
+      </small>
+    </h3>
+    <ul class="second-nav-bar">
+      <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.todolists.open">进行中清单</a></li>
+      <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.todolists.archived">归档清单</a></li>
+      <li class="second-nav-button" dropdown-form-toggle="newTodolistForm" ng-click="newTodolistForm.open=!newTodolistForm.open;focusTodolistName()">
+        <i class="fa fa-plus"></i> 新建待办清单</li>
       <form class="ballon newTodolistForm dropdown-form" name="newTodolistForm" dropdown-form=""
             is-open="newTodolistForm.open">
         <p>
@@ -45,7 +30,7 @@
              ng-click="createTodolist();"> 确定</a>
         </div>
       </form>
-    </div>
+    </ul>
   </div>
 
 

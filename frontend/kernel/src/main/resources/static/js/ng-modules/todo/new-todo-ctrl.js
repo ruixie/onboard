@@ -38,8 +38,10 @@ angular.module('todo')
                 $scope.todo.create(todoUtilService.getTodolist($scope.todo)).then(function(){
                     $(".drawer").drawer("hide");
                     $scope.submitBtn = angular.copy($scope.srcSubmitBtn);
-                    todoService.getNewTodo(todolistService.getTodolistById($scope.projectId, $scope.companyId, 
-                            $scope.todo.todolistId, false, true)).then(function(todo){
+                    var todolist = todolistService.getTodolistById($scope.projectId, $scope.companyId, 
+                            $scope.todo.todolistId, false, true);
+                    todolist.addTodo($scope.todo);
+                    todoService.getNewTodo(todolist).then(function(todo){
                         $scope.todo = todo;
                     });
                 });

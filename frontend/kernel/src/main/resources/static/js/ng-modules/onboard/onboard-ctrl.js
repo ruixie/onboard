@@ -18,7 +18,6 @@ angular.module('onboard')
         $scope.headerProjects = [];
 
         $scope.openProjectsList = function() {
-            //console.log("openlist");
             $scope.headerProjects = [];
             company.getProjects(false, url.companyId()).then(function (projects) {
                 $scope.headerProjects = projects;
@@ -27,7 +26,6 @@ angular.module('onboard')
         };
 
         $scope.closeProjectsList = function() {
-            //console.log("closelist");
             $("#projectsList ul").hide();
         };
 
@@ -82,9 +80,6 @@ angular.module('onboard')
         $scope.companyPlugins = pluginService.getCompanyPlugins();
         $scope.projectPlugins = pluginService.getProjectPlugins();
         $scope.footerPlugins = pluginService.getFooterPlugins();
-        //console.log($scope.projectPlugins);
-        //console.log($scope.companyPlugins);
-        console.log($scope.footerPlugins);
 
         // 全局页面逻辑
         websocket.init();

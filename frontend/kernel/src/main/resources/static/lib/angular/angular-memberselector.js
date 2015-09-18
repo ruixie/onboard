@@ -66,8 +66,6 @@ angular.module('angularMemberselector', [])
                 }
             });
 
-            console.log(scope.tags);
-
             scope.getStatus = function(idx) {
                 var ipt = 'input';
                 if(scope.tags[idx].value != '__ALL__') ipt = ipt + '[data-tag=' + scope.tags[idx].value + ']';
@@ -81,7 +79,6 @@ angular.module('angularMemberselector', [])
             }
 
             scope.memberclick = function(idx) {
-                //console.log(idx);
                 if(!scope.members[idx].lock) scope.members[idx].selected = !scope.members[idx].selected;
                 scope.ret = scope.members.filter(function(user) {
                     return user.selected

@@ -28,7 +28,6 @@
                 scope.addChild = function($event, story, way) {
                     if (story.addChild != undefined && story.addChild) return ;
                     story.addChild = true;
-                    console.log(way);
                     var div = $( $event.currentTarget );
                     if (way == 'title')
                         div = div.parent().parent().next().next().find('.new-story');
@@ -62,13 +61,10 @@
 
                 scope.modifyIt = function(story) {
                     if (story.oldDescription == story.description) {
-                        console.log('no different');
                         return;
                     }
                     story.update().then(function(updateStory){
-                        //console.log(updateStory);
                     }).catch(function(){
-                        console.log('更新需求失败');
                     });
                 };
                 
@@ -77,7 +73,6 @@
                     storyService.getNew(story, scope.newStoryDescription).then(function(newStory){
                         newStory.create().then(function(){
                             if(!utilService.contains(story.childStoryDTOs, newStory)){
-                                console.log("ng add story " + newStory.id);
                                 story.childStoryDTOs.push(newStory);
                             }
                             $( $event.currentTarget ).parent().hide();
@@ -95,7 +90,6 @@
                                 scope.story.uncompletedChildStoryCount++;
                             }, 1000);
                         }).catch(function(e){
-                            console.log('创建需求失败');
                         });
                     });
                 };
@@ -131,7 +125,6 @@
                                     break;
                                 }
                         }).catch(function(){
-                            console.log('删除需求失败');
                         });
                     }
                 };
@@ -141,7 +134,6 @@
                 };
 
                 scope.checkShow = function(story) {
-                    //console.log(window.localStorage['story_' + story.id]);
                     story.show = !(window.localStorage['story_' + story.id] == 'false');
                     return window.localStorage['story_' + story.id] == 'false';
                 };

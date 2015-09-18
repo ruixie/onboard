@@ -57,12 +57,13 @@ angular.module('todo')
                 } 
                 $scope.submitBtn.name = "提交中...";
                 $scope.submitBtn.disable = true;
-                todolistService.createTodolist($scope.newTodolist).then(function () {
+                $scope.newTodolist.create().then(function (todolist) {
+                    $scope.todolists.splice(0, 0, todolist);
                     $("form.newTodolistForm").hide();
                     $scope.submitBtn = angular.copy($scope.srcSubmitBtn);
-                });
-                todolistService.getNewTodolist($scope.projectId, $scope.companyId).then(function (todolist) {
-                    $scope.newTodolist = todolist;
+                    todolistService.getNewTodolist($scope.projectId, $scope.companyId).then(function (todolist) {
+                        $scope.newTodolist = todolist;
+                    });
                 });
             };
             $scope.deleteTodolist = function (todolist) {

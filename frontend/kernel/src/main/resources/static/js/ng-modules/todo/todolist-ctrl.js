@@ -19,7 +19,7 @@ angular.module('todo')
 //            $scope.openTodosFiletr = {deleted: false, status: "!closed"};
 //            $scope.completedTodosFiletr = {deleted: false, status: "closed"};
             $scope.updateTodolist = function (event, todolist) {
-                if($scope.todolistDetailForm.$invalid){
+                if(!todolist.name){
                     return;
                 }
                 todolist.updateByAttrs([$(event.target).attr("name")]);

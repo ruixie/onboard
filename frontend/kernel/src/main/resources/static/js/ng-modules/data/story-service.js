@@ -15,7 +15,6 @@ angular.module('data')
         this.getOpenStories = dataProxy(function(update, projectId, companyId){
             var _storiesUrl = [url.projectApiUrl(projectId, companyId), '/stories'].join("");
             return $http.get(_storiesUrl + "?type=uncompleted").then(function (response) {
-                console.log(response);
                 return openStories = storyDataService.register(response.data);
             });
         });
@@ -31,7 +30,6 @@ angular.module('data')
           this.getAllStories = dataProxy(function(update, projectId, companyId){
               var _storiesUrl = [url.projectApiUrl(projectId, companyId), '/stories'].join("");
               return $http.get(_storiesUrl).then(function (response) {
-                  console.log(response);
                   return openStories = storyDataService.register(response.data);
               });
           });
@@ -67,7 +65,6 @@ angular.module('data')
             }else{
                 var parentStory = storyDataService.findById(story.parentStoryId);
                 if(!utilService.contains(parentStory.childStoryDTOs, story)){
-                    console.log("add story " + story.id);
                     parentStory.childStoryDTOs.push(story);
                 }
             }

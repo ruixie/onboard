@@ -59,11 +59,13 @@ Path里需要添加Mybatis Migration的路径，如“%MIGRATION_HOME%\bin”
 - 将前一步中引入的包依次导入到Virgo Runtime Server中，参考顺序如下：
 
 {"artefacts":[{"id":"org.eclipse.virgo.server.modulefactory:/onboard/onboard.plan"},
+{"id":"org.eclipse.virgo.server.modulefactory:/com.onboard.parent/onboard.plan"},
+{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.osgi.dependencies"},
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.domain.mapper.model"},
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.domain.model"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.index"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.index.impl"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.api"},
+{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.domain.index"},
+{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.domain.index.impl"},
+{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.domain.dto"},
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.domain.transform"},
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.domain.mapper"},
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.common"},
@@ -81,25 +83,13 @@ Path里需要添加Mybatis Migration的路径，如“%MIGRATION_HOME%\bin”
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.websocket"},
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.security"},
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.security.impl"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.github"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.github.impl"},
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.help"},
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.help.impl"},
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.upload"},
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.upload.impl"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.wiki"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.wiki.impl"},
 {"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.sampleProject"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.web.api"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.plugin.git"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.plugin.ci"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.plugin.git.httpserver"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.plugin.ssh"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.plugin.git.sshserver"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.plugin.calendar"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.plugin.mailgun"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.plugin.solr"},
-{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.plugin.suggestion"}]}
+{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.service.sampleProject.impl"},
+{"id":"org.eclipse.virgo.server.modulefactory:com.onboard.web.api"}]}
 
 并右键点击，Start以部署后端。
 

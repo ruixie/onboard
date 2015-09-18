@@ -500,9 +500,7 @@ public class AttachmentServiceImplTest {
         Attachment result = spyAttachmentService.stageAttachment(companyId, projectId, name, size, contentTypeString, file);
         assertNotNull(result);
         assertEquals(sampleAttachment, result);
-        verify(mockSessionService, times(2)).getCurrentUser();
         verify(mockFileService).writeFile(expectPath, file);
-
     }
 
     @Test
@@ -522,7 +520,6 @@ public class AttachmentServiceImplTest {
 
         Attachment result = spyAttachmentService.stageAttachment(companyId, projectId, name, size, contentTypeString, file);
         assertNull(result);
-        verify(mockSessionService, times(2)).getCurrentUser();
         verify(mockFileService).writeFile(expectPath, file);
         verify(spyAttachmentService).deleteFromTrash(id);
 

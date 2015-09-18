@@ -50,7 +50,6 @@ import com.onboard.service.upload.UploadService;
  * @author xingliang
  * 
  */
-// @Transactional
 @Service("sampleProjectServiceBean")
 public class SampleProjectServiceImpl implements SampleProjectService {
 

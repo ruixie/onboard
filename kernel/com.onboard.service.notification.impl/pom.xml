@@ -41,6 +41,17 @@
             <Private-Package>
                 com.onboard.service.notification.impl
             </Private-Package>
+            <Import-Package>
+                <!-- aop -->
+                org.springframework.aop,
+                org.springframework.aop.framework,
+                org.springframework.aop.aspectj.autoproxy,
+                org.aopalliance.aop,
+                net.sf.cglib.proxy,
+                net.sf.cglib.core,
+                net.sf.cglib.reflect,
+                *
+            </Import-Package>
           </instructions>
         </configuration>
       </plugin>  

@@ -251,8 +251,6 @@ public class ProjectServiceImpl extends AbstractBaseService<Project, ProjectExam
         project.setCreated(new Date());
         project.setUpdated(project.getCreated());
         project.setCreatorAvatar(sessionService.getCurrentUser().getAvatar());
-        project.setCreatorId(sessionService.getCurrentUser().getId());
-        project.setCreatorName(sessionService.getCurrentUser().getName());
         projectMapper.insertSelective(project);
 
         Company company = companyService.getById(project.getCompanyId());

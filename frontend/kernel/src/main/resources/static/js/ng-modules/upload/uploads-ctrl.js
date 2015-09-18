@@ -8,19 +8,16 @@ angular.module('upload')
                     templateUrl: 'uploads.html',
                     controller : 'uploadsCtrl'
                 });
-                //.state('company.project.upload-detail', {
-                //    url        : '/uploads/{uploadId:[0-9]+}',
-                //    templateUrl: 'uploads.html'
-                //});
+            //.state('company.project.upload-detail', {
+            //    url        : '/uploads/{uploadId:[0-9]+}',
+            //    templateUrl: 'uploads.html'
+            //});
         }
     ])
     .controller('uploadsCtrl', ['$scope', '$http', '$upload', '$rootScope', 'iasPager', '$state', 'drawer', 'url', 'uploadsService',
         '$modal', function($scope, $http, $upload, $rootScope, iasPager, $state, drawer, url, uploadsService, $modal) {
             $scope.projectId = $state.params.projectId;
             $scope.companyId = $state.params.companyId;
-            $scope.correntCapacity = {
-                'value': 0
-            };
             $scope.downloadLink = function(attachment_id) {
                 return [url.projectApiUrl($scope.projectId, $scope.companyId), 'attachments', attachment_id, 'download'].join('/');
             };
@@ -30,11 +27,6 @@ angular.module('upload')
             $scope.initUploads = function() {
                 uploadsService.InitUploadsList($scope.projectId, $scope.companyId).then(function(data) {
                     $scope.attachments = data.attachmentDTOs;
-                    uploadsService.getAllAttachmentsSize().then(function(capacity){
-                        $scope.correntCapacity = capacity;
-                        $scope.percent = $scope.correntCapacity.value/10000000;
-                    });
-                    $scope.correntCapacity = uploadsService.getAttachmentsSize();
                     $scope.totalCounts = uploadsService.getTotalCounts();
                     pagination();
                 });
@@ -55,8 +47,6 @@ angular.module('upload')
                     $scope.busy = true;
                     uploadsService.getUploadsByStartNum($scope.attachments.length, $scope.projectId, $scope.companyId).then(function(data) {
                         $scope.busy = false;
-                        //console.log('attachments size is ' + $scope.attachments.length);
-                        //console.log('totalCounts is ' + $scope.totalCounts);
                         pagination();
                     });
                 }
@@ -93,29 +83,23 @@ angular.module('upload')
                 uploadsService.uploadFile($files, $scope.projectId, $scope.companyId)
                     .then(function(data) {
                         $("#uploadProgress").hide();
-                        if(data.stat && data.stat === "error"){
+                        if(data.stat && data.stat === "error") {
                             $scope.stat = 'error';
                             $scope.msg = data.msg;
                             return;
                         }
-
-                            $scope.correntCapacity = uploadsService.getAttachmentsSize();
-                            $scope.stat = 'success';
-                            $scope.msg = '上传成功！';
-
-
-                });
+                        $scope.stat = 'success';
+                        $scope.msg = '上传成功！';
+                    });
 
             };
 
             $scope.deleteAttachment = function(attachment) {
                 if(confirm('确认删除该文件?')) {
-                    $http.delete(url.projectApiUrl($scope.projectId, $scope.companyId) + "/attachments/" + attachment.id).error(function () {
+                    $http.delete(url.projectApiUrl($scope.projectId, $scope.companyId) + "/attachments/" + attachment.id).error(function() {
                         confirm("删除失败！");
                     });
                     $scope.attachments.splice($scope.attachments.indexOf(attachment), 1);
-                    $scope.correntCapacity.value = $scope.correntCapacity.value - attachment.size;
-                    uploadsService.setAllAttachmentsSize($scope.correntCapacity);
                 }
             };
 
@@ -124,7 +108,7 @@ angular.module('upload')
             };
 
             $scope.showAttachmentDetail = function(attachment) {
-                $scope.tempItems = [attachment, $scope.attachments,$scope.correntCapacity ];
+                $scope.tempItems = [attachment, $scope.attachments];
                 $modal.open({
                     templateUrl: 'attachmentDetail.html',
                     controller : 'attachmentInfoCtrl',

@@ -42,7 +42,6 @@ angular.module('upload').controller('attachmentInfoCtrl', ['$scope', '$http', 'u
         $scope.getUrl = url.projectApiUrl($scope.currentAttachment.projectId, $scope.currentAttachment.companyId) + "/";
 
         $scope.uploadItems = items[1];
-        $scope.capacityParnet = items[2];
 
         //隐藏modal
         $scope.hideAttachmentInfo = function () {
@@ -61,12 +60,6 @@ angular.module('upload').controller('attachmentInfoCtrl', ['$scope', '$http', 'u
                 $http.delete($scope.getUrl + "attachments/" + attachment.id).success(function () {
                     //upload当中的显示附件列表的数组
                     $scope.uploadItems.splice($scope.uploadItems.indexOf(attachment), 1);
-
-                    uploadsService.getAllAttachmentsSize(function(capacity){
-                        $scope.capacityParnet.value = capacity.value- attachment.size;
-                        uploadsService.setAllAttachmentsSize($scope.capacityParnet);
-
-                    });
                     $modalInstance.dismiss('cancel');
                 }).error(function () {
                     confirm("删除失败！");

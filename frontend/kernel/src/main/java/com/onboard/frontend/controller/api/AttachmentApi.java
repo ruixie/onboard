@@ -3,7 +3,6 @@ package com.onboard.frontend.controller.api;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -72,17 +71,6 @@ public class AttachmentApi {
         HttpHeaders header = new HttpHeaders();
         header.setContentType(getContentType(attachment.getContentType()));
         return new HttpEntity<byte[]>(bytes, header);
-    }
-
-    @RequestMapping(value = "/api/{companyId}/projects/{projectId}/attachments/capacity", method = RequestMethod.GET)
-    @ResponseBody
-    public String doGetProxy(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            return netService.getForJson(request);
-        } catch (InternalException e) {
-            response.setStatus(500);
-        }
-        return null;
     }
 
     @RequestMapping(value = "/api/{companyId}/projects/{projectId}/attachments/image/{attachmentId}", method = RequestMethod.GET)

@@ -5,8 +5,6 @@ angular.module('upload')
             $scope.files = [];
             $scope.selectfile = function($files) {
                 var tempfile;
-                uploadsService.updateAllAttachmentsSize();
-                var fileCapacitySize = uploadsService.getAttachmentsSize();
                 for (var i = 0; i < $files.length; i++) {
                     if ($files[i].size >= 32000000) {
                         $scope.stat = 'error';
@@ -14,12 +12,7 @@ angular.module('upload')
                         $scope.splice($scope.files.indexOf($files[i]), 1);
                         break;
                     }
-                    if($files[i].size + fileCapacitySize.value > 1000000000 || fileCapacitySize.value >= 1000000000){
-                        $scope.stat = 'error';
-                        $scope.msg = '上传文件总量已达到上限！';
-                        $scope.splice($scope.files.indexOf($files[i]), 1);
-                        break;
-                    }
+
                     //var upload = $files[i];
                     //$scope.files.push($files[i]);
                     tempfile = $files[i];
@@ -31,8 +24,6 @@ angular.module('upload')
                         $("#attach-Progress").show();
                         $scope.dynamic = parseInt(100.0 * e.loaded /
                         e.total);
-                        //                   console.log('percent: ' + parseInt(100.0 * e.loaded /
-                        //                   e.total));
                     }).success(function(data, status, headers, config) {
 
                         $scope.data = data;

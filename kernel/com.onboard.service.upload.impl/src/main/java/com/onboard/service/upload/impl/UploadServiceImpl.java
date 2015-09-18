@@ -37,6 +37,7 @@ import com.onboard.service.collaboration.TopicService;
 import com.onboard.service.common.identifiable.IdentifiableManager;
 import com.onboard.service.common.subscrible.SubscriberService;
 import com.onboard.service.upload.UploadService;
+import com.onboard.service.web.SessionService;
 
 /**
  * {@link UploadService}接口实现
@@ -50,13 +51,23 @@ public class UploadServiceImpl extends AbstractBaseService<Upload, UploadExample
 
     public static final int DEFAULT_LIMIT = -1;
 
-    @Autowired AttachmentService attachmentService;
-    @Autowired CommentService commentService;
-    @Autowired SubscriberService subscriberService;
-    @Autowired UserService userService;
-    @Autowired TopicService topicService;
-    @Autowired UploadMapper uploadMapper;
-    @Autowired IdentifiableManager identifiableManager;
+    @Autowired
+    AttachmentService attachmentService;
+    @Autowired
+    CommentService commentService;
+    @Autowired
+    SubscriberService subscriberService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    TopicService topicService;
+    @Autowired
+    UploadMapper uploadMapper;
+    @Autowired
+    IdentifiableManager identifiableManager;
+
+    @Autowired
+    private SessionService sessionService;
 
     @Override
     public Upload getByIdWithDetail(int id) {
@@ -76,13 +87,14 @@ public class UploadServiceImpl extends AbstractBaseService<Upload, UploadExample
         upload.setDeleted(false);
         upload.setCreated(new Date());
         upload.setUpdated(upload.getCreated());
+        upload.setCreatorAvatar(sessionService.getCurrentUser().getAvatar());
         uploadMapper.insert(upload);
         subscriberService.generateSubscribers(upload, userService.getById(upload.getCreatorId()));
         subscriberService.addSubscribers(upload);
 
         Attachment attach = attachmentService.addAttachmentForAttachable(upload, upload.getAttachments().get(0));
-        //TODO
-        //attach.setAttachUrl(identifiableManager.getIdentifiableURL(upload));
+        // TODO
+        // attach.setAttachUrl(identifiableManager.getIdentifiableURL(upload));
         List<Attachment> attachments = new ArrayList<Attachment>();
         attachments.add(attach);
         upload.setAttachments(attachments);

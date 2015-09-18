@@ -49,16 +49,22 @@ import com.onboard.service.web.SessionService;
  */
 @Transactional
 @Service("companyServiceBean")
-public class CompanyServiceImpl extends AbstractBaseService<Company, CompanyExample> 
-        implements CompanyService {
+public class CompanyServiceImpl extends AbstractBaseService<Company, CompanyExample> implements CompanyService {
 
-    @Autowired CompanyMapper companyMapper;
-    @Autowired UserCompanyMapper userCompanyMapper;
-    @Autowired UserProjectMapper userProjectMapper;
-    @Autowired ProjectMapper projectMapper;
-    @Autowired UserService userService;
-    @Autowired AccountService accountService;
-    @Autowired SessionService session;
+    @Autowired
+    CompanyMapper companyMapper;
+    @Autowired
+    UserCompanyMapper userCompanyMapper;
+    @Autowired
+    UserProjectMapper userProjectMapper;
+    @Autowired
+    ProjectMapper projectMapper;
+    @Autowired
+    UserService userService;
+    @Autowired
+    AccountService accountService;
+    @Autowired
+    SessionService session;
 
     @Override
     public List<Company> getCompaniesByUserId(int userId) {
@@ -91,6 +97,8 @@ public class CompanyServiceImpl extends AbstractBaseService<Company, CompanyExam
         company.setCreated(new Date());
         company.setUpdated(company.getCreated());
         company.setCreatorId(session.getCurrentUser().getId());
+        company.setCreatorAvatar(session.getCurrentUser().getAvatar());
+        company.setCreatorName(session.getCurrentUser().getName());
         company.setPrivileged(false);
         companyMapper.insertSelective(company);
         addUserToCompany(company.getId(), company.getCreatorId());

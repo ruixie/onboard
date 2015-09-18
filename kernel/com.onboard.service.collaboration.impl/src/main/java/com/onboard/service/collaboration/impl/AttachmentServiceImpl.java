@@ -58,12 +58,18 @@ public class AttachmentServiceImpl extends AbstractBaseService<Attachment, Attac
 
     public static final int DEFAULT_LIMIT = -1;
 
-    @Autowired AttachmentMapper attachmentMapper;
-    @Autowired SessionService sessionService;
-    @Autowired FileService fileService;
-    @Autowired TagService tagService;
-    @Autowired IdentifiableManager identifiableManager;
-    @Autowired UserService userService;
+    @Autowired
+    AttachmentMapper attachmentMapper;
+    @Autowired
+    SessionService sessionService;
+    @Autowired
+    FileService fileService;
+    @Autowired
+    TagService tagService;
+    @Autowired
+    IdentifiableManager identifiableManager;
+    @Autowired
+    UserService userService;
 
     @Override
     public Attachment getAttachmentByIdWithUrl(int id) {
@@ -272,12 +278,13 @@ public class AttachmentServiceImpl extends AbstractBaseService<Attachment, Attac
         attachment.setSize(size);
         attachment.setCreatorId(sessionService.getCurrentUser().getId());
         attachment.setCreatorName(sessionService.getCurrentUser().getName());
+        attachment.setCreatorAvatar(sessionService.getCurrentUser().getAvatar());
         attachment.setProjectId(projectId);
         attachment.setCompanyId(companyId);
         attachment = create(attachment);
 
-        String path = StringUtils.arrayToDelimitedString(new String[] { "", "attachment", String.valueOf(projectId),
-                "stage", String.valueOf(attachment.getId()) }, "/");
+        String path = StringUtils.arrayToDelimitedString(new String[] { "", "attachment", String.valueOf(projectId), "stage",
+                String.valueOf(attachment.getId()) }, "/");
         if (fileService.writeFile(path, file)) {
             return attachment;
         } else {

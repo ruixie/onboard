@@ -42,8 +42,7 @@ import com.onboard.service.common.identifiable.IdentifiableManager;
 import com.onboard.service.web.SessionService;
 
 /**
- * {@link com.onboard.service.collaboration.IterationService} Service
- * implementation
+ * {@link com.onboard.service.collaboration.IterationService} Service implementation
  * 
  * @generated_by_elevenframework
  * 
@@ -59,7 +58,7 @@ public class IterationServiceImpl extends AbstractBaseService<Iteration, Iterati
     private IterationAttachMapper iterationAttachMapper;
 
     @Autowired
-    //TODO: to delete 
+    // TODO: to delete
     private SessionService sessionService;
 
     @Autowired
@@ -71,7 +70,7 @@ public class IterationServiceImpl extends AbstractBaseService<Iteration, Iterati
     @Override
     public Iteration getById(int id) {
         Iteration iteration = iterationMapper.selectByPrimaryKey(id);
-        if(iteration == null){
+        if (iteration == null) {
             return null;
         }
         iteration.setIterables(getIterablesWithBoardablesByIteration(id));
@@ -79,7 +78,7 @@ public class IterationServiceImpl extends AbstractBaseService<Iteration, Iterati
     }
 
     @Override
-    protected Iteration fillItemBeforeCreate(Iteration item){
+    protected Iteration fillItemBeforeCreate(Iteration item) {
         if (item.getEndTime() != null) {
             DateTime dt = new DateTime(item.getEndTime());
             item.setEndTime(dt.withTimeAtStartOfDay().plusDays(1).plusSeconds(-1).toDate());
@@ -91,10 +90,9 @@ public class IterationServiceImpl extends AbstractBaseService<Iteration, Iterati
         return item;
     }
 
-
     @Override
     public Iteration updateSelective(Iteration item) {
-        if(item == null || item.getId() == null){
+        if (item == null || item.getId() == null) {
             return null;
         }
         Iteration original = iterationMapper.selectByPrimaryKey(item.getId());
@@ -145,7 +143,7 @@ public class IterationServiceImpl extends AbstractBaseService<Iteration, Iterati
         }
         return iterations;
     }
-    
+
     @Override
     public List<Iteration> getCompleteIterationsByProjectId(int projectId, int start, int limit) {
         Iteration sample = new Iteration();
@@ -190,6 +188,9 @@ public class IterationServiceImpl extends AbstractBaseService<Iteration, Iterati
         iteration.setProjectId(project.getId());
         iteration.setStartTime(now.withTimeAtStartOfDay().toDate());
         iteration.setStatus(IterationStatus.CREATED.getValue());
+        iteration.setCreatorAvatar(sessionService.getCurrentUser().getAvatar());
+        iteration.setCreatorId(sessionService.getCurrentUser().getId());
+        iteration.setCreatorName(sessionService.getCurrentUser().getName());
         iterationMapper.insert(iteration);
         return iteration;
     }
@@ -198,8 +199,7 @@ public class IterationServiceImpl extends AbstractBaseService<Iteration, Iterati
     public List<Iterable> getIterablesWithBoardablesByIteration(Integer iterationId) {
         IterationAttach sample = new IterationAttach();
         sample.setIterationId(iterationId);
-        List<IterationAttach> iterationAttachs = iterationAttachMapper.selectByExample(new IterationAttachExample(
-                sample));
+        List<IterationAttach> iterationAttachs = iterationAttachMapper.selectByExample(new IterationAttachExample(sample));
         List<Iterable> iterables = Lists.newArrayList();
         for (IterationAttach iterationAttach : iterationAttachs) {
             BaseOperateItem identifiable = identifiableManager.getIdentifiableWithDetailByTypeAndId(
@@ -227,8 +227,7 @@ public class IterationServiceImpl extends AbstractBaseService<Iteration, Iterati
     private List<IterationAttach> getIterationAttachsByIteration(Integer iterationId) {
         IterationAttach sample = new IterationAttach();
         sample.setIterationId(iterationId);
-        List<IterationAttach> iterationAttachs = iterationAttachMapper.selectByExample(new IterationAttachExample(
-                sample));
+        List<IterationAttach> iterationAttachs = iterationAttachMapper.selectByExample(new IterationAttachExample(sample));
         List<IterationAttach> result = Lists.newArrayList();
         for (IterationAttach iterationAttach : iterationAttachs) {
             BaseOperateItem identifiable = identifiableManager.getIdentifiableByTypeAndId(iterationAttach.getObjectType(),

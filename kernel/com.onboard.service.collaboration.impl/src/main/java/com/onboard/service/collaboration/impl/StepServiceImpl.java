@@ -91,6 +91,7 @@ public class StepServiceImpl extends AbstractBaseService<Step, StepExample> impl
         item.setCreatedTime(new Date());
         item.setCreatorId(sessionService.getCurrentUser().getId());
         item.setCreatorName(sessionService.getCurrentUser().getName());
+        item.setCreatorAvatar(sessionService.getCurrentUser().getAvatar());
         item.setIdInProject(idInProjectService.getNextIdByProjectId(item.getProjectId()));
         if (item.getAssigneeId() == null) {
             item.setAssigneeId(sessionService.getCurrentUser().getId());

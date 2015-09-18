@@ -38,6 +38,7 @@ import com.onboard.service.collaboration.CommentService;
 import com.onboard.service.collaboration.DiscussionService;
 import com.onboard.service.collaboration.TopicService;
 import com.onboard.service.common.subscrible.SubscriberService;
+import com.onboard.service.web.SessionService;
 
 /**
  * {@link DiscussionService}接口实现
@@ -69,6 +70,9 @@ public class DiscussionServiceImpl extends AbstractBaseService<Discussion, Discu
 
     @Autowired
     private TopicService topicService;
+
+    @Autowired
+    private SessionService sessionService;
 
     @Override
     public Discussion getDiscussionByIdForUpdate(int id) {
@@ -122,12 +126,14 @@ public class DiscussionServiceImpl extends AbstractBaseService<Discussion, Discu
         return discussionMapper.selectByExample(new DiscussionExample(discussion));
     }
 
-
     @Override
     public Discussion create(Discussion discussion) {
         discussion.setCreated(new Date());
         discussion.setUpdated(discussion.getCreated());
         discussion.setDeleted(false);
+        discussion.setCreatorId(sessionService.getCurrentUser().getId());
+        discussion.setCreatorName(sessionService.getCurrentUser().getName());
+        discussion.setCreatorAvatar(sessionService.getCurrentUser().getAvatar());
         if (!StringUtils.hasLength(discussion.getSubject())) {
             discussion.setSubject(String.format("%s%s", discussion.getCreatorName(), "发起了一个讨论"));
         }
@@ -138,8 +144,7 @@ public class DiscussionServiceImpl extends AbstractBaseService<Discussion, Discu
         Topic topic = topicService.buildTopicFromDiscussion(discussion);
         topicService.createTopic(topic);
 
-        discussion
-                .setAttachments(attachmentService.addAttachmentsForAttachable(discussion, discussion.getAttachments()));
+        discussion.setAttachments(attachmentService.addAttachmentsForAttachable(discussion, discussion.getAttachments()));
 
         subscriberService.generateSubscribers(discussion, userService.getById(discussion.getCreatorId()));
         subscriberService.addSubscribers(discussion);
@@ -193,7 +198,6 @@ public class DiscussionServiceImpl extends AbstractBaseService<Discussion, Discu
         example.setProjectId(projectId);
         updateSelective(example);
     }
-    
 
     @Override
     public void delete(int id) {

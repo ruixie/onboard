@@ -42,6 +42,7 @@ import com.onboard.service.collaboration.DiscussionService;
 import com.onboard.service.collaboration.TopicService;
 import com.onboard.service.common.identifiable.IdentifiableManager;
 import com.onboard.service.common.subscrible.SubscriberService;
+import com.onboard.service.web.SessionService;
 
 /**
  * {@link CommentService}接口实现
@@ -78,6 +79,8 @@ public class CommentServiceImpl extends AbstractBaseService<Comment, CommentExam
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private SessionService sessionService;
 
     @Override
     public Comment getByIdWithDetail(int id) {
@@ -102,8 +105,7 @@ public class CommentServiceImpl extends AbstractBaseService<Comment, CommentExam
         List<Comment> commentList = commentMapper.selectByExample(example);
         for (Comment com : commentList) {
             // fulfill attachments
-            com.setAttachments(attachmentService.getAttachmentsByTypeAndId(comment.getType(), com.getId(), 0,
-                    MAX_ITEM_NO));
+            com.setAttachments(attachmentService.getAttachmentsByTypeAndId(comment.getType(), com.getId(), 0, MAX_ITEM_NO));
         }
 
         return commentList;
@@ -121,6 +123,9 @@ public class CommentServiceImpl extends AbstractBaseService<Comment, CommentExam
         comment.setDeleted(false);
         comment.setCreated(new Date());
         comment.setUpdated(comment.getCreated());
+        comment.setCreatorId(sessionService.getCurrentUser().getId());
+        comment.setCreatorName(sessionService.getCurrentUser().getName());
+        comment.setCreatorAvatar(sessionService.getCurrentUser().getAvatar());
         commentMapper.insertSelective(comment);
         createOrUpdateTopicByComment(comment);
 
@@ -186,8 +191,7 @@ public class CommentServiceImpl extends AbstractBaseService<Comment, CommentExam
                 Topic topic = new Topic();
                 topic.setRefId(srcComment.getAttachId());
                 topic.setRefType(srcComment.getAttachType());
-                topic.setExcerpt(updatingComment.getContent().substring(0,
-                        Math.min(updatingComment.getContent().length(), 200)));
+                topic.setExcerpt(updatingComment.getContent().substring(0, Math.min(updatingComment.getContent().length(), 200)));
                 topicService.createOrUpdateTopic(topic);
             }
         }
@@ -234,8 +238,7 @@ public class CommentServiceImpl extends AbstractBaseService<Comment, CommentExam
      * 
      */
     private boolean isShowInTopic(Comment comment) {
-        List<Comment> commentList = getCommentsByAttachTypeAndIdWithNotDiscard(comment.getAttachType(),
-                comment.getAttachId());
+        List<Comment> commentList = getCommentsByAttachTypeAndIdWithNotDiscard(comment.getAttachType(), comment.getAttachId());
         CommentObject lastComment = commentList.get(0);
         if (comment.getAttachType().equals(new Discussion().getType())) {
             Discussion dis = discussionService.getById(comment.getAttachId());
@@ -277,7 +280,7 @@ public class CommentServiceImpl extends AbstractBaseService<Comment, CommentExam
         attachmentService.deleteAttachmentByAttachTypeAndId(getModelType(), id);
     }
 
-    //TODO : recover function
+    // TODO : recover function
     @Override
     public void delete(int id) {
         Comment comment = getById(id);

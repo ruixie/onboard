@@ -81,19 +81,32 @@ public class TodoServiceImpl extends AbstractBaseService<Todo, TodoExample> impl
 
     public static final int DEFAULT_LIMIT = -1;
 
-    @Autowired TodoMapper todoMapper;
-    @Autowired TodolistMapper todolistMapper;
-    @Autowired TodolistService todolistService;
-    @Autowired UserService userService;
-    @Autowired ProjectService projectService;
-    @Autowired SubscriberService subscriberService;
-    @Autowired CommentService commentService;
-    @Autowired TopicService topicService;
-    @Autowired IdInProjectService idInProjectService;
-    @Autowired AttachTodoMapper attachTodoMapper;
-    @Autowired SessionService sessionService;
-    @Autowired IdentifiableManager identifiableManager;
-    @Autowired KeywordService keywordService;
+    @Autowired
+    TodoMapper todoMapper;
+    @Autowired
+    TodolistMapper todolistMapper;
+    @Autowired
+    TodolistService todolistService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    ProjectService projectService;
+    @Autowired
+    SubscriberService subscriberService;
+    @Autowired
+    CommentService commentService;
+    @Autowired
+    TopicService topicService;
+    @Autowired
+    IdInProjectService idInProjectService;
+    @Autowired
+    AttachTodoMapper attachTodoMapper;
+    @Autowired
+    SessionService sessionService;
+    @Autowired
+    IdentifiableManager identifiableManager;
+    @Autowired
+    KeywordService keywordService;
 
     @Override
     public void postgenerateTodoKeywords() {
@@ -113,8 +126,8 @@ public class TodoServiceImpl extends AbstractBaseService<Todo, TodoExample> impl
                 if (completedTodo.getAssigneeId() != null) {
                     keywordService.addKeywordToUser(completedTodo, completedTodo.getAssigneeId());
                 }
-                logger.info(String.format("finish generating todo:%d, has finished %d/%d", completedTodo.getId(),
-                        ++hasFinished, size));
+                logger.info(String.format("finish generating todo:%d, has finished %d/%d", completedTodo.getId(), ++hasFinished,
+                        size));
             }
         }
 
@@ -207,6 +220,7 @@ public class TodoServiceImpl extends AbstractBaseService<Todo, TodoExample> impl
         todo.setStatus(IterationItemStatus.TODO.getValue());
         todo.setDoing(false);
         todo.setProjectTodoId(idInProjectService.getNextIdByProjectId(todo.getProjectId()));
+        todo.setCreatorAvatar(sessionService.getCurrentUser().getAvatar());
         todoMapper.insert(todo);
         if (todo.getAssigneeId() != null) {
             todo.setSubscribers(new ArrayList<User>(Arrays.asList(userService.getById(todo.getAssigneeId()))));
@@ -637,8 +651,7 @@ public class TodoServiceImpl extends AbstractBaseService<Todo, TodoExample> impl
         List<AttachTodo> attachTodos = attachTodoMapper.selectByExample(new AttachTodoExample(sample));
         List<BaseOperateItem> result = new ArrayList<BaseOperateItem>();
         for (AttachTodo attachTodo : attachTodos) {
-            result.add(identifiableManager.getIdentifiableByTypeAndId(attachTodo.getAttachType(),
-                    attachTodo.getAttachId()));
+            result.add(identifiableManager.getIdentifiableByTypeAndId(attachTodo.getAttachType(), attachTodo.getAttachId()));
         }
         return result;
     }

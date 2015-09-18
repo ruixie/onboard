@@ -44,6 +44,7 @@ import com.onboard.service.collaboration.TodoService;
 import com.onboard.service.collaboration.TodolistService;
 import com.onboard.service.collaboration.TopicService;
 import com.onboard.service.common.subscrible.SubscriberService;
+import com.onboard.service.web.SessionService;
 
 /**
  * {@link TodolistService}接口实现
@@ -84,6 +85,9 @@ public class TodolistServiceImpl extends AbstractBaseService<Todolist, TodolistE
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SessionService sessionService;
 
     @Override
     public List<Todolist> getTodolistsByProject(int projectId, int start, int limit) {
@@ -218,6 +222,7 @@ public class TodolistServiceImpl extends AbstractBaseService<Todolist, TodolistE
         todolist.setUpdated(now);
         todolist.setArchived(false);
         todolist.setDeleted(false);
+        todolist.setCreatorAvatar(sessionService.getCurrentUser().getAvatar());
         todolistMapper.insert(todolist);
         subscriberService.generateSubscribers(todolist, userService.getById(todolist.getCreatorId()));
         subscriberService.addSubscribers(todolist);

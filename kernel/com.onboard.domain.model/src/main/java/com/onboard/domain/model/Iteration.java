@@ -15,6 +15,7 @@
  *******************************************************************************/
 package com.onboard.domain.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -30,7 +31,7 @@ import com.onboard.domain.model.type.Recommendable;
  * @generated_by_elevenframework
  * 
  */
-public class Iteration extends IterationObject implements BaseProjectItem, Commentable, Recommendable {
+public class Iteration extends IterationObject implements BaseProjectItem, Commentable, Recommendable, Serializable {
 
     private static final long serialVersionUID = -8021956407484159866L;
 

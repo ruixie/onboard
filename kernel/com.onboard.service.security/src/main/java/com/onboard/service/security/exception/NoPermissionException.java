@@ -26,7 +26,7 @@ public class NoPermissionException extends RuntimeException {
     private Integer companyId;
 
     public NoPermissionException() {
-
+        super();
     }
 
     public NoPermissionException(Integer companyId) {

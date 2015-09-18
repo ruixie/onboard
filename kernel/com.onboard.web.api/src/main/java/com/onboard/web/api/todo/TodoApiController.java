@@ -44,10 +44,12 @@ import com.onboard.domain.transform.TodoTransform;
 import com.onboard.domain.transform.TodolistTransform;
 import com.onboard.dto.TodoDTO;
 import com.onboard.dto.TodolistDTO;
+import com.onboard.service.collaboration.KeywordService;
 import com.onboard.service.collaboration.TodoService;
 import com.onboard.service.security.interceptors.ProjectMemberRequired;
 import com.onboard.service.security.interceptors.ProjectNotArchivedRequired;
 import com.onboard.service.web.SessionService;
+import com.onboard.web.api.exception.ResourceNotFoundException;
 import com.onboard.web.api.form.TodoForm;
 import com.onboard.web.api.form.UpdateAttachTodoForm;
 
@@ -65,6 +67,9 @@ public class TodoApiController {
 
     @Autowired
     private LocalValidatorFactoryBean validator;
+
+    @Autowired
+    private KeywordService keywordService;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -127,6 +132,17 @@ public class TodoApiController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteTodoById(@PathVariable("todoId") Integer todoId) {
         todoService.delete(todoId);
+    }
+
+    @RequestMapping(value = "/{todoId}/keywords", method = RequestMethod.GET)
+    @ResponseBody
+    @Interceptors({ ProjectMemberRequired.class })
+    public List<String> getTodoKeywords(@PathVariable("todoId") int todoId) {
+        Todo todo = todoService.getById(todoId);
+        if (todo == null) {
+            throw new ResourceNotFoundException();
+        }
+        return keywordService.getKeywordsByText(todo.generateText());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)

@@ -38,7 +38,7 @@ Path里需要添加Mybatis Migration的路径，如“%MIGRATION_HOME%\bin”
 #### Git clone代码到本地
 
 - 使用git克隆源代码
-- 将../database/environments/development-sample.properties重命名为development.properties，并修改此数据库相关配置，此为数据库的基本设置
+- 将../database/environments/ddevelopment.properties.sample重命名为development.properties，并修改此数据库相关配置，此为数据库的基本设置
 - 将../frontend/kernel/src/main/resources/application.examples.properties重命名为application.properties，此为前端的基本设置
 - 将../onboard.properties.sample重命名为onboard.properties，并复制到 Virgo安装目录/repository/usr中，此为后端的基本设置
 - git 克隆相关依赖jar包到本地 git clone https://github.com/sercxtyf/onboardDependency.git
@@ -48,10 +48,7 @@ Path里需要添加Mybatis Migration的路径，如“%MIGRATION_HOME%\bin”
 
 - 在MySQL中建立新Scheme，名称设为onboard，密码如123456
 - 在命令行中进入Onboard根目录下的database目录，如C:\user\git\osgicn\database，并依次执行下列命令
-- migrate bootstrap,
-- mysql -u root -p 123456 onboard < teamforge-data.sql
-- migrate up
-- migrate status
+- migrate bootstrap
 
 #### 编译后端
 

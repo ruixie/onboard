@@ -29,17 +29,17 @@ import com.onboard.service.activity.ActivityActionType;
 import com.onboard.service.collaboration.DiscussionService;
 import com.onboard.test.moduleutils.ModuleHelper;
 
-public class DiscussionActivityGeneratorTest extends AbstractDiscussionActivityGenerator{
-    
+public class DiscussionActivityGeneratorTest extends AbstractDiscussionActivityGenerator {
+
     @InjectMocks
     private DiscussionActivityGenerator discussionActivityGenerator;
-    
+
     @Test
     public void testModelType() {
         String type = discussionActivityGenerator.modelType();
         assertEquals(type, "discussion");
     }
-    
+
     @Test
     public void testGenerateCreateActivity() {
         Activity ret = discussionActivityGenerator.generateCreateActivity(discussion);
@@ -47,7 +47,7 @@ public class DiscussionActivityGeneratorTest extends AbstractDiscussionActivityG
         assertEquals(ret.getCompanyId(), new Integer(ModuleHelper.companyId));
         assertEquals(ret.getProjectId(), new Integer(ModuleHelper.projectId));
     }
-    
+
     @Test
     public void testGenerateUpdateActivity() {
         Activity ret;
@@ -60,7 +60,7 @@ public class DiscussionActivityGeneratorTest extends AbstractDiscussionActivityG
         ret = discussionActivityGenerator.generateUpdateActivity(discussion, discussion);
         assertEquals(ret.getAction(), ActivityActionType.UPDATE);
     }
-    
+
     @Test
     public void testEnrichModel() {
         BaseProjectItem ret = discussionActivityGenerator.enrichModel(discussion);
@@ -71,8 +71,8 @@ public class DiscussionActivityGeneratorTest extends AbstractDiscussionActivityG
         assertEquals(ret.getProjectId(), new Integer(ModuleHelper.projectId));
         assertEquals(ret.getCreatorName(), ModuleHelper.creatorName);
     }
-    
-    @Test 
+
+    @Test
     public void testModelService() {
         String ret = discussionActivityGenerator.modelService();
         assertEquals(ret, DiscussionService.class.getName());

@@ -32,9 +32,6 @@ angular.module('util')
 
             function link(scope, ele, attrs, onboardCommentCtrl) {
                 scope.avatarUrlInComment = url.avatarUrl;
-                var capacitySize = {
-                    'value': 0
-                };
                 user.getCurrentUser().then(function(user) {
                     scope.currentUser = user;
                 }, function(data) {
@@ -119,19 +116,16 @@ angular.module('util')
 
                 scope.toggleCommentSubscribers = function($event) {
                     var form = $($event.target).parentsUntil('.new-comment').parent();
-
                     form.find('#commentSubscribers').toggleClass('hide');
                 };
 
                 scope.initCommentSubscribers = function(form) {
                     scope.projectUsers = [];
                     scope.selectedUsers = [];
-
                     scope.memberselectorOptions = {
                         type  : 'text',
                         column: 4
                     };
-
                     user.getProjectUsers().then(function(data) {
                         $.merge(scope.projectUsers, data.map(function(user) {
                             return {
@@ -156,8 +150,6 @@ angular.module('util')
 
                 scope.saveComment = function(event) {
                     var form = $(event.target).parentsUntil('form').parent();
-                    var currentCapacitySize = uploadsService.getAttachmentsSize();
-
                     var content = form.find('.fake-input-content').code();
                     if(content == '<p><br></p>') {
                         scope.stat = 'error';
@@ -186,11 +178,6 @@ angular.module('util')
                         $(event.target).attr('disabled', false);
                         //上传成功后，初始化upload页面
                         uploadsService.InitUploadsList(url.projectId(), url.companyId());
-                        //改变当前的容量值
-                        if(currentCapacitySize.value != capacitySize.value) {
-                            uploadsService.setAllAttachmentsSize(capacitySize);
-                            if(!$rootScope.$$phase) $rootScope.$apply();
-                        }
 
                         $('.fake-input-content').each(function(idx, element) {
                             $(element).code('<p><br></p>');

@@ -3,7 +3,7 @@
  */
 
 angular.module('data')
-    .service('commentService', ['url', '$http', '$q', 'uploadsService',function(url, $http, $q, uploadsService) {
+    .service('commentService', ['url', '$http', '$q', 'uploadsService', function(url, $http, $q, uploadsService) {
 
         var _allComments = {};
 
@@ -89,18 +89,16 @@ angular.module('data')
         this.deleteComment = function(commentId, projectId, companyId) {
             var delete_url = [url.projectApiUrl(projectId, companyId), 'comments', commentId].join("/");
             return $http.delete(delete_url, {
-                data   : { id: commentId },
-                headers: { 'Content-Type': 'application/json' }
+                data   : {id: commentId},
+                headers: {'Content-Type': 'application/json'}
             }).then(function(response) {
-                //删除评论之后更新文件容量大小
-                //uploadsService.updateAllAttachmentsSize();
                 return response.data;
             })
         };
 
         this.updateComment = function(updatedComment, projectId, companyId) {
-            var update_url=[url.projectApiUrl(projectId, companyId), 'comments', updatedComment.id].join("/");
-            return $http.put(update_url,updatedComment).then(function(response){
+            var update_url = [url.projectApiUrl(projectId, companyId), 'comments', updatedComment.id].join("/");
+            return $http.put(update_url, updatedComment).then(function(response) {
                 return response.data;
             });
         };

@@ -178,7 +178,6 @@ angular.module('tab')
             };
 
             $scope.initUploadAttachments = function(form, attachmentList) {
-                uploadsService.updateAllAttachmentsSize();
                 var form = $(form);
                 $scope.uploadedFiles = [];
                 if(attachmentList) $scope.uploadedFiles = attachmentList;

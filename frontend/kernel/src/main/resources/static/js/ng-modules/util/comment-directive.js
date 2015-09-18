@@ -58,9 +58,6 @@ angular.module('util')
             function link(scope, ele, attrs, controller) {
 
                 scope.avatarUrlInComment = url.avatarUrl;
-                var capacitySize = {
-                    'value': 0
-                };
                 user.getCurrentUser().then(function(user) {
                     scope.currentUser = user;
                 }, function(data) {
@@ -137,8 +134,6 @@ angular.module('util')
                 };
 
                 scope.initUploadAttachments = function(form, attachmentList) {
-                    uploadsService.updateAllAttachmentsSize();
-                    capacitySize.value = uploadsService.getAttachmentsSize().value;
                     var form = $(form);
                     scope.uploadedFiles = [];
                     if(attachmentList) scope.uploadedFiles = attachmentList;
@@ -154,13 +149,6 @@ angular.module('util')
                                 scope.splice(scope.uploadedFiles.indexOf(tempfile), 1);
                                 break;
                             }
-                            if($files[i].size + capacitySize.value > 1000000000 || capacitySize.value >= 1000000000) {
-                                scope.stat = 'error';
-                                scope.msg = '上传文件总量已达到上限！';
-                                scope.splice(scope.files.indexOf($files[i]), 1);
-                                break;
-                            }
-                            capacitySize.value = capacitySize.value + tempfile.size;
                             scope.upload = $upload.upload({
                                 url : url.projectApiUrl() + '/attachments/stage',
                                 file: tempfile
@@ -181,8 +169,6 @@ angular.module('util')
                     };
                     scope.remove = function(file) {
                         $http.delete(url.projectApiUrl() + "/attachments/" + file.id);
-                        capacitySize.value = capacitySize.value - file.size;
-
                         var idx = scope.uploadedFiles.indexOf(file);
                         if(idx > -1) {
                             scope.uploadedFiles.splice(idx, 1);
@@ -194,15 +180,6 @@ angular.module('util')
                     if(confirm("确实要删除评论吗？")) {
                         commentService.deleteComment(comment.id, scope.projectId, scope.companyId).then(function(data) {
                             $($event.target).parentsUntil('.media').parent().hide(500).remove();
-
-                            //删除评论之后，刷新upload页面
-                            if(data.capacity != 0) {
-                                uploadsService.InitUploadsList(url.projectId(), url.companyId());
-                                var currentCapactiy = uploadsService.getAttachmentsSize();
-                                currentCapactiy.value = currentCapactiy.value - data.capacity;
-                                uploadsService.setAllAttachmentsSize(currentCapactiy);
-                            }
-
                         }, function(data) {
                             scope.stat = 'error';
                             scope.msg = '删除评论失败！'
@@ -229,8 +206,8 @@ angular.module('util')
                     commentToBeEdit.attachmentDTOs = scope.uploadedFiles;
                     commentToBeEdit.attachments = scope.uploadedFiles;
 
-                    if(controller.atUserSubscribers.length){
-                        if(!commentToBeEdit.subscriberDTOs){
+                    if(controller.atUserSubscribers.length) {
+                        if(!commentToBeEdit.subscriberDTOs) {
                             commentToBeEdit.subscriberDTOs = [];
                         }
                         $.merge(commentToBeEdit.subscriberDTOs, controller.atUserSubscribers);

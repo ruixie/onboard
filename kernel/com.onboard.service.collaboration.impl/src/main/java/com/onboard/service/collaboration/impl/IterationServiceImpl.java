@@ -234,7 +234,7 @@ public class IterationServiceImpl extends AbstractBaseService<Iteration, Iterati
         for (IterationAttach iterationAttach : iterationAttachs) {
             BaseOperateItem identifiable = identifiableManager.getIdentifiableByTypeAndId(iterationAttach.getObjectType(),
                     iterationAttach.getObjectId());
-            if (identifiable.getDeleted()) {
+            if (identifiable == null || identifiable.getDeleted()) {
                 continue;
             }
             iterationAttach.setIterable((Iterable) identifiable);

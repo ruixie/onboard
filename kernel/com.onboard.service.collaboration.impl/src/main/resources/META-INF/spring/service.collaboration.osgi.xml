@@ -73,7 +73,7 @@
   <service id="todolistService" interface="com.onboard.service.collaboration.TodolistService, com.onboard.service.base.BaseService" ref="todolistServiceBean" />
   <service id="commentService" interface="com.onboard.service.collaboration.CommentService, com.onboard.service.base.BaseService" ref="commentServiceBean" />
   <service id="attachmentService" interface="com.onboard.service.collaboration.AttachmentService, com.onboard.service.base.BaseService" ref="attachmentServiceBean" />
-  <service id="projectService" interface="com.onboard.service.collaboration.ProjectService" ref="projectServiceBean" />
+  <service id="projectService" interface="com.onboard.service.collaboration.ProjectService, com.onboard.service.base.BaseService" ref="projectServiceBean" />
   <service id="IterationService" interface="com.onboard.service.collaboration.IterationService, com.onboard.service.base.BaseService" ref="iterationServiceBean" />
   <service id="companyApplicationService" interface="com.onboard.service.collaboration.CompanyApplicationService" ref="companyApplicationServiceBean" />
   <service id="bugService" interface="com.onboard.service.collaboration.BugService, com.onboard.service.collaboration.ProjectItemService, com.onboard.service.base.BaseService" ref="bugServiceBean" />
@@ -92,7 +92,7 @@
   <service id="tagService" interface="com.onboard.service.collaboration.TagService" ref="tagServiceBean" />
   <service id="trashService" interface="com.onboard.service.collaboration.TrashService" ref="trashServiceBean" />
   <service id="iterationService" interface="com.onboard.service.collaboration.IterationService" ref="iterationServiceBean" />
-  <service id="idInProjectService" interface="com.onboard.service.collaboration.IdInProjectService, com.onboard.service.base.BaseService" ref="idInProjectServiceImplBean" />
+  <service id="idInProjectService" interface="com.onboard.service.collaboration.IdInProjectService" ref="idInProjectServiceImplBean" />
 
   <!-- ActivityGenerator服务 -->
   <service id="commentActivityGenerator" interface="com.onboard.service.activity.ActivityGenerator" ref="commentActivityGeneratorBean" />

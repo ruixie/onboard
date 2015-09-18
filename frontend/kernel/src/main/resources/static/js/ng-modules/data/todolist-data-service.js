@@ -52,7 +52,9 @@ angular.module('data')
                 //todolist的增删改查
                 this.create = function(){
                     return $http.post(this._todolistApi(), this.getTodolistDTO()).then(function (response) {
-                        self.updateByTodolistDTO(response.data);
+                        self.updateByTodolistDTO(response.data)
+                        _todolists[self.id] = self;
+                        return self;
                     });
                 };
                 this.delete = function(){

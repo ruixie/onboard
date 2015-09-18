@@ -20,7 +20,7 @@
 </div>
 <!-- drawer -->
 <div drawer="" id="drawer" class="modal drawer">
-  <div class="colle_label" ng-hide="type == 'commit'">
+  <div class="colle_label" ng-hide="type == 'commit' || id == undefined">
     <div class="colle_label_body">
       <i ng-hide="isCollected" class="fa fa-star-o colle_star" title="收藏" ng-click="collect()"></i>
       <i ng-show="isCollected" class="fa fa-star colle_star" title="取消收藏" ng-click="collect()"></i>

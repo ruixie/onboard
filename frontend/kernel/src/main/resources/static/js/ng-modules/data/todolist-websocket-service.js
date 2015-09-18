@@ -3,9 +3,8 @@ angular.module('data')
         function(todolistService, todolistDataService) {
             this.add = function(todolistDTO) {
                 var todolist = todolistDataService.registerTodolists([todolistDTO])[0];
-                console.log(todolist);
                 var todolists = todolistService.getTodolists(todolistDTO.projectId, todolistDTO.companyId, false, true);
-                if (todolists) {
+                if (todolists && todolists.indexOf(todolist) >= 0) {
                     todolists.splice(0, 0, todolist);
                 }
             };

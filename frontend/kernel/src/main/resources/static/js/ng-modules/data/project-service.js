@@ -11,7 +11,6 @@ angular.module('data')
         };
 
         this.getLastVisited = function() {
-            console.log(lastVistedProject);
             return lastVistedProject;
         };
 

@@ -13,6 +13,5 @@ angular.module('company')
 
             company.getCompanyInfo($scope.companyId).then(function(company) {
                 $scope.currentCompany = company;
-                console.log(company);
             });
         }]);

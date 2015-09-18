@@ -135,7 +135,7 @@ angular.module('bugs')
                     description: $('#newBug').find('textarea[name="description"]').code()
                 };
                 bugService.createBug(newBug, $scope.projectId, $scope.companyId).then(function(data) {
-                    $state.go('company.project.bugs.opened');
+                    $state.go('company.project.bugs.opened',{},{reload:true});
                     drawer.close();
                 });
             };

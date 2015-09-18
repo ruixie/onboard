@@ -20,7 +20,7 @@ Onboard是用于软件开发团队在开发过程中对生产过程进行协同�
 - Virgo，推荐使用3.6版本
 - Mybatis Migration，推荐使用3.1.0版本
 - MySQL，推荐使用最新版
-- Redis，推荐使用2.0.2版本（推荐安装为系统Service）
+- Redis，推荐使用2.8.19版本（推荐安装为系统Service）
 
 #### 环境变量配置
 
@@ -37,10 +37,11 @@ Path里需要添加Mybatis Migration的路径，如“%MIGRATION_HOME%\bin”
 
 #### Git clone代码到本地
 
-- 使用git进行克隆
-- 将../database/environments/development-sample.properties重命名为development.properties，此为数据库的基本设置
+- 使用git克隆源代码
+- 将../database/environments/development-sample.properties重命名为development.properties，并修改此数据库相关配置，此为数据库的基本设置
 - 将../frontend/kernel/src/main/resources/application.examples.properties重命名为application.properties，此为前端的基本设置
 - 将../onboard.properties.sample重命名为onboard.properties，并复制到 Virgo安装目录/repository/usr中，此为后端的基本设置
+- git 克隆相关依赖jar包到本地 git clone https://github.com/sercxtyf/onboardDependency.git
 - 将Virgo需要用到的第三方库（外链：Virgo第三方库仓库）复制到 Virgo安装目录/repository/usr中
 
 #### 初始化数据库

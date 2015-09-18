@@ -11,15 +11,6 @@ angular.module('data')
             // 临时上传文件
                 tempfile;
 
-            //所有附件的大小总和
-            var allAttachmentsSize = {
-                'value':0
-            };
-            this.updateAllAttachmentsSize = function () {
-                this.getAllAttachmentsSize();
-
-            };
-
 
             var findUploadDTOIdx = function (uploadDTO) {
                 for (var i = 0; i < _attachmentDTOs.length; i++) {
@@ -35,22 +26,7 @@ angular.module('data')
                     attachmentDTO.contentType = "image";
                 }
             };
-            //从后台获取数据
-            this.getAllAttachmentsSize = function(){
-                return $http.get( [url.projectApiUrl(url.projectId(), url.companyId()), '/attachments/capacity'].join(""))
-                    .then(function(result) {
-                        allAttachmentsSize.value = result.data;
-                        return allAttachmentsSize;
-                    });
-            };
-            //用于维护空间的数量
-            this.getAttachmentsSize = function(){
-                return allAttachmentsSize;
-            };
 
-            this.setAllAttachmentsSize = function(attachmentsSize){
-                allAttachmentsSize.value = attachmentsSize.value;
-            };
 
             this.uploadFile = function($files, projectId, companyId) {
                 var promises = [];
@@ -63,20 +39,14 @@ angular.module('data')
                             msg: $files[i].name+'上传失败：上传文件过大！'
                         }
                     }
-                    if(allAttachmentsSize.value > 1000000000 || ($files[i].size + allAttachmentsSize.value ) > 1000000000 ){
-                        info = {
-                            stat: "error",
-                            msg: '上传文件总量已达到上限！'
-                        }
-                    }
+
                     if(info.stat === "error"){
                         var deferred = $q.defer();
                         deferred.resolve(info);
                         promises.push(deferred.promise);
                         break;
                     }else{
-                        allAttachmentsSize.value = $files[i].size + allAttachmentsSize.value;
-                        uploads.push($files[i]);
+                          uploads.push($files[i]);
                         tempfile = $files[i];
 
                         //临时保存
@@ -169,7 +139,6 @@ angular.module('data')
                 var del_url = [url.projectApiUrl(upload.projectId, upload.companyId), '/uploads/', upload.id, '/delete'].join("");
 
                 return $http.delete(del_url).then(function(response){
-                    allAttachmentsSize.value = allAttachmentsSize.value - size;
                     return response;
                 });
             };

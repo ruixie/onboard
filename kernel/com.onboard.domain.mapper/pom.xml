@@ -44,6 +44,7 @@
                 com.springsource.com.mysql.jdbc;bundle-version="5.1.6"
             </Import-Bundle>
             <Import-Package>
+                <!-- aop -->
                 org.springframework.aop,
                 org.springframework.aop.framework,
                 org.springframework.aop.aspectj.autoproxy,

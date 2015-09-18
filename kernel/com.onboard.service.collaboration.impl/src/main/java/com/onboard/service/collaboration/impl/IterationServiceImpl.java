@@ -182,7 +182,9 @@ public class IterationServiceImpl extends AbstractBaseService<Iteration, Iterati
         DateTime now = DateTime.now();
         Iteration iteration = new Iteration();
         iteration.setCompanyId(project.getCompanyId());
+        iteration.setDeleted(false);
         iteration.setCreated(new Date());
+        iteration.setUpdated(new Date());
         iteration.setCreatorId(-1);
         iteration.setEndTime(now.withTimeAtStartOfDay().plusDays(7).plusSeconds(-1).toDate());
         iteration.setProjectId(project.getId());

@@ -25,7 +25,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import com.onboard.domain.model.Discussion;
@@ -65,17 +66,23 @@ public class SampleProjectServiceImpl implements SampleProjectService {
     UploadService uploadService;
     @Autowired
     AttachmentService attachmentService;
+    @Autowired
+    ApplicationContext applicationContext;
 
     public static final Logger logger = LoggerFactory.getLogger(SampleProjectServiceImpl.class);
-    private static final String RESOURCE_PATH = "com/onboard/service/service/sampleProject/";
+    private static final String RESOURCE_PATH = "com/onboard/service/service/sampleProject/impl/";
     private static final String JSON_NAME = "sample-project.json";
 
     @Override
     public void createSampleProjectByCompanyId(Integer companyId, User creator) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-
-            File json = new ClassPathResource(RESOURCE_PATH + JSON_NAME).getFile();
+            Resource[] resource = applicationContext.getResources(String.format("classpath*:**%s**", RESOURCE_PATH + JSON_NAME));
+            if (resource == null || resource.length == 0) {
+                logger.error("sampleProject.json is not exist");
+                return;
+            }
+            File json = resource[0].getFile();
             SampleProject sample = mapper.readValue(json, SampleProject.class);
             Project project = sample.getSampleProject();
             project.setCompanyId(companyId);

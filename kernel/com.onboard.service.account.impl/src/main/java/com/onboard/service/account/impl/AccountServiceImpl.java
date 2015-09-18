@@ -166,6 +166,7 @@ public class AccountServiceImpl implements AccountService {
         activity.setCreatorId(user.getId());
         activity.setCreatorName(user.getName());
         activity.setSubject(ACTIVITY_INFO);
+        activity.setCreatorAvatar(user.getAvatar());
         activity.setTarget(project.getName());
 
         activityMapper.insert(activity);

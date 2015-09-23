@@ -42,6 +42,8 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.mitre.dsmiley.httpproxy.ProxyServlet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -49,15 +51,14 @@ import com.onboard.frontend.model.User;
 import com.onboard.frontend.service.web.SessionService;
 
 public class ApiProxyServlet extends HttpServlet {
+    
+    public static final Logger logger = LoggerFactory.getLogger(ApiProxyServlet.class);
 
     @Autowired
     private SessionService sessionService;
 
     @Value("${api.domain}")
     private String domain;
-
-    @Value("${api.path}")
-    private String apiUri;
 
     @Value("${api.protocol}")
     private String protocol;
@@ -244,6 +245,7 @@ public class ApiProxyServlet extends HttpServlet {
         // note: we won't transfer the protocol version because I'm not sure it would truly be compatible
         String method = servletRequest.getMethod();
         String proxyRequestUri = rewriteUrlFromRequest(servletRequest);
+        logger.info(proxyRequestUri);
         HttpRequest proxyRequest;
         // spec: RFC 2616, sec 4.3: either of these two headers signal that there is a message body.
         if (servletRequest.getHeader(HttpHeaders.CONTENT_LENGTH) != null
@@ -509,8 +511,8 @@ public class ApiProxyServlet extends HttpServlet {
         StringBuilder uri = new StringBuilder(500);
         uri.append(getTargetUri(servletRequest));
         // Handle the path given to the servlet
-        if (servletRequest.getPathInfo() != null) {// ex: /my/path.html
-            uri.append(encodeUriQuery(servletRequest.getPathInfo()));
+        if (servletRequest.getRequestURI() != null) {// ex: /my/path.html
+            uri.append(encodeUriQuery(servletRequest.getRequestURI()));
         }
         // Handle the query string & fragment
         String queryString = servletRequest.getQueryString();// ex:(following '?'): name=value&foo=bar#fragment
@@ -584,7 +586,7 @@ public class ApiProxyServlet extends HttpServlet {
             char c = in.charAt(i);
             boolean escape = true;
             if (c < 128) {
-                if (asciiQueryChars.get((int) c)) {
+                if (asciiQueryChars.get(c)) {
                     escape = false;
                 }
             } else if (!Character.isISOControl(c) && !Character.isSpaceChar(c)) {// not-ascii
@@ -615,23 +617,22 @@ public class ApiProxyServlet extends HttpServlet {
 
         asciiQueryChars = new BitSet(128);
         for (char c = 'a'; c <= 'z'; c++)
-            asciiQueryChars.set((int) c);
+            asciiQueryChars.set(c);
         for (char c = 'A'; c <= 'Z'; c++)
-            asciiQueryChars.set((int) c);
+            asciiQueryChars.set(c);
         for (char c = '0'; c <= '9'; c++)
-            asciiQueryChars.set((int) c);
+            asciiQueryChars.set(c);
         for (char c : c_unreserved)
-            asciiQueryChars.set((int) c);
+            asciiQueryChars.set(c);
         for (char c : c_punct)
-            asciiQueryChars.set((int) c);
+            asciiQueryChars.set(c);
         for (char c : c_reserved)
-            asciiQueryChars.set((int) c);
-
-        asciiQueryChars.set((int) '%');// leave existing percent escapes in place
+            asciiQueryChars.set(c);
+        asciiQueryChars.set('%');// leave existing percent escapes in place
     }
 
     public String getTargetUrl() {
-        return String.format("%s%s%s", protocol, domain, apiUri);
+        return String.format("%s%s", protocol, domain);
     }
 
     private void addAuthToHeader(HttpRequest proxyRequest) {

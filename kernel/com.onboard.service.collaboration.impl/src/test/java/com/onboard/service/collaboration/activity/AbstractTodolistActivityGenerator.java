@@ -24,14 +24,15 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.onboard.domain.model.Project;
 import com.onboard.domain.model.Todo;
 import com.onboard.domain.model.Todolist;
+import com.onboard.service.account.UserService;
 import com.onboard.service.collaboration.ProjectService;
 import com.onboard.service.collaboration.TodolistService;
+import com.onboard.service.web.SessionService;
 import com.onboard.test.moduleutils.ModuleHelper;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -42,7 +43,13 @@ public abstract class AbstractTodolistActivityGenerator {
     protected Todolist todolist, todolistWithTodos, todolistArchived, todolistDeleted, todolistMoved, todolistName,
             todolistDescription, todolistNameAndDescription;
 
-    protected static ProjectService projectService;
+    @Mock
+    protected ProjectService projectService;
+    @Mock
+    protected SessionService sessionService;
+    @Mock
+    protected UserService userService;
+
     protected Project project;
 
     @Mock
@@ -68,10 +75,14 @@ public abstract class AbstractTodolistActivityGenerator {
         todolistNameAndDescription.setDescription(ModuleHelper.description + "1");
 
         project = ModuleHelper.getASampleProject();
-        projectService = Mockito.mock(ProjectService.class);
         when(projectService.getById(anyInt())).thenReturn(project);
+        when(sessionService.getCurrentUser()).thenReturn(ModuleHelper.getASampleUser());
 
-        // ActivityRecorderHelper.setProjectService(projectService);
+        ActivityRecorderHelper activityRecorderHelper = new ActivityRecorderHelper();
+        activityRecorderHelper.setProjectService(projectService);
+        activityRecorderHelper.setSession(sessionService);
+        activityRecorderHelper.setUserService(userService);
+
         initTodolistService();
     }
 

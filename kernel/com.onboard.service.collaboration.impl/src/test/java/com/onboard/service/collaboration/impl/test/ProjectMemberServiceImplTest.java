@@ -51,6 +51,7 @@ import com.onboard.service.account.CompanyService;
 import com.onboard.service.account.UserService;
 import com.onboard.service.activity.ActivityService;
 import com.onboard.service.collaboration.ProjectService;
+import com.onboard.service.collaboration.activity.ActivityRecorderHelper;
 import com.onboard.service.collaboration.impl.ProjectMemberService;
 import com.onboard.service.web.SessionService;
 import com.onboard.test.exampleutils.CriterionVerifier;
@@ -128,11 +129,13 @@ public class ProjectMemberServiceImplTest {
         }))).thenReturn(ModuleHelper.getASampleUser());
         when(projectMapper.selectByPrimaryKey(Mockito.eq(ModuleHelper.projectId))).thenReturn(project);
 
-        // ActivityRecorderHelper.setProjectService(projectService);
+        ActivityRecorderHelper activityRecorderHelper = new ActivityRecorderHelper();
+        activityRecorderHelper.setProjectService(projectService);
+        activityRecorderHelper.setSession(sessionService);
+        activityRecorderHelper.setUserService(userService);
+
         when(projectService.getById(anyInt())).thenReturn(project);
-        // ActivityRecorderHelper.setUserService(userService);
         when(userService.getById(anyInt())).thenReturn(ModuleHelper.getASampleUser());
-        // ActivityRecorderHelper.setSession(sessionService);
         when(sessionService.getCurrentUser()).thenReturn(ModuleHelper.getASampleUser());
     }
 

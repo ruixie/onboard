@@ -27,8 +27,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.onboard.domain.model.Discussion;
 import com.onboard.domain.model.Project;
 import com.onboard.domain.model.type.BaseProjectItem;
+import com.onboard.service.account.UserService;
 import com.onboard.service.collaboration.DiscussionService;
 import com.onboard.service.collaboration.ProjectService;
+import com.onboard.service.web.SessionService;
 import com.onboard.test.moduleutils.ModuleHelper;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -37,7 +39,12 @@ public abstract class AbstractDiscussionActivityGenerator {
     @Mock
     protected DiscussionService mockedDiscussionService;
 
-    protected static ProjectService projectService;
+    @Mock
+    protected ProjectService projectService;
+    @Mock
+    protected UserService userService;
+    @Mock
+    protected SessionService sessionService;
 
     protected BaseProjectItem baseProjectItem;
     protected Discussion discussion, discussionDeleted, discussionOtherProject;
@@ -54,7 +61,12 @@ public abstract class AbstractDiscussionActivityGenerator {
         project = ModuleHelper.getASampleProject();
         projectService = Mockito.mock(ProjectService.class);
         when(projectService.getById(anyInt())).thenReturn(project);
-        // ActivityRecorderHelper.setProjectService(projectService);
+        when(sessionService.getCurrentUser()).thenReturn(ModuleHelper.getASampleUser());
+
+        ActivityRecorderHelper activityRecorderHelper = new ActivityRecorderHelper();
+        activityRecorderHelper.setProjectService(projectService);
+        activityRecorderHelper.setSession(sessionService);
+        activityRecorderHelper.setUserService(userService);
         // discussion = (Discussion) baseProjectItem;
         initDiscussionService();
     }

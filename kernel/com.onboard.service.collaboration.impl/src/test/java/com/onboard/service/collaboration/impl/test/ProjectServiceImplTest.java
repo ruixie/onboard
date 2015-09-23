@@ -58,6 +58,7 @@ import com.onboard.service.collaboration.ProjectService;
 import com.onboard.service.collaboration.TodoService;
 import com.onboard.service.collaboration.TodolistService;
 import com.onboard.service.collaboration.TopicService;
+import com.onboard.service.collaboration.activity.ActivityRecorderHelper;
 import com.onboard.service.collaboration.impl.ProjectMemberService;
 import com.onboard.service.collaboration.impl.ProjectServiceImpl;
 import com.onboard.service.web.SessionService;
@@ -160,11 +161,13 @@ public class ProjectServiceImplTest {
 
         Mockito.doNothing().when(projectMemberService).add(anyInt(), anyInt(), any(int[].class));
 
-        // ActivityRecorderHelper.setProjectService(projectService);
+        ActivityRecorderHelper activityRecorderHelper = new ActivityRecorderHelper();
+        activityRecorderHelper.setProjectService(projectService);
+        activityRecorderHelper.setSession(sessionService);
+        activityRecorderHelper.setUserService(userService);
+
         when(projectService.getById(anyInt())).thenReturn(project);
-        // ActivityRecorderHelper.setUserService(userService);
         when(userService.getById(anyInt())).thenReturn(ModuleHelper.getASampleUser());
-        // ActivityRecorderHelper.setSession(sessionService);
         when(sessionService.getCurrentUser()).thenReturn(ModuleHelper.getASampleUser());
 
         // when(companyService.getById)

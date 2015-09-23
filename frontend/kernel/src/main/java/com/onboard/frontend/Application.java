@@ -84,6 +84,7 @@ public class Application {
 
     private static class OnboardCustomizer implements EmbeddedServletContainerCustomizer {
 
+        @Override
         public void customize(ConfigurableEmbeddedServletContainer container) {
             container.addErrorPages(new ErrorPage(HttpStatus.BAD_REQUEST, "/error/404"));
             container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error/404"));
@@ -101,7 +102,7 @@ public class Application {
 
     @Bean
     public ServletRegistrationBean servletRegistrationBean() throws ServletException {
-        return new ServletRegistrationBean(getGitServlet(), "/api/*");
+        return new ServletRegistrationBean(getGitServlet(), "/api/*", "/plugins/*");
     }
 
     public static void main(String[] args) {

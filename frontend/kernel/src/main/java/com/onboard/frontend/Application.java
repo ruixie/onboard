@@ -101,7 +101,7 @@ public class Application {
 
     @Bean
     public ServletRegistrationBean servletRegistrationBean() throws ServletException {
-        return new ServletRegistrationBean(getGitServlet(), "/api/*");
+        return new ServletRegistrationBean(getGitServlet(), "/api/*", "/plugins/*");
     }
 
     public static void main(String[] args) {
